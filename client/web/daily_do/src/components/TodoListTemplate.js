@@ -4,18 +4,24 @@ import TodoItemList from './TodoItemList';
 import './TodoListTemplate.css';
 
 const TodoListTemplate = () => {
-
-    let todoItemId = 1;
-
-    const [ todoItemList, setTodoItemList ] = useState([ { id: 0, content: "Todo #1", isDone : true }]);
+    const [ todoItemCnt, setTodoItemCnt ] = useState(1);
+    const [ todoItemList, setTodoItemList ] = useState([ { id: 0, content: "할일 #1", isDone : true }]);
     const [ formInput, setFormInput ] = useState('');
     
     function handleToggle(id) {
+        setFormInput('');
+
         const index = todoItemList.findIndex(todoItem => todoItem.id === id);
         const selectedItem = todoItemList[index];
-        selectedItem.isDone = !selectedItem.isDone;
+        
+        const updatedTodoItemList = [...todoItemList];
 
-        setTodoItemList({...todoItemList, selectedItem});
+        updatedTodoItemList[index] = {
+            ...selectedItem,
+            isDone: !selectedItem.isDone
+        };
+
+        setTodoItemList(updatedTodoItemList);
     }
   
     function handleRemove(id) {
@@ -29,13 +35,13 @@ const TodoListTemplate = () => {
   
     function handleCreate() {
         const newTodoItem = {
-            id: todoItemId++,
+            id: todoItemCnt,
             content: formInput,
             isDone: false
         };
 
-        setTodoItemList({...todoItemList, newTodoItem});
-        console.log(todoItemList);
+        setTodoItemCnt(todoItemCnt + 1);
+        setTodoItemList([...todoItemList, newTodoItem]);
     }
 
 
