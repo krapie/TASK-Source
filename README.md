@@ -6,6 +6,7 @@ Task: Time/Task Management Service
 # Updates
 + 2021-04-27
     + 웹 클라이언트: Daily Do 컴포넌트 프로토타입 개발 2단계 (할 일 수정, 체크, 서버 API와 통신) 완료
+    + 서버: Daily Do 서비스 Java 파일 및 클래스, 변수, 함수들의 이름 변경 ( Task -> Todo )
 + 2021-04-26
     + 웹 클라이언트: Daily Do 컴포넌트 프로토타입 개발 1단계 (할 일 생성, 읽기, 삭제 기능) 완료
 + 2021-04-25
