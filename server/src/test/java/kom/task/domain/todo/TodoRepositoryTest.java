@@ -24,7 +24,7 @@ public class TodoRepositoryTest {
     }
 
     @Test
-    public void task_repository_save_test() {
+    public void todo_repository_save_test() {
         //given
         String content = "todo";
         Boolean isDone = true;
@@ -42,5 +42,4 @@ public class TodoRepositoryTest {
         assertThat(todo.getContent()).isEqualTo(content);
         assertThat(todo.getIsDone()).isEqualTo(isDone);
     }
-
 }

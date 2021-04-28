@@ -1,21 +1,21 @@
 import { useEffect, useState } from 'react';
 
-function Test() {
-  const [ taskList, setTaskList ] = useState(null);
+function DaydoTest() {
+  const [ daydoList, setDaydoList ] = useState(null);
   
   // CREATE
-  function createTask() {
-    const newTask = {
-      content : "task create",
-      isDone : false
+  function createDaydo() {
+    const newDaydo = {
+      day : 0,
+      content : "sunday todo"
     }
 
-    fetch('http://localhost:8080/api/task', {
+    fetch('http://localhost:8080/api/daydo', {
       method : 'POST',
       headers: {
         'content-type' : 'application/json'
       },
-      body : JSON.stringify(newTask)
+      body : JSON.stringify(newDaydo)
     })
     .then((response) => response.json())
     .then((data) => {
@@ -25,28 +25,27 @@ function Test() {
   } 
   
   // Read
-  function fetchTask() {
-    fetch('http://localhost:8080/api/task')
+  function fetchDaydo() {
+    fetch('http://localhost:8080/api/daydo')
         .then((response) => response.json())
         .then((data) => {
-          console.log("TASKS: ", data);
-          setTaskList(data);
+          console.log("Daydo Items: ", data);
+          setDaydoList(data);
         });
   }
 
   // Update
-  function updateTask() {
-    const updatedTask = {
-      content : "task update",
-      isDone : true
+  function updateDaydo() {
+    const updatedDaydo = {
+        content : "sunday todo #2"
     }
 
-    fetch(`http://localhost:8080/api/task/1`, {
+    fetch(`http://localhost:8080/api/daydo/1`, {
             method : 'PUT',
             headers : {
                 'content-type' : 'application/json'
             },
-            body : JSON.stringify(updatedTask)
+            body : JSON.stringify(updatedDaydo)
         })
         .then((response) => response.json())
         .then((data) => {
@@ -55,8 +54,8 @@ function Test() {
   }
 
   // Delete
-  function deleteTask() {
-    fetch(`http://localhost:8080/api/task/1`, {
+  function deleteDaydo() {
+    fetch(`http://localhost:8080/api/daydo/1`, {
             method : 'DELETE',
             headers : {
                 'content-type' : 'application/json'
@@ -72,14 +71,14 @@ function Test() {
     <div>
       <h1>TASK</h1>
       <hr></hr>
-      <p>TASK Client-Server API Test</p>
+      <p>TASK-daydo Client-Server API Test</p>
 
-      <button onClick={createTask}>Create</button>
-      <button onClick={fetchTask}>Read</button>
-      <button onClick={updateTask}>Update</button>
-      <button onClick={deleteTask}>Delete</button>
+      <button onClick={createDaydo}>Create</button>
+      <button onClick={fetchDaydo}>Read</button>
+      <button onClick={updateDaydo}>Update</button>
+      <button onClick={deleteDaydo}>Delete</button>
     </div>
   );
 }
 
-export default Test;
+export default DaydoTest;

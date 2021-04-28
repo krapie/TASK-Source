@@ -4,6 +4,8 @@ Task: Time/Task Management Service
 
 
 # Updates
++ 2021-04-28
+    + 서버: Daily Do 서비스 - '요일별 할 일' 목록 API 개발 (요일별 목록 CRUD 기능) 완료
 + 2021-04-27
     + 웹 클라이언트: Daily Do 컴포넌트 프로토타입 개발 2단계 (할 일 수정, 체크, 서버 API와 통신) 완료
     + 서버: Daily Do 서비스 Java 파일 및 클래스, 변수, 함수들의 이름 변경 ( Task -> Todo )
@@ -21,8 +23,8 @@ Task: Time/Task Management Service
     + 대시보드 프로토타입 페이지 추가 (Daily Do, Pomodoro 앱, 간단한 Todo, Pomo 정보 표시)
     + 프론트(로그인) 프로토타입 페이지, 
 + API 서버
-    + 'Daily Do' 요일별 할 일 목록 API 개발
-    + 'Pomodoro' 서비스 프로토타입 API 개발
+    + Daily Do 서비스 - '오늘 할 일'에 오늘 요일에 해당하는 '요일별 할 일' 목록 갱신 기능 개발
+    + Pomodoro 서비스 프로토타입 API 개발
     + 로그인 기능 추가 (Auth2)
 
 # Issues
