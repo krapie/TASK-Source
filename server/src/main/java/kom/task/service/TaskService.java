@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +33,8 @@ public class TaskService {
 
     @Transactional
     public List<TodoResponseDto> fetchAllTodoItems() {
+        todayFetch();
+
         List<Todo> todoEntities = todoRepository.findAll();
         List<TodoResponseDto> responseDtoList = new ArrayList<>();
 
@@ -91,5 +94,32 @@ public class TaskService {
         daydoRepository.delete(daydo);
 
         return id;
+    }
+
+
+    /*** FETCH LOGICS ***/
+    public void todayFetch() {
+        // 이미 To-do 아이템이 존재하면 (이미 요일별 할 일이 저장되어 있으면)
+        if(todoRepository.count() != 0) {
+            return;
+        }
+
+        // 호출된 시점의 요일을 구해서
+        LocalDate localDate = LocalDate.now();
+        int todayDay =  localDate.getDayOfWeek().getValue(); // Monday - Sunday : 1 ~ 7
+
+        // 해당 요일에 해당하는 튜플들을 DaydoRepository에서 추출 후
+        List<Daydo> daydoList = daydoRepository.findAll();
+        daydoList.stream().filter(daydo -> (daydo.getDay() == todayDay));
+
+        // To-do 아이템으로 변환 후 TodoRepository에 저장
+        for(Daydo daydo : daydoList ) {
+            Todo todoEntity = Todo.builder()
+                    .content(daydo.getContent())
+                    .isDone(false)
+                    .build();
+
+            todoRepository.save(todoEntity);
+        }
     }
 }

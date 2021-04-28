@@ -6,8 +6,8 @@ function DaydoTest() {
   // CREATE
   function createDaydo() {
     const newDaydo = {
-      day : 0,
-      content : "sunday todo"
+      day : 3,
+      content : "wednesday todo"
     }
 
     fetch('http://localhost:8080/api/daydo', {

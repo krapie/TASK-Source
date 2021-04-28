@@ -16,7 +16,7 @@ public class Daydo {
     private Long id;
 
     @Column
-    private Integer day; // Sunday - Saturday : 0 ~ 6
+    private Integer day; // Monday - Sunday : 1 ~ 7
 
     @Column
     private String content;
