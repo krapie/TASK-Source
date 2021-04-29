@@ -4,14 +4,14 @@ import TodoItemList from './TodoItemList';
 import './TodoListTemplate.css';
 
 const TodoListTemplate = () => {
-    const [ todoItemList, setTodoItemList ] = useState(null);
+    const [ todoItemList, setTodoItemList ] = useState([]);
     const [ formInput, setFormInput ] = useState('');
     const [ fetched, setFetched ] = useState(false);
 
     // FETCH - GET
     useEffect(() => {
         //첫 로딩시에만 서버로부터 Todo 목록 가져오기
-        if(!todoItemList && !fetched) {
+        if(!fetched) {
             fetch('http://localhost:8080/api/todo')
             .then((response) => response.json())
             .then((items) => {
@@ -20,7 +20,7 @@ const TodoListTemplate = () => {
                 setFetched(true);
             });
         }
-    });
+    }, [fetched]);
 
     // CREAT - POST 
     function handleCreate() {
@@ -142,7 +142,7 @@ const TodoListTemplate = () => {
 
     return (
         <div className="todo-list-template-wrapper">
-            <div className="title">
+            <div className="todo-title">
                 <h2>목록</h2>
             </div>
             <hr></hr>

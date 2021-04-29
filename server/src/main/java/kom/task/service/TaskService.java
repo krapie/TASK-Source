@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -110,10 +111,10 @@ public class TaskService {
 
         // 해당 요일에 해당하는 튜플들을 DaydoRepository에서 추출 후
         List<Daydo> daydoList = daydoRepository.findAll();
-        daydoList.stream().filter(daydo -> (daydo.getDay() == todayDay));
+        List<Daydo> todayDaydoList = daydoList.stream().filter(daydo -> daydo.getDay() == todayDay).collect(Collectors.toList());
 
         // To-do 아이템으로 변환 후 TodoRepository에 저장
-        for(Daydo daydo : daydoList ) {
+        for(Daydo daydo : todayDaydoList ) {
             Todo todoEntity = Todo.builder()
                     .content(daydo.getContent())
                     .isDone(false)

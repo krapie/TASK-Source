@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 function DaydoTest() {
   const [ daydoList, setDaydoList ] = useState(null);
@@ -32,6 +32,8 @@ function DaydoTest() {
           console.log("Daydo Items: ", data);
           setDaydoList(data);
         });
+
+        console.log("Stated Items: ", daydoList);
   }
 
   // Update

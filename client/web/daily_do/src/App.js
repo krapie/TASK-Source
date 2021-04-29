@@ -1,5 +1,5 @@
 import './App.css';
-import DaydoTest from './components/test/DaydoTest';
+import DayDoListTemplate from './components/Daydo/DaydoListTemplate';
 import TodoListTemplate from './components/Todo/TodoListTemplate';
 function App() {
 
@@ -7,7 +7,9 @@ function App() {
     <div>
       <h1>오늘 할 일은?</h1>
       <TodoListTemplate></TodoListTemplate>
-      <DaydoTest></DaydoTest>
+      <h1>설정</h1>
+      <h2>요일별 할 일 설정</h2>
+      <DayDoListTemplate></DayDoListTemplate>
     </div>
   );
 }

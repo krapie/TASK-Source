@@ -4,12 +4,15 @@ Task: Time/Task Management Service
 
 
 # Updates
++ 2021-04-29
+    + 서버: Daily Do 서비스 - '오늘 할 일'에 오늘 요일에 해당하는 '요일별 할 일' 목록 갱신 기능에서, 요일별 할 일을 제대로 필터링하지 못하는 문제 해결
+    + 웹 클라이언트: Daily Do 컴포넌트 프로토타입 개발 3단계 (요일별 할 일 설정 기능) 개발 완료
 + 2021-04-28
     + 서버: Daily Do 서비스 - '요일별 할 일' 목록 API 개발 (요일별 목록 CRUD 기능) 완료
     + 서버: Daily Do 서비스 - '오늘 할 일'에 오늘 요일에 해당하는 '요일별 할 일' 목록 갱신 기능 개발 완료
 + 2021-04-27
-    + 웹 클라이언트: Daily Do 컴포넌트 프로토타입 개발 2단계 (할 일 수정, 체크, 서버 API와 통신) 완료
     + 서버: Daily Do 서비스 Java 파일 및 클래스, 변수, 함수들의 이름 변경 ( Task -> Todo )
+    + 웹 클라이언트: Daily Do 컴포넌트 프로토타입 개발 2단계 (할 일 수정, 체크, 서버 API와 통신) 완료
 + 2021-04-26
     + 웹 클라이언트: Daily Do 컴포넌트 프로토타입 개발 1단계 (할 일 생성, 읽기, 삭제 기능) 완료
 + 2021-04-25
@@ -18,7 +21,6 @@ Task: Time/Task Management Service
 
 # TO-DO
 + 웹 클라이언트
-    + 웹 클라이언트: Daily Do 컴포넌트 프로토타입 개발 3단계 (요일별 할 일 설정 기능)
     + 기본 Pomodoro 컴포넌트 프로토타입 개발 1단계 (타이머 기능, 타이머 세팅 기능, 일일 포모 저장 기능)
     + 기본 Pomodoro 컴포넌트 프로토타입 개발 2단계 (서버 API 통신)
     + 대시보드 프로토타입 페이지 추가 (Daily Do, Pomodoro 앱, 간단한 Todo, Pomo 정보 표시)
@@ -26,6 +28,8 @@ Task: Time/Task Management Service
 + API 서버
     + Pomodoro 서비스 프로토타입 API 개발
     + 로그인 기능 추가 (Auth2)
++ 기타
+    + Daily Do 서비스 웹 클라이언트: 리액트 컴포넌트, 코드 리팩토링
 
 # Issues
 + CORS Policy
