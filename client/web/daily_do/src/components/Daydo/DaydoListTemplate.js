@@ -15,14 +15,14 @@ const DayDoListTemplate = () => {
 
     // FETCH - GET
     useEffect(() => {
-        // 첫 로딩시에만 서버로부터 모든 요일의 Daydo 목록 가져오기
-        if(allDaydoItemList.length === 0 || !fetched) {
+        // 서버로부터 모든 요일의 Daydo 목록 가져오기
+        if(!fetched) {
             fetch('http://localhost:8080/api/daydo')
             .then((response) => response.json())
             .then((items) => {
                 console.log("서버로부터 모든 요일별 Daydo 목록 가져옴: ", items);
-                setAllDaydoItemList(items);
                 setFetched(true);
+                setAllDaydoItemList(items);
             });
         }
 
@@ -66,6 +66,7 @@ const DayDoListTemplate = () => {
              setDaydoItemList([...daydoItemList, newDaydoItem]);
          })
 
+         // 서버에서 다시 목록 가져오기
          setFetched(false);
     }
     
@@ -86,9 +87,10 @@ const DayDoListTemplate = () => {
             console.log("ID:", deletedId, " 삭제됨");
         });
 
-        //클라이언트
+        // 클라이언트
         setDaydoItemList(updatedDaydoItemList);
 
+        // 서버에서 다시 목록 가져오기
         setFetched(false);
     }
   
@@ -121,6 +123,7 @@ const DayDoListTemplate = () => {
 
         setDaydoItemList(updatedDaydoItemList);
 
+        // 서버에서 다시 목록 가져오기
         setFetched(false);
     }
 
@@ -162,6 +165,7 @@ const DayDoListTemplate = () => {
             <hr></hr>
             <div className="daydo-list-wrapper">
                 <DaydoItemList
+                    day={day}
                     daydoList={daydoItemList}
                     onRemove={handleRemove}
                     onChange={handleDaydoInputChange}

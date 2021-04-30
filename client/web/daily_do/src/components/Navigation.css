@@ -1,0 +1,12 @@
+.navigation {
+    display: fixed;
+    top: 0;
+    left: 0;
+}
+
+.navigation-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 0;
+    list-style: none;
+}
