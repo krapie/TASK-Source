@@ -144,9 +144,9 @@ const TodoListTemplate = () => {
         <div className="todo-list-template-wrapper">
             <div className="todo-title">
                 <h2>목록</h2>
+                <p></p>
             </div>
-            <hr></hr>
-            <div className="todo-list-wrapper">
+            <div className="todo-lists-wrapper">
                 <TodoItemList
                     todoList={todoItemList}
                     onRemove={handleRemove}
@@ -154,7 +154,6 @@ const TodoListTemplate = () => {
                     onToggle={handleToggle}
                 />
             </div>
-            <hr></hr>
             <div className="todo-form-wrapper">
                 <TodoForm
                     value={formInput}

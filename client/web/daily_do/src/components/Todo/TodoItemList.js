@@ -4,11 +4,8 @@ import './TodoItemList.css';
 const TodoItemList = ({ todoList, onRemove, onChange, onToggle }) => {
     let todoListHTML;
 
-    if(!todoList) {
-        todoListHTML = <p>로딩중...</p>;
-    }
-    else if(todoList.length === 0) {
-        todoListHTML = <p>새 할 일을 적어주세요!</p>
+    if(todoList.length === 0) {
+        todoListHTML = <div className="todo-empty-list">새 할 일을 적어주세요!</div>
     }
     else {
         todoListHTML = todoList.map(
@@ -27,9 +24,9 @@ const TodoItemList = ({ todoList, onRemove, onChange, onToggle }) => {
     }
 
     return (
-        <div className="todo-list-wrapper">
+        <ul className="todo-list-wrapper">
             {todoListHTML}
-        </div>
+        </ul>
     );
 }
 

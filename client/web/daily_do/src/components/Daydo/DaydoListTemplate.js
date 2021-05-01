@@ -5,13 +5,15 @@ import './DaydoListTemplate.css'
 import DaydoSlider from './DaydoSlider'
 
 const DayDoListTemplate = () => {
+    const today = new Date();
+
     const [ allDaydoItemList, setAllDaydoItemList ] = useState([]);
     const [ daydoItemList, setDaydoItemList ] = useState([]);
 
     const [ formInput, setFormInput ] = useState('');
     const [ fetched, setFetched ] = useState(false);
 
-    const [ day, setDay ] = useState(1); // 설정의 요일별 할 일 목록의 세팅되어 있는 요일 (기본 월요일 설정)
+    const [ day, setDay ] = useState(today.getDay()); // 설정의 요일별 할 일 목록의 세팅되어 있는 요일 (기본 월요일 설정)
 
     // FETCH - GET
     useEffect(() => {
@@ -158,11 +160,11 @@ const DayDoListTemplate = () => {
 
     
     return (
-        <div className="todo-list-template-wrapper">
+        <div className="daydo-list-template-wrapper">
             <div className="daydo-title-wrapper">
                 <DaydoSlider day={day} onSlide={handleSlider}></DaydoSlider>
             </div>
-            <hr></hr>
+            <p></p>
             <div className="daydo-list-wrapper">
                 <DaydoItemList
                     day={day}
@@ -171,7 +173,6 @@ const DayDoListTemplate = () => {
                     onChange={handleDaydoInputChange}
                 />
             </div>
-            <hr></hr>
             <div className="daydo-form-wrapper">
                 <DaydoForm
                     value={formInput}

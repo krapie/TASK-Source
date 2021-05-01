@@ -1,3 +1,36 @@
-.todo-form {
-    text-align: center;
+.daydo-form {
+    width: 70%;
+    display: grid;
+    grid-template-columns: 2rem 5fr 1fr;
+    margin: auto;
+    border-bottom: 0.1rem solid rgba(0,0,0,0.1);
+}
+
+.daydo-form span {
+    font-size: 1.5rem;
+    color: gray;
+}
+
+.daydo-form input[type="text"] {
+    width: 100%;
+    font-size: 1rem;
+    color: #333333;
+    border: none;
+    background: transparent;
+    margin: auto;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    padding: 0px;
+}
+
+.daydo-form button {
+    border: none;
+    background-color: transparent;
+    color: gray;
+    padding: 0px;
+    font-size: 1rem;
+}
+
+.daydo-form input:focus {
+    outline: none;
 }

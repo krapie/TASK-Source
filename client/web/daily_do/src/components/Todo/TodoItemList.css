@@ -1,7 +1,5 @@
-.todo-list-wrapper {
+.todo-empty-list {
+    color: gray;
+    margin: auto;
     text-align: center;
-}
-
-.check {
-    text-align: left;
 }

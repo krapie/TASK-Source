@@ -1,4 +1,38 @@
 .daydo-item {
-    display: grid;
-    grid-template-columns: 3fr 1fr;
+    border-bottom: 0.1rem solid rgba(0,0,0,0.1);
+    padding: 2%;
+    list-style: none;
+}
+
+.daydo-item input[type="text"] {
+    display: inline-block;
+    width: 70%;
+    font-size: 1rem;
+    border: none;
+    background: transparent;
+    margin: auto;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    padding: 0px;
+}
+
+.checked {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.daydo-item input:focus {
+    outline: none;
+}
+
+.daydo-item .remove-item {
+    font-size: 1rem;
+    float: right;
+    display: none;
+    color: gray;
+    cursor: pointer;
+}
+
+.daydo-item:hover .remove-item {
+    display: inline;
 }

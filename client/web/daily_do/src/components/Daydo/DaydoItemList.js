@@ -10,7 +10,7 @@ const DaydoItemList = ({ day, daydoList, onRemove, onChange }) => {
         daydoListHTML = <p>로딩중...</p>;
     }
     else if(daydoList.length === 0) {
-        daydoListHTML = <p>{dayHTML}에 할 일을 적어주세요!</p>
+        daydoListHTML = <div className="daydo-empty-list">{dayHTML}마다 할 일을 설정해주세요!</div>
     }
     else {
         daydoListHTML = daydoList.map(
