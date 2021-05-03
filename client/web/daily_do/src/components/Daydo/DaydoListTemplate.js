@@ -4,7 +4,7 @@ import DaydoForm from './DaydoForm'
 import './DaydoListTemplate.css'
 import DaydoSlider from './DaydoSlider'
 
-const DayDoListTemplate = () => {
+const DayDoListTemplate = ({ darkTheme }) => {
     const today = new Date();
 
     const [ allDaydoItemList, setAllDaydoItemList ] = useState([]);
@@ -15,6 +15,18 @@ const DayDoListTemplate = () => {
 
     const [ day, setDay ] = useState(today.getDay()); // 설정의 요일별 할 일 목록의 세팅되어 있는 요일 (기본 월요일 설정)
 
+    useEffect(() => { // 다크 모드 
+        console.log()
+        const inputs = document.querySelectorAll('input');
+    
+        if(darkTheme) {  
+          inputs.forEach(input => input.classList.add('dark'));
+        }
+        else {
+          inputs.forEach(input => input.classList.remove('dark'));
+        }
+      });
+      
     // FETCH - GET
     useEffect(() => {
         // 서버로부터 모든 요일의 Daydo 목록 가져오기
@@ -160,7 +172,7 @@ const DayDoListTemplate = () => {
 
     
     return (
-        <div className="daydo-list-template-wrapper">
+        <div className="template-wrapper daydo-list-template-wrapper">
             <div className="daydo-title-wrapper">
                 <DaydoSlider day={day} onSlide={handleSlider}></DaydoSlider>
             </div>

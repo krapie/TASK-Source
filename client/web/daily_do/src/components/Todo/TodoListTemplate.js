@@ -3,10 +3,22 @@ import TodoForm from './TodoForm';
 import TodoItemList from './TodoItemList';
 import './TodoListTemplate.css';
 
-const TodoListTemplate = () => {
+const TodoListTemplate = ({ darkTheme }) => {
     const [ todoItemList, setTodoItemList ] = useState([]);
     const [ formInput, setFormInput ] = useState('');
     const [ fetched, setFetched ] = useState(false);
+
+    useEffect(() => { // 다크 모드 
+        console.log()
+        const inputs = document.querySelectorAll('input');
+    
+        if(darkTheme) {  
+          inputs.forEach(input => input.classList.add('dark'));
+        }
+        else {
+          inputs.forEach(input => input.classList.remove('dark'));
+        }
+      });
 
     // FETCH - GET
     useEffect(() => {
@@ -141,7 +153,7 @@ const TodoListTemplate = () => {
   
 
     return (
-        <div className="todo-list-template-wrapper">
+        <div className="template-wrapper todo-list-template-wrapper">
             <div className="todo-title">
                 <h2>목록</h2>
                 <p></p>

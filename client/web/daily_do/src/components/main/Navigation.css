@@ -9,6 +9,11 @@
     background-color: #333333;
 }
 
+.dark {
+    background-color: #121212;
+    color: #ffffff;
+  }
+
 .navigation-list {
     list-style: none;
     text-align: center;

@@ -1,27 +1,8 @@
-.daydo-list-template-wrapper {
-    position: relative;
-    z-index: 1;
-    width: 600px;
-    margin: auto;
-    margin-top: 3%;
-
-    text-align: center;
-
-    background-color: #F6F6F6;
-    border-radius: 10%;
-
-    padding: 1%;
-}
-
 .daydo-list-template-wrapper p {
     width: 70%;
     margin: auto;
 
     border-bottom: 0.1rem solid #86868B;
-}
-
-.daydo-title {
-    color: #1D1D1F;
 }
 
 .daydo-list-wrapper {

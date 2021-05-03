@@ -27,6 +27,45 @@ h1 {
   margin-bottom: 15%;    
 }
 
+.dark {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+.template-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 600px;
+  margin: auto;
+  margin-top: 3%;
+
+  text-align: center;
+
+  border-radius: 10%;
+
+  padding: 1%;
+}
+
+.template-wrapper-dark {
+  position: relative;
+  z-index: 1;
+  width: 600px;
+  margin: auto;
+  margin-top: 3%;
+
+  text-align: center;
+
+  background-color: #1D1D1D;
+  border-radius: 10%;
+
+  padding: 1%;
+}
+
+.component {
+  margin-top: 10%;
+  margin-bottom: 15%;    
+}
+
 /*Responsive*/
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   h1 {

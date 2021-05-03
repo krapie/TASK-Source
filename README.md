@@ -2,8 +2,33 @@
 Task: Time/Task Management Service
 태스크: 일정/시간 관리 서비스
 
+# Features
++ Daily Do 서비스
+    + 오늘 할 일 관리 기능
+    + 설정 - 요일별 할 일 추가 기능 (자동으로 해당 요일에 할 일이 추가됨)
++ Pomodoro 서비스
++ Dashboard 서비스
+
+# Tech Stacks
++ 서버
+    + REST API
+    + Java
+    + Spring Boot
++ 웹 클라이언트
+    + HTML5/CSS3
+    + JavaScript (ES6)
+    + React.js (Hooks)
+    + Webpack, Babel
 
 # Updates
++ 2021-05-03
+    + Daily Do 서비스
+        + 웹 클라이언트
+            + 설정에서 Light-Dark 테마 설정 기능 추가
++ 2021-05-01
+    + Daily Do 서비스
+        + 웹 클라이언트
+            + 기존 'Daily Do' 서비스의 CSS 디자인을 그대로 적용 완료
 + 2021-04-30
     + Daily Do 서비스
         + 웹 클라이언트
@@ -41,6 +66,7 @@ Task: Time/Task Management Service
 + Daily Do 서비스
     + 서버
     + 웹 클라이언트
+        + 라우팅 추가
 + Pomodoro 서비스
     + 서버
         + Pomodoro 서비스 프로토타입 API 개발
