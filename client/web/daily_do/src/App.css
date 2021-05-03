@@ -62,14 +62,27 @@ h1 {
 }
 
 .component {
-  margin-top: 10%;
-  margin-bottom: 15%;    
+  margin-top: 12.5%;
+  margin-bottom: 20%;    
 }
 
 /*Responsive*/
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   h1 {
       font-size: 2.8rem;
+  }
+
+  .component {
+    margin-top: 15%;
+    margin-bottom: 20%;    
+  }
+
+  .template-wrapper {
+    width: 70%;
+  }
+
+  .template-wrapper-dark {
+    width: 70%;
   }
 }
 @media screen and (max-width: 767px) {
@@ -79,5 +92,18 @@ h1 {
 
   h1 {
       font-size: 2.2rem;
+  }
+
+  .component {
+    margin-top: 20%;
+    margin-bottom: 25%;    
+  }
+
+  .template-wrapper {
+    width: 70%;
+  }
+
+  .template-wrapper-dark {
+    width: 70%;
   }
 }

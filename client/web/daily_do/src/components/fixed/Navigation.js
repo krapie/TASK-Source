@@ -1,12 +1,13 @@
+import { Link } from 'react-router-dom';
 import './Navigation.css';
 
-const Navigation = ({ onNavigation }) => {
+const Navigation = () => {
     return (
         <nav className="navigation">
             <ul className="navigation-list">
-                <li><span className="today" onClick={onNavigation}>오늘</span></li>
+                <li><Link to="/">오늘</Link></li>
                 <li id="logo">&pi;</li>
-                <li><span className="preference" onClick={onNavigation}>설정</span></li>
+                <li><Link to="/preference">설정</Link></li>
             </ul>
         </nav>
     );

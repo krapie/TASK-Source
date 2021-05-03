@@ -87,21 +87,3 @@
   .slider.round:before {
     border-radius: 50%;
   }
-
-/*Responsive*/
-@media screen and (min-width: 768px) and (max-width: 1023px) {
-    .component {
-        margin-top: 15%;
-        margin-bottom: 20%;    
-    }
-  }
-  @media screen and (max-width: 767px) {
-    .preference-template-wrapper {
-        width: 80%;
-    }
-
-    .component {
-        margin-top: 20%;
-        margin-bottom: 25%;    
-    }
-  }

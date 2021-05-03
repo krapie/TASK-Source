@@ -21,10 +21,15 @@ Task: Time/Task Management Service
     + Webpack, Babel
 
 # Updates
++ 2021-05-04
+    + Daily Do 서비스
+        + 웹 클라이언트
+            + React Router를 이용하여 주소에 따라 다른 컴포넌트가 화면에 나타나도록 변경함
+            + CSS, JS 파일 정리 및 일부분 리팩토링 완료
 + 2021-05-03
     + Daily Do 서비스
         + 웹 클라이언트
-            + 설정에서 Light-Dark 테마 설정 기능 추가
+            + 설정에서 Light-Dark 테마 설정 기능 추가 (추후 styled-components를 활용하여 리팩토링할 예정)
 + 2021-05-01
     + Daily Do 서비스
         + 웹 클라이언트

@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import Footer from './components/main/Footer';
-import Navigation from './components/main/Navigation';
+import Footer from './components/fixed/Footer';
+import Navigation from './components/fixed/Navigation';
 import PreferenceWrapper from './components/PreferenceWrapper';
 import TodayWrapper from './components/TodayWrapper';
 import './App.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 function App() {
   const today = new Date();
@@ -11,9 +12,9 @@ function App() {
   const todayDateHTML = <p>오늘은 <br></br> {today.getMonth()+1}월 {today.getDate()}일 {dayname[today.getDay()]}요일</p>;
 
   const [ darkTheme, setDarkTheme ] = useState(false); // 다크 모드
-  const [ selectedPageNum, setSelectedPageNum ] = useState(0); // 기본값: 오늘 할 일 (0)
+  //const [ selectedPageNum, setSelectedPageNum ] = useState(0); // 기본값: 오늘 할 일 (0)
 
-  useEffect(() => { // 랜더링 이후
+  useEffect(() => { // 랜더링 이후 다크 모드 설정 (추후 리팩토링)
     const body = document.querySelector('body');
     const navigation = document.querySelector('.navigation');
     const footer = document.querySelector('.footer');
@@ -30,28 +31,22 @@ function App() {
     }
   }, [ darkTheme ]);
 
-  function handleNavigation(e) {
-      const selectedPageName = e.target.className;
-
-      if(selectedPageName === "today") {
-        setSelectedPageNum(0);
-      }
-      else if(selectedPageName === "preference") {
-        setSelectedPageNum(1);
-      }
-  }
-
   function handleThemeToggle() {
     setDarkTheme(!darkTheme);
   }
   
   // 메인
   return (
-    <div className="main">
-      <Navigation onNavigation={handleNavigation}></Navigation>
-      { (selectedPageNum === 0) ? (<TodayWrapper darkTheme={darkTheme} todayDateHTML={todayDateHTML}></TodayWrapper>) : (<PreferenceWrapper darkTheme={darkTheme} handleThemeToggle={handleThemeToggle}></PreferenceWrapper>)}
-      <Footer></Footer>
-    </div>
+    <Router>
+      <div className="main">
+        <Navigation></Navigation>
+        <Switch>
+          <Route path="/" exact render={() => <TodayWrapper darkTheme={darkTheme} todayDateHTML={todayDateHTML}/>}/>
+          <Route path="/preference" render={() => <PreferenceWrapper darkTheme={darkTheme} handleThemeToggle={handleThemeToggle}/>}/>
+        </Switch>
+        <Footer></Footer>
+      </div>
+    </Router>
   );
 }
 

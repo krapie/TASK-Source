@@ -32,6 +32,11 @@
     text-decoration: none;
 }
 
+.navigation-list a {
+    color: #FBFBFD;
+    text-decoration: none;
+}
+
 .navigation-list #logo {
     font-size: 1.5rem;
     margin: 0px;
@@ -43,7 +48,7 @@
     cursor: pointer;
 }
 
-.navigation-list span:hover {
+.navigation-list a:hover {
     font-weight: bold;
     color: #ffffff;
     cursor: pointer;

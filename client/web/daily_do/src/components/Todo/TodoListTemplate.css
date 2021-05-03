@@ -13,21 +13,3 @@
     list-style: none;
     text-align: left;
 }
-
-/*Responsive*/
-@media screen and (min-width: 768px) and (max-width: 1023px) {
-    .component {
-        margin-top: 15%;
-        margin-bottom: 20%;    
-    }
-  }
-  @media screen and (max-width: 767px) {
-    .todo-list-template-wrapper {
-        width: 80%;
-    }
-
-    .component {
-        margin-top: 20%;
-        margin-bottom: 25%;    
-    }
-  }
