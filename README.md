@@ -6,7 +6,10 @@ Task: Time/Task Management Service
 + Daily Do 서비스
     + 오늘 할 일 관리 기능
     + 설정 - 요일별 할 일 추가 기능 (자동으로 해당 요일에 할 일이 추가됨)
+    + 다크 모드
 + Pomodoro 서비스
+    + 타이머 기능
+    + 오늘 달성한 포모
 + Dashboard 서비스
 
 # Tech Stacks
@@ -19,8 +22,13 @@ Task: Time/Task Management Service
     + JavaScript (ES6)
     + React.js (Hooks)
     + Webpack, Babel
-
+    + React Router
+    
 # Updates
++ 2021-05-07
+    + Pomodoro 서비스
+        + 웹 클라이언트
+            + 기본 Pomodoro 컴포넌트 프로토타입 개발 1단계 (타이머 기능, 일일 포모 카운트 기능) 완료
 + 2021-05-04
     + Daily Do 서비스
         + 웹 클라이언트
@@ -71,13 +79,13 @@ Task: Time/Task Management Service
 + Daily Do 서비스
     + 서버
     + 웹 클라이언트
-        + 라우팅 추가
 + Pomodoro 서비스
     + 서버
         + Pomodoro 서비스 프로토타입 API 개발
     + 웹 클라이언트
-        + 기본 Pomodoro 컴포넌트 프로토타입 개발 1단계 (타이머 기능, 타이머 세팅 기능, 일일 포모 저장 기능)
-        + 기본 Pomodoro 컴포넌트 프로토타입 개발 2단계 (서버 API와 통신)
+        + 기본 Pomodoro 컴포넌트 프로토타입 개발 2단계 (설정 - 타이머 세팅 기능)
+        + 기본 Pomodoro 컴포넌트 프로토타입 개발 3단계 (서버 API와 통신: 타이머 저장, 포모 저장)
+        + 기존 'Pomodoro' 서비스의 CSS 디자인을 그대로 적용
 + 대시보드 서비스
     + 서버
     + 웹 클라이언트
