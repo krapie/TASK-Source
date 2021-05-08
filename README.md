@@ -25,6 +25,12 @@ Task: Time/Task Management Service
     + React Router
     
 # Updates
++ 2021-05-08
+    + Pomodoro 서비스
+        + 웹 클라이언트
+            + 기본 Pomodoro 컴포넌트 프로토타입 개발 2단계 (설정 - 타이머 세팅 기능) 템플릿 완료
+            + 고정 요소 (네비게이션, Footer) + React Router 적용 완료 (타이머, 설정 탭)
+            + 일부 컴포넌트에 CSS 적용 완료 (Daily Do 서비스와 동일한 스타일 적용)
 + 2021-05-07
     + Pomodoro 서비스
         + 웹 클라이언트
@@ -32,7 +38,7 @@ Task: Time/Task Management Service
 + 2021-05-04
     + Daily Do 서비스
         + 웹 클라이언트
-            + React Router를 이용하여 주소에 따라 다른 컴포넌트가 화면에 나타나도록 변경함
+            + React Router를 이용하여 주소에 따라 다른 컴포넌트가 화면에 나타나도록 변경
             + CSS, JS 파일 정리 및 일부분 리팩토링 완료
 + 2021-05-03
     + Daily Do 서비스
@@ -81,10 +87,10 @@ Task: Time/Task Management Service
     + 웹 클라이언트
 + Pomodoro 서비스
     + 서버
-        + Pomodoro 서비스 프로토타입 API 개발
+        + Pomodoro 서비스 프로토타입 API 개발 (설정 타이머, 포모 저장 기능)
     + 웹 클라이언트
-        + 기본 Pomodoro 컴포넌트 프로토타입 개발 2단계 (설정 - 타이머 세팅 기능)
-        + 기본 Pomodoro 컴포넌트 프로토타입 개발 3단계 (서버 API와 통신: 타이머 저장, 포모 저장)
+        + 기본 Pomodoro 컴포넌트 프로토타입 개발 2단계+ (서버 API와 통신: 타이머 저장, 포모 저장)
+        + 기본 Pomodoro 컴포넌트 프로토타입 개발 3단계 (타이머 설정, 오늘 한 포모 기능 완성)
         + 기존 'Pomodoro' 서비스의 CSS 디자인을 그대로 적용
 + 대시보드 서비스
     + 서버
