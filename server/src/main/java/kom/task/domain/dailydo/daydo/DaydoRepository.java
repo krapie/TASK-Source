@@ -1,4 +1,4 @@
-package kom.task.domain.daydo;
+package kom.task.domain.dailydo.daydo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

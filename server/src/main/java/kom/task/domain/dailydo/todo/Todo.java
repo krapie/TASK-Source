@@ -1,4 +1,4 @@
-package kom.task.domain.daydo;
+package kom.task.domain.dailydo.todo;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -9,26 +9,27 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Daydo {
+public class Todo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
-    private Integer day; // Monday - Sunday : 1 ~ 7
+    private String content;
 
     @Column
-    private String content;
+    private Boolean isDone;
 
 
     @Builder
-    public Daydo(Integer day, String content) {
-        this.day = day;
+    public Todo(String content, Boolean isDone) {
         this.content = content;
+        this.isDone = isDone;
     }
 
-    public void update(String content) {
+    public void update(String content, Boolean isDone) {
         this.content = content;
+        this.isDone = isDone;
     }
 }

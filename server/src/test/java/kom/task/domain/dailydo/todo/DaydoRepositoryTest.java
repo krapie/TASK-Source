@@ -1,7 +1,7 @@
-package kom.task.domain.todo;
+package kom.task.domain.dailydo.todo;
 
-import kom.task.domain.daydo.Daydo;
-import kom.task.domain.daydo.DaydoRepository;
+import kom.task.domain.dailydo.daydo.Daydo;
+import kom.task.domain.dailydo.daydo.DaydoRepository;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;

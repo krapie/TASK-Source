@@ -1,9 +1,10 @@
 package kom.task.service;
 
-import kom.task.domain.daydo.Daydo;
-import kom.task.domain.daydo.DaydoRepository;
-import kom.task.domain.todo.Todo;
-import kom.task.domain.todo.TodoRepository;
+import kom.task.domain.dailydo.daydo.Daydo;
+import kom.task.domain.dailydo.daydo.DaydoRepository;
+import kom.task.domain.dailydo.todo.Todo;
+import kom.task.domain.dailydo.todo.TodoRepository;
+import kom.task.domain.pomodoro.Pomodoro;
 import kom.task.web.dto.daydo.DaydoResponseDto;
 import kom.task.web.dto.daydo.DaydoSaveRequestDto;
 import kom.task.web.dto.daydo.DaydoUpdateRequestDto;
@@ -11,6 +12,7 @@ import kom.task.web.dto.todo.TodoResponseDto;
 import kom.task.web.dto.todo.TodoSaveRequestDto;
 import kom.task.web.dto.todo.TodoUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +27,7 @@ public class TaskService {
 
     private final TodoRepository todoRepository;
     private final DaydoRepository daydoRepository;
+    private final Pomodoro pomodoro;
 
     /*** TO DO REST SERVICE ***/
     @Transactional
@@ -122,5 +125,16 @@ public class TaskService {
 
             todoRepository.save(todoEntity);
         }
+    }
+
+    /*** Pomodoro Service ***/
+    public Pomodoro fetchPomodoroItem() {
+        return pomodoro;
+    }
+
+    public Pomodoro updatePomdoroItem(Pomodoro updateDto) {
+        pomodoro.update(updateDto.getTimerSet());
+
+        return pomodoro; // SUCCESS
     }
 }

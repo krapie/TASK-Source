@@ -1,14 +1,74 @@
+import { useState, useEffect } from "react";
+
 const TimerChange = () => {
+    const [ formInput, setFormInput ] = useState(''); // 입력 필드값
+    const [ timerSet, setTimerSet ] = useState(0);
+    const [ fetched, setFetched ] = useState(false);
+
+    // FETCH - GET
+    useEffect(() => {
+        if(!fetched) {
+            fetch('http://localhost:8080/api/pomodoro')
+            .then((response) => response.json())
+            .then((info) => {
+                console.log("서버로부터 Pomodoro 정보 가져옴: ",  info.timerSet);
+                setTimerSet(info.timerSet);
+                setFetched(true);
+            });
+        }
+    }, [fetched]);
+    
+    function handleUpdate() {
+        setFormInput('');
+        // 입력값 유효성 검사 (분:초)
+        if(!RegExp("[0-9][0-9]:[0-9][0-9]").test(formInput)) { //if not in correct format
+            alert("형식에 맞게 값을 입력해주세요!");
+            return;
+        }
+
+        const time_parsed = formInput.split(':');
+        let minutes = parseInt(time_parsed[0]);
+        let seconds = parseInt(time_parsed[1]);
+        seconds += minutes * 60;
+        
+        const pomodoroForm = {
+            timerSet : seconds
+        };    
+
+        // 서버
+        fetch(`http://localhost:8080/api/pomodoro`, {
+            method : 'PUT',
+            headers : {
+                'content-type' : 'application/json'
+            },
+            body : JSON.stringify(pomodoroForm)
+        })
+        .then((response) => response.json())
+        .then((updatedPomodoro) => {
+            setTimerSet(updatedPomodoro.timerSet);
+            console.log("Update Success", updatedPomodoro.timerSet );
+        });
+    }
+
+    function handleChange(e) {
+        setFormInput(e.target.value);
+    }
+
+    function handleKeyPress(e) {
+        if(e.key === 'Enter') {
+            handleUpdate();
+        }
+    }
 
     return (
         <div className="timerChange component">
             <h3>타이머 설정</h3>
             <div className="timer_set_form">
-                <input type="text"  placeholder="분:초"></input>
-                <button >변경</button>
+                <input type="text" value={formInput} onChange={handleChange} onKeyPress={handleKeyPress} placeholder="분:초"></input>
+                <button onClick={handleUpdate}>변경</button>
             </div>
             <p>자신만의 포모도로 타이머를 세팅해보세요!</p>
-            <p>현재 타이머 세팅: <b className="timer_set_display"></b></p>
+            <p>현재 타이머 세팅: <b className="timer_set_display">{Math.floor(timerSet / 60) < 10 ? ('0' + Math.floor(timerSet / 60)) : (Math.floor(timerSet / 60))}:{(timerSet % 60) < 10 ? ('0' + timerSet % 60) : (timerSet % 60)}</b></p>
         </div>
     );
 }

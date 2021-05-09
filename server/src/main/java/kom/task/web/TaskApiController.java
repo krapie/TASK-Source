@@ -1,7 +1,8 @@
 package kom.task.web;
 
-import kom.task.domain.daydo.Daydo;
-import kom.task.domain.todo.Todo;
+import kom.task.domain.dailydo.daydo.Daydo;
+import kom.task.domain.dailydo.todo.Todo;
+import kom.task.domain.pomodoro.Pomodoro;
 import kom.task.service.TaskService;
 import kom.task.web.dto.daydo.DaydoResponseDto;
 import kom.task.web.dto.daydo.DaydoSaveRequestDto;
@@ -83,4 +84,24 @@ public class TaskApiController {
     public Long deleteDaydoItem(@PathVariable Long id) {
         return taskService.deleteDaydoItem(id);
     }
+
+
+    /*** Pomodoro TEMPORARY REST Controller ***/
+
+     // Read
+     @GetMapping("/api/pomodoro")
+     public ResponseEntity<?> fetchAllPomodoroItems() {
+         Pomodoro pomodoro = taskService.fetchPomodoroItem();
+
+        return ResponseEntity.status(HttpStatus.OK).body(pomodoro);
+     }
+
+     // Update
+     @PutMapping("/api/pomodoro")
+     public ResponseEntity<?> updatePomodoroItem(@RequestBody Pomodoro pomodoro) {
+
+         Pomodoro updatedPomodoro = taskService.updatePomdoroItem(pomodoro);
+
+         return ResponseEntity.status(HttpStatus.OK).body(updatedPomodoro);
+     }
 }

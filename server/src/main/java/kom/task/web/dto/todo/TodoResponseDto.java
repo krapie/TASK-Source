@@ -1,6 +1,6 @@
 package kom.task.web.dto.todo;
 
-import kom.task.domain.todo.Todo;
+import kom.task.domain.dailydo.todo.Todo;
 import lombok.Getter;
 
 @Getter

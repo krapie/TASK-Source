@@ -18,7 +18,7 @@ const TodoListTemplate = ({ darkTheme }) => {
         else {
           inputs.forEach(input => input.classList.remove('dark'));
         }
-      });
+    });
 
     // FETCH - GET
     useEffect(() => {

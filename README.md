@@ -25,6 +25,13 @@ Task: Time/Task Management Service
     + React Router
     
 # Updates
++ 2021-05-09
+    + Pomodoro 서비스
+        + 서버
+            + Pomodoro 서비스 프로토타입 API 개발 완료 (설정 타이머, 포모 저장 기능, 임시적으로 단일 리파지토리로 개발)
+        + 웹 클라이언트
+            + 기본 Pomodoro 컴포넌트 프로토타입 개발 2단계+ (서버 API와 통신 및 타이머 설정 기능 완성)
+            + 타이머가 작동하고 있는 도중에 설정 탭으로 이동 시 언마운트된 탭(타이머 탭)에서 상태값들의 메모리 누수가 발생하는 문제 해결 (useEffect cleanUp)
 + 2021-05-08
     + Pomodoro 서비스
         + 웹 클라이언트
@@ -86,11 +93,8 @@ Task: Time/Task Management Service
     + 서버
     + 웹 클라이언트
 + Pomodoro 서비스
-    + 서버
-        + Pomodoro 서비스 프로토타입 API 개발 (설정 타이머, 포모 저장 기능)
     + 웹 클라이언트
-        + 기본 Pomodoro 컴포넌트 프로토타입 개발 2단계+ (서버 API와 통신: 타이머 저장, 포모 저장)
-        + 기본 Pomodoro 컴포넌트 프로토타입 개발 3단계 (타이머 설정, 오늘 한 포모 기능 완성)
+        + 기본 Pomodoro 컴포넌트 프로토타입 개발 3단계 (오늘 한 포모 자동 업데이트 및 서버에 전송 기능 완성)
         + 기존 'Pomodoro' 서비스의 CSS 디자인을 그대로 적용
 + 대시보드 서비스
     + 서버
@@ -107,3 +111,4 @@ Task: Time/Task Management Service
 # Issues
 + CORS Policy
     + Port Issue: Cross Origin 3000 -> 8080
+    + Pomodoro 서비스: 2초 이하에서 탭 전환 시 메모리 누수와 함께 제대로 cleanUp이 되지 않는 문제

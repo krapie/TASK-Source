@@ -1,9 +1,9 @@
 package kom.task.web;
 
-import kom.task.domain.daydo.Daydo;
-import kom.task.domain.daydo.DaydoRepository;
-import kom.task.domain.todo.Todo;
-import kom.task.domain.todo.TodoRepository;
+import kom.task.domain.dailydo.daydo.Daydo;
+import kom.task.domain.dailydo.daydo.DaydoRepository;
+import kom.task.domain.dailydo.todo.Todo;
+import kom.task.domain.dailydo.todo.TodoRepository;
 import kom.task.web.dto.daydo.DaydoSaveRequestDto;
 import kom.task.web.dto.daydo.DaydoUpdateRequestDto;
 import kom.task.web.dto.todo.TodoSaveRequestDto;

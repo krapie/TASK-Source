@@ -3,6 +3,7 @@ import './Timer.css';
 import TimerDisplay from './TimerDisplay';
 
 const Timer = ({ timeSet, pomoUpdate }) => {
+    
     let countdown;
     let isBreakTime = false;
 
@@ -10,12 +11,23 @@ const Timer = ({ timeSet, pomoUpdate }) => {
     const [ remainderSeconds, setRemainderSeconds ] = useState(0);
     const [ timerSet, setTimerSet ] = useState(timeSet);
 
+    // timeSet props 가져오기
+    useEffect(() => {
+        setTimerSet(timeSet);    
+    }, [ timeSet ]);
+
     // 설정되어 있는 시간만큼 초기 화면 표시
     useEffect(() => {
         setRemainderMinutes(Math.floor(timerSet / 60));
         setRemainderSeconds(timerSet % 60);
-    }, [ timerSet ])
+    }, [ timerSet ]);
 
+    // Router 이동시 states cleanUp 해주기
+    useEffect(() => {
+        return function cleanUp() {
+            clearInterval(countdown);
+        }
+    }, []); 
 
     function start_timer() {
         timer(timerSet);

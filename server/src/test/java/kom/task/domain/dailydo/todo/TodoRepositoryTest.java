@@ -1,4 +1,4 @@
-package kom.task.domain.todo;
+package kom.task.domain.dailydo.todo;
 
 import org.junit.After;
 import org.junit.Test;
