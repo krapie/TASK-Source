@@ -19,7 +19,11 @@ public class Pomodoro {
         this.pomo = pomo;
     }
 
-    public void update(Integer timerSet) {
+    public void updateTimerSet(Integer timerSet) {
         this.timerSet = timerSet;
+    }
+
+    public void updatePomo(Integer pomo) {
+        this.pomo = pomo;
     }
 }

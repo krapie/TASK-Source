@@ -97,11 +97,20 @@ public class TaskApiController {
      }
 
      // Update
-     @PutMapping("/api/pomodoro")
-     public ResponseEntity<?> updatePomodoroItem(@RequestBody Pomodoro pomodoro) {
+     @PutMapping("/api/pomodoro/timerset")
+     public ResponseEntity<?> updatePomodoroItemTimerSet(@RequestBody Pomodoro pomodoro) {
 
-         Pomodoro updatedPomodoro = taskService.updatePomdoroItem(pomodoro);
+         Pomodoro updatedPomodoro = taskService.updatePomodoroItemTimerSet(pomodoro);
 
          return ResponseEntity.status(HttpStatus.OK).body(updatedPomodoro);
      }
+
+    // Update
+    @PutMapping("/api/pomodoro/pomo")
+    public ResponseEntity<?> updatePomodoroItemPomo(@RequestBody Pomodoro pomodoro) {
+
+        Pomodoro updatedPomodoro = taskService.updatePomodoroItemPomo(pomodoro);
+
+        return ResponseEntity.status(HttpStatus.OK).body(updatedPomodoro);
+    }
 }

@@ -132,8 +132,14 @@ public class TaskService {
         return pomodoro;
     }
 
-    public Pomodoro updatePomdoroItem(Pomodoro updateDto) {
-        pomodoro.update(updateDto.getTimerSet());
+    public Pomodoro updatePomodoroItemTimerSet(Pomodoro updateDto) {
+        pomodoro.updateTimerSet(updateDto.getTimerSet());
+
+        return pomodoro; // SUCCESS
+    }
+
+    public Pomodoro updatePomodoroItemPomo(Pomodoro updateDto) {
+        pomodoro.updatePomo(updateDto.getPomo());
 
         return pomodoro; // SUCCESS
     }

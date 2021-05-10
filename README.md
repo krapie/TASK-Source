@@ -10,6 +10,7 @@ Task: Time/Task Management Service
 + Pomodoro 서비스
     + 타이머 기능
     + 오늘 달성한 포모
+    + 다크 모드    
 + Dashboard 서비스
 
 # Tech Stacks
@@ -25,6 +26,11 @@ Task: Time/Task Management Service
     + React Router
     
 # Updates
++ 2021-05-11
+    + 서버
+        + 포모 업데이트 기능 추가
+    + 웹 클라이언트
+        + 기본 Pomodoro 컴포넌트 프로토타입 개발 3단계 (오늘 한 포모 자동 업데이트 및 서버에 저장 기능 완성)
 + 2021-05-10
     + Pomodoro 서비스
         + 웹 클라이언트
@@ -94,27 +100,25 @@ Task: Time/Task Management Service
             + Daily Do 서비스 - '오늘 할 일' 프로토타입 API 와 통신 테스트 완료 (정상작동)
 
 # TO-DO
-+ Daily Do 서비스
++ 메인 서비스
     + 서버
-    + 웹 클라이언트
-+ Pomodoro 서비스
-    + 서버
-        + 포모 업데이트 기능 추가 
-    + 웹 클라이언트
-        + 기본 Pomodoro 컴포넌트 프로토타입 개발 3단계 (오늘 한 포모 자동 업데이트 및 서버에 전송 기능 완성)
+        + 로그인 기능 추가 (Auth2)
 + 대시보드 서비스
     + 서버
     + 웹 클라이언트
         + 대시보드 프로토타입 페이지 추가 (Daily Do, Pomodoro 앱, 간단한 Todo, 
         Pomo 정보 표시)
-        + 프론트(로그인) 프로토타입 페이지 
-+ 메인 서비스
+        + 프론트(로그인) 프로토타입 페이지         
++ Daily Do 서비스
     + 서버
-        + 로그인 기능 추가 (Auth2)
+    + 웹 클라이언트
++ Pomodoro 서비스
+    + 서버
+    + 웹 클라이언트
 + 기타
     + Daily Do 서비스 웹 클라이언트: 리액트 컴포넌트, 코드 리팩토링
 
 # Issues
 + CORS Policy
     + Port Issue: Cross Origin 3000 -> 8080
-    + Pomodoro 서비스: 2초 이하에서 탭 전환 시 메모리 누수와 함께 제대로 cleanUp이 되지 않는 문제
+    + Pomodoro 서비스: 탭 전환 시 간헐적으로 메모리 누수와 함께 제대로 cleanUp이 되지 않는 문제
