@@ -8,7 +8,23 @@ const TimerTemplate = () => {
     const [ fetched, setFetched ] = useState(false);
 
     function handlePomoUpdate() {
-        setPomo(pomo+1);
+        const pomodoroForm = {
+            pomo : pomo+1
+        };    
+
+        // 서버
+        fetch(`http://localhost:8080/api/pomodoro/pomo`, {
+            method : 'PUT',
+            headers : {
+                'content-type' : 'application/json'
+            },
+            body : JSON.stringify(pomodoroForm)
+        })
+        .then((response) => response.json())
+        .then((updatedPomodoro) => {
+            setPomo(updatedPomodoro.pomo);
+            console.log("Updated Pomo: ", updatedPomodoro.pomo);
+        });
     }
 
     // FETCH - GET

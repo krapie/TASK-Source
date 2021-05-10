@@ -37,7 +37,7 @@ const TimerChange = () => {
         };    
 
         // 서버
-        fetch(`http://localhost:8080/api/pomodoro`, {
+        fetch(`http://localhost:8080/api/pomodoro/timerset`, {
             method : 'PUT',
             headers : {
                 'content-type' : 'application/json'
@@ -47,7 +47,7 @@ const TimerChange = () => {
         .then((response) => response.json())
         .then((updatedPomodoro) => {
             setTimerSet(updatedPomodoro.timerSet);
-            console.log("Update Success", updatedPomodoro.timerSet );
+            console.log("Updated TimerSet: ", updatedPomodoro.timerSet );
         });
     }
 
