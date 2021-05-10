@@ -11,7 +11,7 @@ public class Pomodoro {
 
     public Pomodoro() {
         this.timerSet = 25*60;
-        this.pomo = 6;
+        this.pomo = 0;
     }
 
     public Pomodoro(Integer timerSet, Integer pomo) {

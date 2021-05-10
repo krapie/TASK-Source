@@ -42,12 +42,6 @@
     margin: 0px;
 }
 
-.navigation-list #logo:hover{
-    font-weight: bold;
-    color: #ffffff;
-    cursor: pointer;
-}
-
 .navigation-list a:hover {
     font-weight: bold;
     color: #ffffff;

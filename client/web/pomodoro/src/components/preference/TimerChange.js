@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import "./TimerChange.css";
 
 const TimerChange = () => {
     const [ formInput, setFormInput ] = useState(''); // 입력 필드값
@@ -61,13 +62,13 @@ const TimerChange = () => {
     }
 
     return (
-        <div className="timerChange component">
+        <div className="preference_component">
             <h3>타이머 설정</h3>
             <div className="timer_set_form">
-                <input type="text" value={formInput} onChange={handleChange} onKeyPress={handleKeyPress} placeholder="분:초"></input>
-                <button onClick={handleUpdate}>변경</button>
+                <input className="timer_set_text" type="text" value={formInput} onChange={handleChange} onKeyPress={handleKeyPress} placeholder="분 : 초 "></input>
+                <button className="timer_set_submit" onClick={handleUpdate}>변경</button>
             </div>
-            <p>자신만의 포모도로 타이머를 세팅해보세요!</p>
+            <p>자신만의 뽀모도로 타이머를 세팅해보세요.</p>
             <p>현재 타이머 세팅: <b className="timer_set_display">{Math.floor(timerSet / 60) < 10 ? ('0' + Math.floor(timerSet / 60)) : (Math.floor(timerSet / 60))}:{(timerSet % 60) < 10 ? ('0' + timerSet % 60) : (timerSet % 60)}</b></p>
         </div>
     );

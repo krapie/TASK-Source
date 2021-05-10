@@ -25,6 +25,11 @@ Task: Time/Task Management Service
     + React Router
     
 # Updates
++ 2021-05-10
+    + Pomodoro 서비스
+        + 웹 클라이언트
+            + 설정 탭에 다크 모드 설정 기능 추가 완료
+            + 기존 'Pomodoro' 서비스의 CSS 디자인을 적용 완료
 + 2021-05-09
     + Pomodoro 서비스
         + 서버
@@ -54,7 +59,7 @@ Task: Time/Task Management Service
 + 2021-05-01
     + Daily Do 서비스
         + 웹 클라이언트
-            + 기존 'Daily Do' 서비스의 CSS 디자인을 그대로 적용 완료
+            + 기존 'Daily Do' 서비스의 CSS 디자인을 적용 완료
 + 2021-04-30
     + Daily Do 서비스
         + 웹 클라이언트
@@ -93,9 +98,10 @@ Task: Time/Task Management Service
     + 서버
     + 웹 클라이언트
 + Pomodoro 서비스
+    + 서버
+        + 포모 업데이트 기능 추가 
     + 웹 클라이언트
         + 기본 Pomodoro 컴포넌트 프로토타입 개발 3단계 (오늘 한 포모 자동 업데이트 및 서버에 전송 기능 완성)
-        + 기존 'Pomodoro' 서비스의 CSS 디자인을 그대로 적용
 + 대시보드 서비스
     + 서버
     + 웹 클라이언트

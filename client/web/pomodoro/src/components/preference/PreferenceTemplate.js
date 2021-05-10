@@ -1,27 +1,19 @@
-import TimerChange from "./TimerChange"
+import './PreferenceTemplate.css'; 
+import DarkMode from "./DarkMode";
+import TimerChange from "./TimerChange";
 
-const PreferenceTemplate = () => {
+const PreferenceTemplate = ({ darkTheme, onToggle }) => {
 
     return (
-        <div className="preferenceTemplate component">
-            <h1>설정</h1>
+        <div className="preference_template">
+            <h1 className="preference_title">설정</h1>
             <ul>
                 <li>
                     <TimerChange></TimerChange>
                 </li>
-                {/*
                 <li>
-                    <div>
-                        <h3>다크 모드</h3>
-                        <div className="theme_toggle">
-                            <label className="switch">
-                                <input type="checkbox"></input>
-                                <span className="slider round"></span>
-                            </label>
-                        </div>
-                    </div>
+                    <DarkMode darkTheme={darkTheme} onToggle={onToggle}></DarkMode>
                 </li>
-                */}
             </ul>
         </div>
     );

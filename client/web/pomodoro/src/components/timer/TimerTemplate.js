@@ -27,12 +27,12 @@ const TimerTemplate = () => {
 
     
     return (
-        <div className="timerTemplate component">
-            <h1>포모도로</h1>
+        <div className="timer_template component">
+            <h1>뽀모도로!</h1>
             <Timer timeSet={timerSet} pomoUpdate={handlePomoUpdate}></Timer> 
-            <h2 className="pomodoro_count">{pomo} 포모 달성!</h2>
-            <p>1 포모 = 25분</p>
-            <p>4 포모 후 30분 휴식!</p>
+            <h2 className="pomodoro_count">오늘은 {pomo} 뽀모를 했어요!</h2>
+            <p>1 포모 = 25분 집중, 5분 휴식</p>
+            <p>4 포모 후 30분 휴식</p>
         </div>
     );
 }

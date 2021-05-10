@@ -6,7 +6,7 @@ const Navigation = () => {
         <nav className="navigation">
             <ul className="navigation-list">
                 <li><Link to="/">타이머</Link></li>
-                <li id="logo">&pi;</li>
+                <li id="logo"><a href="/">&pi;</a></li>
                 <li><Link to="/preference">설정</Link></li>
             </ul>
         </nav>

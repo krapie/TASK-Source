@@ -1,4 +1,4 @@
-import './Timer.css';
+import './TimerDisplay.css';
 
 const TimerDisplay = ({ minutes, seconds }) => {
     return (

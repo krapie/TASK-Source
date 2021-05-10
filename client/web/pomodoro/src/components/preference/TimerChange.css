@@ -1,0 +1,23 @@
+.preference_component .timer_set_text {
+    padding: 2%;
+    margin-right: 1%;
+    background-color: transparent;
+    color: gray;
+    border: 0.1rem solid gray;
+}
+
+.preference_component .timer_set_submit {
+    padding: 2%;
+    background-color: transparent;
+    color: gray;
+    border: 0.1rem solid gray;
+}
+
+.preference_component .timer_set_submit:hover {
+    cursor: pointer;
+    background-color: rgba(0,0,0,0.1);
+}
+
+.preference_component .timer_set_display {
+    font-size: 1.3rem;
+}

@@ -73,7 +73,7 @@ const Timer = ({ timeSet, pomoUpdate }) => {
         <div className="timer">
             <TimerDisplay minutes={remainderMinutes} seconds={remainderSeconds}></TimerDisplay>
             <p className="break_time_display"></p>
-            <input className="start_timer_button" type="button" value="시작!" onClick={start_timer}/>
+            <input className="start_timer_button" type="button" value="타이머 시작!" onClick={start_timer}/>
         </div>
     );
 }

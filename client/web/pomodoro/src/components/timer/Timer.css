@@ -1,0 +1,13 @@
+.timer .start_timer_button {
+    margin-top: 10%;
+    margin-bottom: 5%;
+    background-color: transparent;
+    border: 1px solid gray;
+    padding: 3%;
+    color: gray;
+}
+
+.timer .start_timer_button:hover {
+    cursor: pointer;
+    background-color: rgba(0,0,0,0.1);
+}
