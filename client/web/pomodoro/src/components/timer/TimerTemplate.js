@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 const TimerTemplate = () => {
     const [ pomo, setPomo ] = useState(0);
-    const [ timerSet, setTimerSet ] = useState(0);
+    const [ timerSet, setTimerSet ] = useState(25*60);
     const [ fetched, setFetched ] = useState(false);
 
     function handlePomoUpdate() {
