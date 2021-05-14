@@ -1,0 +1,47 @@
+.dashboard .dashboard_user_info {
+    margin-bottom: 5%;
+}
+
+.dashboard .dashboard_user_info .user_picture {
+    width: 150px;
+    height: 150px;
+    background-color: #333333;
+    /*background-image: url("../../Komputer.png");
+    background-position: center;
+    background-size: cover;*/
+    border-radius: 50%;
+    margin: auto;
+}
+
+.dashboard .dashboard_content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.dashboard .dashboard_content .daily_do_app_picture {
+    width: 75px;
+    height: 75px;
+    background-color: #333333;
+    /*background-image: url("../../Komputer.png");
+    background-position: center;
+    background-size: cover;*/
+    border-radius: 50%;
+    margin: auto;
+    text-align: center;
+    line-height: 75px;
+    color: white;
+}
+
+.dashboard .dashboard_content .pomodoro_app_picture {
+    width: 75px;
+    height: 75px;
+    background-color: #333333;
+    /*background-image: url("../../Komputer.png");
+    background-position: center;
+    background-size: cover;*/
+    border-radius: 50%;
+    margin: auto;
+    text-align: center;
+    line-height: 75px;
+    color: white;
+}

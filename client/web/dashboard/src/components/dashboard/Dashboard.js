@@ -1,11 +1,7 @@
-import './DashboardWrapper.css';
+import './Dashboard.css';
 import { useEffect, useState } from "react";
 
-function DashboardWrapper() {
-    const today = new Date();
-    const dayname = ['일','월','화','수','목','금','토','일'];       
-    const todayDateHTML = <p>오늘은 <br></br> {today.getMonth()+1}월 {today.getDate()}일 {dayname[today.getDay()]}요일</p>;
-
+function Dashboard() {
     const [ todoItems, setTodoItems ] = useState([]);
     const [ pomodoroItem, setPomodoroItem ] = useState([]);
     const [ isPatched, setIsPatched ] = useState(false);
@@ -33,7 +29,7 @@ function DashboardWrapper() {
         }
     }, [ isPatched ]);
 
-    useEffect(() => {
+    useEffect(() => { // 임시
         calTodoItemsCount();  
         calTodoItemsDoneCount();
         calPomoCount();
@@ -52,25 +48,23 @@ function DashboardWrapper() {
     }
 
     return (
-        <div>
-            <div className="dashboard_background">
-                
+        <div className="dashboard">
+            <div className="dashboard_user_info component">
+                <div className="user_picture"></div>
+                <h2>박지환</h2>
+                <hr></hr>
             </div>
-            <div className="dashboard_content">
-                <div className="dashboard_date">
-                    {todayDateHTML}
-                </div>
+            <div className="dashboard_content component">
                 <div className="dashboard_daily_do">
-                    <h1>오늘 할 일</h1>
+                    <a href="/"><div className="daily_do_app_picture">오늘 할 일</div></a>
                     <ul>
-                        <li>오늘 할 일 달성률: {Math.round((todoItemsDoneCount / todoItemsCount) * 100)}%</li>
-                        <li>오늘 할 일: {todoItemsDoneCount}/{todoItemsCount}</li>
+                        <li>오늘 할 일 달성률<h1>{Math.round((todoItemsDoneCount / todoItemsCount) * 100)}%</h1></li>
                     </ul>
                 </div>
                 <div className="dashboard_pomodoro">
-                    <h1>뽀모도로</h1>
+                    <a href="/"><div className="pomodoro_app_picture">뽀모도로</div></a>
                     <ul>
-                        <li>오늘 한 뽀모: {pomoCount}</li>
+                        <li>오늘 한 뽀모<h1>{pomoCount} 뽀모</h1></li>
                     </ul>
                 </div>
             </div>
@@ -78,4 +72,4 @@ function DashboardWrapper() {
     );
 }
 
-export default DashboardWrapper;
+export default Dashboard;

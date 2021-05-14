@@ -78,12 +78,3 @@
     -ms-transform: translateX(13px);
     transform: translateX(13px);
   }
-  
-  /* Rounded sliders */
-  .slider.round {
-    border-radius: 17px;
-  }
-  
-  .slider.round:before {
-    border-radius: 50%;
-  }

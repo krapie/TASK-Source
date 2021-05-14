@@ -1,13 +1,12 @@
-.preference_component .text {
+.preference .text {
   vertical-align: middle;
   margin-right: 2%;
 }
 
-.preference_component label {
+.preference label {
  vertical-align: middle;
 }
 
-/* *** W3School Round Toggle Switch *** */
 /* The switch - the box around the slider */
 .switch {
     position: relative;
@@ -49,11 +48,11 @@
   }
   
   input:checked + .slider {
-    background-color: gray;
+    background-color: #333333;
   }
   
   input:focus + .slider {
-    box-shadow: 0 0 1px gray;
+    box-shadow: 0 0 1px #333333;
   }
   
   input:checked + .slider:before {
