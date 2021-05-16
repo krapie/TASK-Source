@@ -1,33 +1,131 @@
 package kom.task.service;
 
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.gson.GsonFactory;
 import kom.task.domain.dailydo.daydo.Daydo;
 import kom.task.domain.dailydo.daydo.DaydoRepository;
 import kom.task.domain.dailydo.todo.Todo;
 import kom.task.domain.dailydo.todo.TodoRepository;
 import kom.task.domain.pomodoro.Pomodoro;
+import kom.task.domain.user.User;
+import kom.task.domain.user.UserRepository;
 import kom.task.web.dto.daydo.DaydoResponseDto;
 import kom.task.web.dto.daydo.DaydoSaveRequestDto;
 import kom.task.web.dto.daydo.DaydoUpdateRequestDto;
 import kom.task.web.dto.todo.TodoResponseDto;
 import kom.task.web.dto.todo.TodoSaveRequestDto;
 import kom.task.web.dto.todo.TodoUpdateRequestDto;
+import kom.task.web.dto.user.UserResponseDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
 import java.util.stream.Collectors;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 
 @RequiredArgsConstructor
 @Service
 public class TaskService {
 
+    private static final String CLIENT_ID = "855394650411-buaopph1kokclaq6l9i8tirma6u2svf0.apps.googleusercontent.com";
     private final TodoRepository todoRepository;
     private final DaydoRepository daydoRepository;
+    private final UserRepository userRepository;
     private final Pomodoro pomodoro;
+
+    /*** LOGIN REST SERVICE ***/
+    public String googleTokenLogin(String tokenDtoString) {
+        String returnString = "";
+        Payload payload = TokenVerify(tokenDtoString);
+
+        if(payload != null) {
+            // Print user identifier
+            String userId = payload.getSubject();
+            System.out.println("User ID: " + userId);
+
+            // Get profile information from payload
+            String email = payload.getEmail();
+            boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
+            String name = (String) payload.get("name");
+            String pictureUrl = (String) payload.get("picture");
+            String locale = (String) payload.get("locale");
+            String familyName = (String) payload.get("family_name");
+            String givenName = (String) payload.get("given_name");
+
+            // Use or store profile information
+            // ...
+            userRepository.findByUserId(userId)
+                    .map(entity -> entity.update(name, pictureUrl))
+                    .orElse(userRepository.save(User.builder()
+                            .userId(userId)
+                            .name(name)
+                            .email(email)
+                            .pictureUrl(pictureUrl)
+                            .build()));
+
+            returnString = name;
+        }
+        else {
+            returnString = "invalid token";
+        }
+
+        return returnString;
+    }
+
+    public UserResponseDto fetchUserInfo(String tokenDtoString) {
+        Payload payload = TokenVerify(tokenDtoString);
+        UserResponseDto userResponseDto = null;
+
+        if(payload != null) {
+            // Print user identifier
+            String userId = payload.getSubject();
+            System.out.println("User ID: " + userId);
+
+            User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("id not found"));
+            userResponseDto = new UserResponseDto(user);
+        }
+        else {
+
+        }
+
+        return userResponseDto;
+    }
+
+    public Payload TokenVerify(String tokenDtoString) {
+        Payload payload = null;
+
+        GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new GsonFactory())
+                // Specify the CLIENT_ID of the app that accesses the backend:
+                .setAudience(Collections.singletonList(CLIENT_ID))
+                // Or, if multiple clients access the backend:
+                //.setAudience(Arrays.asList(CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3))
+                .build();
+
+        // (Receive idTokenString by HTTPS POST)
+        try {
+            GoogleIdToken idToken = verifier.verify(tokenDtoString);
+            if (idToken != null) {
+                payload = idToken.getPayload();
+            } else {
+                System.out.println("Invalid ID token.");
+            }
+        } catch (GeneralSecurityException e) {
+            System.out.println(e.getStackTrace());
+        } catch (IOException e) {
+            System.out.println(e.getStackTrace());
+        }
+
+        return payload;
+    }
 
     /*** TO DO REST SERVICE ***/
     @Transactional

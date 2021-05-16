@@ -1,0 +1,24 @@
+.information {
+    margin-top: 45%;
+    margin-bottom: 10%;
+}
+
+#logo {
+    font-size: 7rem;
+    margin-bottom: 0;
+}
+
+.customGPlusSignIn {
+    width: 240px;
+    margin: auto;
+    margin-top: 10%;
+    margin-bottom: 5%;
+    background-color: transparent;
+    border: 1px solid gray;
+    padding: 2%;
+    color: gray;
+}
+
+.customGPlusSignIn:hover {
+    cursor: pointer;
+}

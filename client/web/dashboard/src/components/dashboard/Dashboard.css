@@ -3,10 +3,10 @@
 }
 
 .dashboard .dashboard_user_info .user_picture {
-    width: 150px;
-    height: 150px;
-    background-color: #333333;
-    /*background-image: url("../../Komputer.png");
+    width: 130px;
+    height: 130px;
+    /*background-color: #333333;
+    background-image: url("../../Komputer.png");
     background-position: center;
     background-size: cover;*/
     border-radius: 50%;

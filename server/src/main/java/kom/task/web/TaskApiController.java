@@ -1,5 +1,6 @@
 package kom.task.web;
 
+import com.fasterxml.jackson.databind.node.TextNode;
 import kom.task.domain.dailydo.daydo.Daydo;
 import kom.task.domain.dailydo.todo.Todo;
 import kom.task.domain.pomodoro.Pomodoro;
@@ -10,12 +11,14 @@ import kom.task.web.dto.daydo.DaydoUpdateRequestDto;
 import kom.task.web.dto.todo.TodoResponseDto;
 import kom.task.web.dto.todo.TodoSaveRequestDto;
 import kom.task.web.dto.todo.TodoUpdateRequestDto;
+import kom.task.web.dto.user.UserResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -23,6 +26,24 @@ import java.util.List;
 public class TaskApiController {
 
     private final TaskService taskService;
+
+    /*** LOGIN REST CONTROLLER ***/
+    // Login
+    @PostMapping("/api/google/tokensignin")
+    public String googleTokenLogin(@RequestParam("idtoken") String tokenDtoString) {
+        String userName = taskService.googleTokenLogin(tokenDtoString);
+
+        return userName;
+    }
+
+    // Get User Info
+    @PostMapping("/api/user")
+    public ResponseEntity<?> fetchUserData(@RequestBody TextNode tokenDtoString) {
+        UserResponseDto responseDto = taskService.fetchUserInfo(tokenDtoString.asText());
+
+        return ResponseEntity.status(HttpStatus.OK).body(responseDto);
+    }
+
 
     /*** To Do REST CONTROLLER ***/
 
