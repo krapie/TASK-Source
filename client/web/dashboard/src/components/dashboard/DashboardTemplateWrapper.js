@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import Dashboard from './Dashboard';
-import './DashboardTemplateWrapper.css';
 import Navigation from '../fixed/Navigation';
 
 function DashboardTemplateWrapper({ darkTheme }) {
@@ -17,7 +16,7 @@ function DashboardTemplateWrapper({ darkTheme }) {
       }, [ darkTheme ]);
 
     return (
-    <div className="navigation-dashboard_wrapper">
+    <div className="navigation-dashboard_wrapper wrapper">
         <Navigation></Navigation>
         <Dashboard></Dashboard>
     </div>

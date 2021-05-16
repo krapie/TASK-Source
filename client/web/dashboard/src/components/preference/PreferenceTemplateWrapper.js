@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import Preference from './Preference';
-import './PreferenceTemplateWrapper.css';
 import Navigation from '../fixed/Navigation';
 
 function PreferenceTemplateWrapper({ darkTheme, handleThemeToggle }) {
@@ -17,7 +16,7 @@ function PreferenceTemplateWrapper({ darkTheme, handleThemeToggle }) {
       }, [ darkTheme ]);
 
     return (
-        <div className="navigation-preference-wrapper">
+        <div className="navigation-preference-wrapper wrapper">
             <Navigation></Navigation>
             <h1 style={{ fontSize : '3rem', marginBottom : '10%'}}>설정</h1>
             <div className="preferences">

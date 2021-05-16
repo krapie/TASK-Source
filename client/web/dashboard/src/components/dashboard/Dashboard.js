@@ -11,6 +11,7 @@ function Dashboard() {
     const [ todoItemsCount, setTodoItemsCount ] = useState(0);
     const [ todoItemsDoneCount, setTodoItemsDoneCount ] = useState(0);
     const [ pomoCount, setPomoCount ] = useState(0);
+    const [ pomoTimer, setPomoTimer ] = useState({ });
     
     const idToken = localStorage.getItem("idToken");
     
@@ -24,12 +25,18 @@ function Dashboard() {
                     setTodoItems(data);
                 });
 
-            fetch('http://localhost:8080/api/pomodoro')
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log("Pomodoro Item: ", data.timerSet, data.pomo);
-                    setPomodoroItem(data);
-                });
+            fetch('http://localhost:8080/api/pomodoro', {
+                method : 'POST',
+                headers : {
+                    'content-type' : 'application/json'
+                },
+                body : JSON.stringify(idToken)
+            })
+            .then((response) => response.json())
+            .then((info) => {
+                console.log("서버로부터 Pomodoro 정보 가져옴: ",  info.timerSet, info.pomo);
+                setPomodoroItem(info);
+            });
 
             // GET 방식으로 서버 전송
             fetch('http://localhost:8080/api/user', {
@@ -41,7 +48,7 @@ function Dashboard() {
             }) 
             .then((response) => response.json())
             .then((newUserInfo) => {
-                console.log("유저 정보 가져옴: ", newUserInfo);
+                console.log("유저 정보 가져옴: ", {newUserInfo});
                 setUserInfo(newUserInfo);
             });
                 
@@ -52,7 +59,7 @@ function Dashboard() {
     useEffect(() => { // 임시
         calTodoItemsCount();  
         calTodoItemsDoneCount();
-        calPomoCount();
+        calPomdoroCount();
     }, [ todoItems, pomodoroItem ]);
 
     function calTodoItemsCount() {
@@ -63,8 +70,14 @@ function Dashboard() {
         setTodoItemsDoneCount(todoItems.filter(todoItem => todoItem.isDone).length);
     }
 
-    function calPomoCount() {
+    function calPomdoroCount() {
+        const timerSet = pomodoroItem.timerSet;
+        
         setPomoCount(pomodoroItem.pomo);
+        setPomoTimer({
+            minutes : Math.floor(timerSet / 60),
+            seconds : timerSet % 60
+        });
     }
 
     return (
@@ -78,13 +91,14 @@ function Dashboard() {
                 <div className="dashboard_daily_do">
                     <a href="http://localhost:3001"><div className="daily_do_app_picture">오늘 할 일</div></a>
                     <ul>
-                        <li>오늘 할 일 달성률<h1>{Math.round((todoItemsDoneCount / todoItemsCount) * 100)}%</h1></li>
+                        <li><p>오늘 할 일 달성률</p><hr></hr><h1>{todoItemsCount != 0 ? Math.round((todoItemsDoneCount / todoItemsCount) * 100) : '0'}%</h1></li>
                     </ul>
                 </div>
                 <div className="dashboard_pomodoro">
                     <a href="http://localhost:3002"><div className="pomodoro_app_picture">뽀모도로</div></a>
                     <ul>
-                        <li>오늘 한 뽀모<h1>{pomoCount} 뽀모</h1></li>
+                        <li><p>오늘 한 뽀모</p><hr></hr><h1>{pomoCount} 뽀모</h1></li>
+                        <li><p>나의 집중력</p><hr></hr><h1>{isNaN(pomoTimer.seconds) ? '0분0초' : pomoTimer.minutes + '분' + pomoTimer.seconds + '초'}</h1></li>
                     </ul>
                 </div>
             </div>

@@ -43,6 +43,10 @@ h3 {
   margin: auto;
 }
 
+.wrapper {
+  margin-top: 10%;
+}
+
 /*Responsive*/
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   h1 {
@@ -51,6 +55,10 @@ h3 {
 
   .component { 
     width: 70%;
+  }
+
+  .wrapper {
+    margin-top: 20%;
   }
 }
 @media screen and (max-width: 767px) {
@@ -64,5 +72,9 @@ h3 {
 
   .component {  
     width: 70%;
+  }
+
+  .wrapper {
+    margin-top: 25%;
   }
 }

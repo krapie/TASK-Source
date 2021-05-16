@@ -4,16 +4,26 @@ import "./TimerChange.css";
 const TimerChange = () => {
     const [ formInput, setFormInput ] = useState(''); // 입력 필드값
     const [ timerSet, setTimerSet ] = useState(0);
+    const [ pomo, setPomo ] = useState(0);
     const [ fetched, setFetched ] = useState(false);
 
-    // FETCH - GET
+    const idToken = localStorage.getItem("idToken");
+
+    // FETCH - POST
     useEffect(() => {
         if(!fetched) {
-            fetch('http://localhost:8080/api/pomodoro')
+            fetch('http://localhost:8080/api/pomodoro', {
+                method : 'POST',
+                headers : {
+                    'content-type' : 'application/json'
+                },
+                body : JSON.stringify(idToken)
+            })
             .then((response) => response.json())
             .then((info) => {
-                console.log("서버로부터 Pomodoro 정보 가져옴: ",  info.timerSet);
+                console.log("서버로부터 Pomodoro 정보 가져옴: ",  info.timerSet, info.pomo);
                 setTimerSet(info.timerSet);
+                setPomo(info.pomo);
                 setFetched(true);
             });
         }
@@ -33,11 +43,13 @@ const TimerChange = () => {
         seconds += minutes * 60;
         
         const pomodoroForm = {
-            timerSet : seconds
+            tokenId : idToken,
+            timerSet : seconds,
+            pomo : pomo
         };    
 
         // 서버
-        fetch(`http://localhost:8080/api/pomodoro/timerset`, {
+        fetch(`http://localhost:8080/api/pomodoro/update`, {
             method : 'PUT',
             headers : {
                 'content-type' : 'application/json'
