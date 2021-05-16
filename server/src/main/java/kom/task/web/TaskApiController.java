@@ -8,6 +8,8 @@ import kom.task.service.TaskService;
 import kom.task.web.dto.daydo.DaydoResponseDto;
 import kom.task.web.dto.daydo.DaydoSaveRequestDto;
 import kom.task.web.dto.daydo.DaydoUpdateRequestDto;
+import kom.task.web.dto.pomodoro.PomodoroResponseDto;
+import kom.task.web.dto.pomodoro.PomodoroUpdateRequestDto;
 import kom.task.web.dto.todo.TodoResponseDto;
 import kom.task.web.dto.todo.TodoSaveRequestDto;
 import kom.task.web.dto.todo.TodoUpdateRequestDto;
@@ -110,28 +112,19 @@ public class TaskApiController {
     /*** Pomodoro TEMPORARY REST Controller ***/
 
      // Read
-     @GetMapping("/api/pomodoro")
-     public ResponseEntity<?> fetchAllPomodoroItems() {
-         Pomodoro pomodoro = taskService.fetchPomodoroItem();
+     @PostMapping("/api/pomodoro")
+     public ResponseEntity<?> fetchPomodoroItem(@RequestBody TextNode tokenDtoString) {
+         PomodoroResponseDto responseDto = taskService.fetchPomodoroItem(tokenDtoString.asText());
 
-        return ResponseEntity.status(HttpStatus.OK).body(pomodoro);
+         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
      }
 
      // Update
-     @PutMapping("/api/pomodoro/timerset")
-     public ResponseEntity<?> updatePomodoroItemTimerSet(@RequestBody Pomodoro pomodoro) {
+     @PutMapping("/api/pomodoro/update")
+     public ResponseEntity<?> updatePomodoroItem(@RequestBody PomodoroUpdateRequestDto requestDto) {
 
-         Pomodoro updatedPomodoro = taskService.updatePomodoroItemTimerSet(pomodoro);
+         PomodoroResponseDto updatedDto = taskService.updatePomodoroItem(requestDto);
 
-         return ResponseEntity.status(HttpStatus.OK).body(updatedPomodoro);
+         return ResponseEntity.status(HttpStatus.OK).body(updatedDto);
      }
-
-    // Update
-    @PutMapping("/api/pomodoro/pomo")
-    public ResponseEntity<?> updatePomodoroItemPomo(@RequestBody Pomodoro pomodoro) {
-
-        Pomodoro updatedPomodoro = taskService.updatePomodoroItemPomo(pomodoro);
-
-        return ResponseEntity.status(HttpStatus.OK).body(updatedPomodoro);
-    }
 }

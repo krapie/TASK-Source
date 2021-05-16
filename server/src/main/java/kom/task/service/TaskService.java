@@ -7,11 +7,14 @@ import kom.task.domain.dailydo.daydo.DaydoRepository;
 import kom.task.domain.dailydo.todo.Todo;
 import kom.task.domain.dailydo.todo.TodoRepository;
 import kom.task.domain.pomodoro.Pomodoro;
+import kom.task.domain.pomodoro.PomodoroRepository;
 import kom.task.domain.user.User;
 import kom.task.domain.user.UserRepository;
 import kom.task.web.dto.daydo.DaydoResponseDto;
 import kom.task.web.dto.daydo.DaydoSaveRequestDto;
 import kom.task.web.dto.daydo.DaydoUpdateRequestDto;
+import kom.task.web.dto.pomodoro.PomodoroResponseDto;
+import kom.task.web.dto.pomodoro.PomodoroUpdateRequestDto;
 import kom.task.web.dto.todo.TodoResponseDto;
 import kom.task.web.dto.todo.TodoSaveRequestDto;
 import kom.task.web.dto.todo.TodoUpdateRequestDto;
@@ -27,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
@@ -40,7 +44,7 @@ public class TaskService {
     private final TodoRepository todoRepository;
     private final DaydoRepository daydoRepository;
     private final UserRepository userRepository;
-    private final Pomodoro pomodoro;
+    private final PomodoroRepository pomodoroRepository;
 
     /*** LOGIN REST SERVICE ***/
     public String googleTokenLogin(String tokenDtoString) {
@@ -72,6 +76,9 @@ public class TaskService {
                             .pictureUrl(pictureUrl)
                             .build()));
 
+            pomodoroRepository.findByUserId(userId)
+                    .orElseGet(() -> pomodoroRepository.save(new Pomodoro(userId)));
+
             returnString = name;
         }
         else {
@@ -100,32 +107,7 @@ public class TaskService {
         return userResponseDto;
     }
 
-    public Payload TokenVerify(String tokenDtoString) {
-        Payload payload = null;
 
-        GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new GsonFactory())
-                // Specify the CLIENT_ID of the app that accesses the backend:
-                .setAudience(Collections.singletonList(CLIENT_ID))
-                // Or, if multiple clients access the backend:
-                //.setAudience(Arrays.asList(CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3))
-                .build();
-
-        // (Receive idTokenString by HTTPS POST)
-        try {
-            GoogleIdToken idToken = verifier.verify(tokenDtoString);
-            if (idToken != null) {
-                payload = idToken.getPayload();
-            } else {
-                System.out.println("Invalid ID token.");
-            }
-        } catch (GeneralSecurityException e) {
-            System.out.println(e.getStackTrace());
-        } catch (IOException e) {
-            System.out.println(e.getStackTrace());
-        }
-
-        return payload;
-    }
 
     /*** TO DO REST SERVICE ***/
     @Transactional
@@ -225,20 +207,76 @@ public class TaskService {
         }
     }
 
+
     /*** Pomodoro Service ***/
-    public Pomodoro fetchPomodoroItem() {
-        return pomodoro;
+    @Transactional
+    public PomodoroResponseDto fetchPomodoroItem(String tokenDtoString) {
+        Payload payload = TokenVerify(tokenDtoString);
+        PomodoroResponseDto pomodoroResponseDto = null;
+
+        if(payload != null) {
+            // Print user identifier
+            String userId = payload.getSubject();
+            System.out.println("User ID: " + userId);
+
+            Pomodoro pomodoro = pomodoroRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("id not found"));
+            pomodoroResponseDto = new PomodoroResponseDto(pomodoro);
+        }
+        else {
+
+        }
+
+        return pomodoroResponseDto;
     }
 
-    public Pomodoro updatePomodoroItemTimerSet(Pomodoro updateDto) {
-        pomodoro.updateTimerSet(updateDto.getTimerSet());
+    @Transactional
+    public PomodoroResponseDto updatePomodoroItem(PomodoroUpdateRequestDto requestDto) {
+        Payload payload = TokenVerify(requestDto.getTokenId());
+        PomodoroResponseDto pomodoroResponseDto = null;
 
-        return pomodoro; // SUCCESS
+        if(payload != null) {
+            // Print user identifier
+            String userId = payload.getSubject();
+            System.out.println("User ID: " + userId);
+
+            Pomodoro pomodoro = pomodoroRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("id not found"));
+            pomodoro.update(requestDto.getTimerSet(),requestDto.getPomo());
+
+            pomodoroResponseDto = new PomodoroResponseDto(pomodoro);
+        }
+        else {
+
+        }
+
+        return pomodoroResponseDto;
     }
 
-    public Pomodoro updatePomodoroItemPomo(Pomodoro updateDto) {
-        pomodoro.updatePomo(updateDto.getPomo());
 
-        return pomodoro; // SUCCESS
+    /*** TOKEN VERIFY ***/
+    public Payload TokenVerify(String tokenDtoString) {
+        Payload payload = null;
+
+        GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new GsonFactory())
+                // Specify the CLIENT_ID of the app that accesses the backend:
+                .setAudience(Collections.singletonList(CLIENT_ID))
+                // Or, if multiple clients access the backend:
+                //.setAudience(Arrays.asList(CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3))
+                .build();
+
+        // (Receive idTokenString by HTTPS POST)
+        try {
+            GoogleIdToken idToken = verifier.verify(tokenDtoString);
+            if (idToken != null) {
+                payload = idToken.getPayload();
+            } else {
+                System.out.println("Invalid ID token.");
+            }
+        } catch (GeneralSecurityException e) {
+            System.out.println(e.getStackTrace());
+        } catch (IOException e) {
+            System.out.println(e.getStackTrace());
+        }
+
+        return payload;
     }
 }
