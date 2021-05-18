@@ -9,17 +9,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DaydoSaveRequestDto {
 
+    private String token;
     private Integer day;
     private String content;
 
     @Builder
-    public DaydoSaveRequestDto(Integer day, String content) {
+    public DaydoSaveRequestDto(String token, Integer day, String content) {
+        this.token = token;
         this.day = day;
         this.content = content;
     }
 
-    public Daydo toEntity() {
+    public Daydo toEntity(String userId) {
         return Daydo.builder()
+                .userId(userId)
                 .day(day)
                 .content(content)
                 .build();

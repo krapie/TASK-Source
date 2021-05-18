@@ -108,22 +108,46 @@ public class TaskService {
     }
 
 
-
     /*** TO DO REST SERVICE ***/
     @Transactional
-    public Todo saveTodoItem(TodoSaveRequestDto requestDto) {
-        return todoRepository.save(requestDto.toEntity());
+    public TodoResponseDto saveTodoItem(TodoSaveRequestDto requestDto) {
+        Payload payload = TokenVerify(requestDto.getToken());
+        Todo createdTodo = new Todo();
+
+        if(payload != null) {
+            // Print user identifier
+            String userId = payload.getSubject();
+            System.out.println("User ID: " + userId);
+
+            createdTodo = todoRepository.save(requestDto.toEntity(userId));
+        }
+        else {
+            System.out.println("invalid token");
+        }
+
+        return new TodoResponseDto(createdTodo);
     }
 
     @Transactional
-    public List<TodoResponseDto> fetchAllTodoItems() {
-        todayFetch();
-
-        List<Todo> todoEntities = todoRepository.findAll();
+    public List<TodoResponseDto> fetchAllTodoItems(String tokenDtoString) {
+        Payload payload = TokenVerify(tokenDtoString);
         List<TodoResponseDto> responseDtoList = new ArrayList<>();
 
-        for(Todo todoEntity : todoEntities) {
-            responseDtoList.add(new TodoResponseDto(todoEntity));
+        if(payload != null) {
+            // Print user identifier
+            String userId = payload.getSubject();
+            System.out.println("User ID: " + userId);
+
+            todayFetch(userId);
+
+            List<Todo> todoEntities = todoRepository.findAllByUserId(userId);
+
+            for(Todo todoEntity : todoEntities) {
+                responseDtoList.add(new TodoResponseDto(todoEntity));
+            }
+        }
+        else {
+            System.out.println("invalid token");
         }
 
         return responseDtoList;
@@ -148,17 +172,42 @@ public class TaskService {
 
     /*** DAY DO REST SERVICE ***/
     @Transactional
-    public Daydo saveDaydoItem(DaydoSaveRequestDto requestDto) {
-        return daydoRepository.save(requestDto.toEntity());
+    public DaydoResponseDto saveDaydoItem(DaydoSaveRequestDto requestDto) {
+        Payload payload = TokenVerify(requestDto.getToken());
+        Daydo createdDaydo = new Daydo();
+
+        if(payload != null) {
+            // Print user identifier
+            String userId = payload.getSubject();
+            System.out.println("User ID: " + userId);
+
+            createdDaydo = daydoRepository.save(requestDto.toEntity(userId));
+        }
+        else {
+            System.out.println("invalid token");
+        }
+
+        return new DaydoResponseDto(createdDaydo);
     }
 
     @Transactional
-    public List<DaydoResponseDto> fetchAllDaydoItems() {
-        List<Daydo> daydoEntities = daydoRepository.findAll();
+    public List<DaydoResponseDto> fetchAllDaydoItems(String tokenDtoString) {
+        Payload payload = TokenVerify(tokenDtoString);
         List<DaydoResponseDto> responseDtoList = new ArrayList<>();
 
-        for(Daydo daydoEntity : daydoEntities) {
-            responseDtoList.add(new DaydoResponseDto(daydoEntity));
+        if(payload != null) {
+            // Print user identifier
+            String userId = payload.getSubject();
+            System.out.println("User ID: " + userId);
+
+            List<Daydo> daydoEntities = daydoRepository.findAllByUserId(userId);
+
+            for(Daydo daydoEntity : daydoEntities) {
+                responseDtoList.add(new DaydoResponseDto(daydoEntity));
+            }
+        }
+        else {
+            System.out.println("invalid token");
         }
 
         return responseDtoList;
@@ -182,9 +231,9 @@ public class TaskService {
 
 
     /*** FETCH LOGICS ***/
-    public void todayFetch() {
-        // 이미 To-do 아이템이 존재하면 (이미 요일별 할 일이 저장되어 있으면)
-        if(todoRepository.count() != 0) {
+    public void todayFetch(String userId) {
+        // (임시) 이미 해당 아이디를 field로 가진 To-do 아이템이 존재하면 (이미 요일별 할 일이 저장되어 있으면) -> 추후 날짜가 지나면 업데이트 하는 로직으로 수정
+        if(todoRepository.findAllByUserId(userId).size() != 0) {
             return;
         }
 
@@ -193,12 +242,13 @@ public class TaskService {
         int todayDay =  localDate.getDayOfWeek().getValue(); // Monday - Sunday : 1 ~ 7
 
         // 해당 요일에 해당하는 튜플들을 DaydoRepository에서 추출 후
-        List<Daydo> daydoList = daydoRepository.findAll();
+        List<Daydo> daydoList = daydoRepository.findAllByUserId(userId);
         List<Daydo> todayDaydoList = daydoList.stream().filter(daydo -> daydo.getDay() == todayDay).collect(Collectors.toList());
 
         // To-do 아이템으로 변환 후 TodoRepository에 저장
         for(Daydo daydo : todayDaydoList ) {
             Todo todoEntity = Todo.builder()
+                    .userId(userId)
                     .content(daydo.getContent())
                     .isDone(false)
                     .build();

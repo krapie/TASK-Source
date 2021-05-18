@@ -15,6 +15,8 @@ const DayDoListTemplate = ({ darkTheme }) => {
 
     const [ day, setDay ] = useState(today.getDay()); // 설정의 요일별 할 일 목록의 세팅되어 있는 요일 (기본 월요일 설정)
 
+    const idToken = localStorage.getItem("idToken");
+
     useEffect(() => { // 다크 모드 
         console.log()
         const inputs = document.querySelectorAll('input');
@@ -27,11 +29,17 @@ const DayDoListTemplate = ({ darkTheme }) => {
         }
       });
       
-    // FETCH - GET
+    // FETCH - POST
     useEffect(() => {
         // 서버로부터 모든 요일의 Daydo 목록 가져오기
         if(!fetched) {
-            fetch('http://localhost:8080/api/daydo')
+            fetch('http://localhost:8080/api/daydos', {
+                method : 'POST',
+                headers : {
+                    'content-type' : 'application/json'
+                },
+                body : JSON.stringify(idToken)
+            })
             .then((response) => response.json())
             .then((items) => {
                 console.log("서버로부터 모든 요일별 Daydo 목록 가져옴: ", items);
@@ -62,6 +70,7 @@ const DayDoListTemplate = ({ darkTheme }) => {
 
         // 서버로 보낼 객체 아이템 생성
         const newDaydoItem = {
+            token: idToken,
             content: formInput,
             day: day
         };

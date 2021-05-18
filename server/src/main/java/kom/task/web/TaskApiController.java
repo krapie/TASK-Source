@@ -3,7 +3,6 @@ package kom.task.web;
 import com.fasterxml.jackson.databind.node.TextNode;
 import kom.task.domain.dailydo.daydo.Daydo;
 import kom.task.domain.dailydo.todo.Todo;
-import kom.task.domain.pomodoro.Pomodoro;
 import kom.task.service.TaskService;
 import kom.task.web.dto.daydo.DaydoResponseDto;
 import kom.task.web.dto.daydo.DaydoSaveRequestDto;
@@ -20,7 +19,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -48,19 +46,18 @@ public class TaskApiController {
 
 
     /*** To Do REST CONTROLLER ***/
-
     // Create
     @PostMapping("/api/todo")
     public ResponseEntity<?> saveTodoItem(@RequestBody TodoSaveRequestDto requestDto) {
-        Todo newTodo = taskService.saveTodoItem(requestDto);
+        TodoResponseDto responseDto = taskService.saveTodoItem(requestDto);
 
-        return ResponseEntity.status(HttpStatus.OK).body(newTodo);
+        return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 
     // Read
-    @GetMapping("/api/todo")
-    public ResponseEntity<?> fetchAllTodoItems() {
-        List<TodoResponseDto> responseDto = taskService.fetchAllTodoItems();
+    @PostMapping("/api/todos")
+    public ResponseEntity<?> fetchAllTodoItems(@RequestBody TextNode tokenDtoString) {
+        List<TodoResponseDto> responseDto = taskService.fetchAllTodoItems(tokenDtoString.asText());
 
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
@@ -79,19 +76,18 @@ public class TaskApiController {
 
 
     /*** Day Do REST CONTROLLER ***/
-
     // Create
     @PostMapping("/api/daydo")
     public ResponseEntity<?> saveDaydoItem(@RequestBody DaydoSaveRequestDto requestDto) {
-        Daydo newDaydo = taskService.saveDaydoItem(requestDto);
+        DaydoResponseDto responseDto = taskService.saveDaydoItem(requestDto);
 
-        return ResponseEntity.status(HttpStatus.OK).body(newDaydo);
+        return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 
     // Read
-    @GetMapping("/api/daydo")
-    public ResponseEntity<?> fetchAllDaydoItems() {
-        List<DaydoResponseDto> responseDto = taskService.fetchAllDaydoItems();
+    @PostMapping("/api/daydos")
+    public ResponseEntity<?> fetchAllDaydoItems(@RequestBody TextNode tokenDtoString) {
+        List<DaydoResponseDto> responseDto = taskService.fetchAllDaydoItems(tokenDtoString.asText());
 
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
@@ -109,7 +105,7 @@ public class TaskApiController {
     }
 
 
-    /*** Pomodoro TEMPORARY REST Controller ***/
+    /*** Pomodoro REST Controller ***/
 
      // Read
      @PostMapping("/api/pomodoro")

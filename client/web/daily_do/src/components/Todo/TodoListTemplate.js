@@ -8,6 +8,8 @@ const TodoListTemplate = ({ darkTheme }) => {
     const [ formInput, setFormInput ] = useState('');
     const [ fetched, setFetched ] = useState(false);
 
+    const idToken = localStorage.getItem("idToken");
+
     useEffect(() => { // 다크 모드 
         console.log()
         const inputs = document.querySelectorAll('input');
@@ -20,11 +22,17 @@ const TodoListTemplate = ({ darkTheme }) => {
         }
     });
 
-    // FETCH - GET
+    // FETCH - POST
     useEffect(() => {
         //첫 로딩시에만 서버로부터 Todo 목록 가져오기
         if(!fetched) {
-            fetch('http://localhost:8080/api/todo')
+            fetch('http://localhost:8080/api/todos', {
+                method : 'POST',
+                headers : {
+                    'content-type' : 'application/json'
+                },
+                body : JSON.stringify(idToken)
+            })
             .then((response) => response.json())
             .then((items) => {
                 console.log("서버로부터 Todo 목록 가져옴: ", items);
@@ -34,13 +42,14 @@ const TodoListTemplate = ({ darkTheme }) => {
         }
     }, [fetched]);
 
-    // CREAT - POST 
+    // CREATE - POST 
     function handleCreate() {
         // Form 안의 내용을 초기화
         setFormInput('');
 
         // 서버로 보낼 객체 아이템 생성
         const newTodoItem = {
+            token: idToken,
             content: formInput,
             isDone: false
         };

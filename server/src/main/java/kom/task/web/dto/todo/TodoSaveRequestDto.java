@@ -9,17 +9,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TodoSaveRequestDto {
 
+    private String token;
     private String content;
     private Boolean isDone;
 
     @Builder
-    public TodoSaveRequestDto(String content, Boolean isDone) {
+    public TodoSaveRequestDto(String token, String content, Boolean isDone) {
+        this.token = token;
         this.content = content;
         this.isDone = isDone;
     }
 
-    public Todo toEntity() {
+    public Todo toEntity(String userId) {
         return Todo.builder()
+                .userId(userId)
                 .content(content)
                 .isDone(isDone)
                 .build();

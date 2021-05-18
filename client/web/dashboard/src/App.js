@@ -32,7 +32,7 @@ function App() {
       <div className="main">
         <Switch>
           <Route path="/" exact component={Login}/>
-          <Route path="/dashboard" render={() => <DashboardTemplateWrapper darkTheme={darkTheme} darkTheme={darkTheme}></DashboardTemplateWrapper>}/>
+          <Route path="/dashboard" render={() => <DashboardTemplateWrapper darkTheme={darkTheme}></DashboardTemplateWrapper>}/>
           <Route path="/preference" render={() => <PreferenceTemplateWrapper darkTheme={darkTheme} handleThemeToggle={handleThemeToggle}></PreferenceTemplateWrapper>}/>
         </Switch>
         <Footer></Footer>

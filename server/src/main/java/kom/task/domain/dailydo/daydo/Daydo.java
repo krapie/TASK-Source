@@ -16,6 +16,9 @@ public class Daydo {
     private Long id;
 
     @Column
+    private String userId;
+
+    @Column
     private Integer day; // Monday - Sunday : 1 ~ 7
 
     @Column
@@ -23,7 +26,8 @@ public class Daydo {
 
 
     @Builder
-    public Daydo(Integer day, String content) {
+    public Daydo(String userId, Integer day, String content) {
+        this.userId = userId;
         this.day = day;
         this.content = content;
     }

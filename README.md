@@ -24,12 +24,21 @@ Task: Time/Task Management Service
 + 웹 클라이언트
     + HTML5/CSS3
     + JavaScript (ES6)
-    + React.js (Hooks)
+    + React.js (Hooks), React Router
     + Webpack, Babel
-    + React Router
     
 # Updates
-+ 2021-05-17
++ 2021-05-17 - 프로토타입 완성
+    + 태스크(메인/대시보드) 서비스
+        + 웹 클라이언트
+            + 로그아웃 기능 구현 완료
+    + 오늘 할 일 서비스
+        + 서버
+            + 기존 DB (JPA)에 사용자 ID 필드를 추가, 변경에 따른 API도 수정 완료
+        + 클라이언트
+            + 서버 API와 통신하는 로직 수정 (로그인 토큰으로 서버 API와 통신)
+
++ 2021-05-16
     + 태스크(메인/대시보드) 서비스
         + 웹 클라이언트
             + 대시보드 탭에서 사용자에 따른 뽀모도로 정보를 표시하도록 서버 API와 통신하는 로직 수정
@@ -38,9 +47,9 @@ Task: Time/Task Management Service
         + 서버
             + 사용자별 뽀모도로 DB (JPA)로 전환 완료, 전환에 따른 API도 수정 완료
         + 클라이언트
-            + 서버 API와 통신하는 로직 수정 (로그인 토큰으로 사용자별 뽀모도로 데이터를 가져옴)
+            + 서버 API와 통신하는 로직 수정 (로그인 토큰으로 서버 API와 통신)
             
-+ 2021-05-16
++ 2021-05-15
     + 태스크(메인/대시보드) 서비스
         + 서버
             + 로그인 API 구현 완료 (Google OAuth 로그인, 토큰 검증 후 Google 서버에서 사용자 정보를 가져와서 User 리파지토리에 저장/수정 후 해당 정보 클라이언트로 전송) 
@@ -154,17 +163,27 @@ Task: Time/Task Management Service
 # TO-DO
 + 태스크(메인/대시보드) 서비스
     + 서버
-    + 웹 클라이언트      
+        + API 리팩토링
+        + 사용자 프로필 수정 API 개발
+    + 웹 클라이언트
+        + 대시보드에 다양한 통계 추가
+        + 대시보드 통계 항목에 애니메이션 추가   
+        + 컴포넌트 리팩토링           
 + Daily Do 서비스
     + 서버
+        + API 리팩토링
     + 웹 클라이언트
+        + 네비게이션 상단에 로그인한 사용자 보이기
+        + 컴포넌트 리팩토링        
 + Pomodoro 서비스
     + 서버
+        + API 리팩토링
     + 웹 클라이언트
-+ 기타
-    + Daily Do 서비스 웹 클라이언트: 리액트 컴포넌트, 코드 리팩토링
+        + 네비게이션 상단에 로그인한 사용자 보이기
+        + 컴포넌트 리팩토링
 
 # Issues
 + CORS Policy
     + Port Issue: Cross Origin 3000 -> 8080
     + Pomodoro 서비스: 탭 전환 시 간헐적으로 메모리 누수와 함께 제대로 cleanUp이 되지 않는 문제
+    + React Warnings: useEffect dependencies에 추가 여부에 관한 문제

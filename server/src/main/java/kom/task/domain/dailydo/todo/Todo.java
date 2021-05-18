@@ -16,6 +16,9 @@ public class Todo {
     private Long id;
 
     @Column
+    private String userId;
+
+    @Column
     private String content;
 
     @Column
@@ -23,7 +26,8 @@ public class Todo {
 
 
     @Builder
-    public Todo(String content, Boolean isDone) {
+    public Todo(String userId, String content, Boolean isDone) {
+        this.userId = userId;
         this.content = content;
         this.isDone = isDone;
     }
