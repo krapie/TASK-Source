@@ -1,15 +1,10 @@
 import './Dashboard.css';
 import { useEffect, useState } from "react";
-import { createBrowserHistory } from 'history';
 
-function Dashboard() {
-    let history = createBrowserHistory();
-
+function Dashboard({ userInfo }) {
     const [todoItems, setTodoItems] = useState([]);
     const [pomodoroItem, setPomodoroItem] = useState([]);
     const [isPatched, setIsPatched] = useState(false);
-
-    const [userInfo, setUserInfo] = useState("");
 
     const [todoItemsCount, setTodoItemsCount] = useState(0);
     const [todoItemsDoneCount, setTodoItemsDoneCount] = useState(0);
@@ -47,20 +42,6 @@ function Dashboard() {
                     setPomodoroItem(info);
                 });
 
-            // GET 방식으로 서버 전송
-            fetch('http://localhost:8080/api/user', {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(idToken)
-            })
-                .then((response) => response.json())
-                .then((newUserInfo) => {
-                    console.log("유저 정보 가져옴: ", { newUserInfo });
-                    setUserInfo(newUserInfo);
-                });
-
             setIsPatched(true);
         }
     }, [isPatched]);
@@ -89,20 +70,11 @@ function Dashboard() {
         });
     }
 
-    function signOut() {
-        var auth2 = window.gapi.auth2.getAuthInstance();
-        auth2.signOut().then(function () {
-            console.log('User signed out.');
-            window.location.replace('http://localhost:3000');
-        });
-    }
-
     return (
         <div className="dashboard">
             <div className="dashboard_user_info component">
                 <img className="user_picture" src={userInfo.pictureUrl} alt={userInfo.name}></img><br></br>
                 <h2 style={{ display: 'inline-block' }}>{userInfo.name}</h2><span>님의 대시보드</span>
-                <p onClick={signOut}>로그아웃</p>
                 <hr></hr>
             </div>
             <div className="dashboard_content component">

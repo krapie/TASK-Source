@@ -34,12 +34,37 @@ function App() {
   function handleThemeToggle() {
     setDarkTheme(!darkTheme);
   }
+
+  const [isPatched, setIsPatched] = useState(false);
+  const [userInfo, setUserInfo] = useState("");
+  const idToken = localStorage.getItem("idToken");
+  
+  // Read
+  useEffect(() => {
+      if (!isPatched) {
+          // GET 방식으로 서버 전송
+          fetch('http://localhost:8080/api/user', {
+              method: 'POST',
+              headers: {
+                  'content-type': 'application/json'
+              },
+              body: JSON.stringify(idToken)
+          })
+              .then((response) => response.json())
+              .then((newUserInfo) => {
+                  console.log("유저 정보 가져옴: ", { newUserInfo });
+                  setUserInfo(newUserInfo);
+              });
+
+          setIsPatched(true);
+      }
+  }, [isPatched]);
   
   // 메인
   return (
     <Router>
       <div className="main">
-        <Navigation></Navigation>
+        <Navigation userInfo={userInfo}></Navigation>
         <Switch>
           <Route path="/" exact render={() => <TodayWrapper darkTheme={darkTheme} todayDateHTML={todayDateHTML}/>}/>
           <Route path="/preference" render={() => <PreferenceWrapper darkTheme={darkTheme} handleThemeToggle={handleThemeToggle}/>}/>
