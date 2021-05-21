@@ -4,7 +4,7 @@ import DaydoForm from './DaydoForm'
 import './DaydoListTemplate.css'
 import DaydoSlider from './DaydoSlider'
 
-const DayDoListTemplate = ({ darkTheme }) => {
+const DayDoListTemplate = ({ idToken, darkTheme }) => {
     const today = new Date();
 
     const [ allDaydoItemList, setAllDaydoItemList ] = useState([]);
@@ -14,8 +14,6 @@ const DayDoListTemplate = ({ darkTheme }) => {
     const [ fetched, setFetched ] = useState(false);
 
     const [ day, setDay ] = useState(today.getDay()); // 설정의 요일별 할 일 목록의 세팅되어 있는 요일 (기본 월요일 설정)
-
-    const idToken = localStorage.getItem("idToken");
 
     useEffect(() => { // 다크 모드 
         console.log()

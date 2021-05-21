@@ -37,7 +37,7 @@ function App() {
 
   const [isPatched, setIsPatched] = useState(false);
   const [userInfo, setUserInfo] = useState("");
-  const idToken = localStorage.getItem("idToken");
+  const idToken = document.cookie.split('; ').find(row => row.startsWith('idToken')).split('=')[1];
   
   // Read
   useEffect(() => {
@@ -66,8 +66,8 @@ function App() {
       <div className="main">
         <Navigation userInfo={userInfo}></Navigation>
         <Switch>
-          <Route path="/" exact render={() => <TodayWrapper darkTheme={darkTheme} todayDateHTML={todayDateHTML}/>}/>
-          <Route path="/preference" render={() => <PreferenceWrapper darkTheme={darkTheme} handleThemeToggle={handleThemeToggle}/>}/>
+          <Route path="/" exact render={() => <TodayWrapper idToken={idToken} darkTheme={darkTheme} todayDateHTML={todayDateHTML}/>}/>
+          <Route path="/preference" render={() => <PreferenceWrapper idToken={idToken} darkTheme={darkTheme} handleThemeToggle={handleThemeToggle}/>}/>
         </Switch>
         <Footer></Footer>
       </div>

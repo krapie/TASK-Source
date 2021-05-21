@@ -3,12 +3,10 @@ import TodoForm from './TodoForm';
 import TodoItemList from './TodoItemList';
 import './TodoListTemplate.css';
 
-const TodoListTemplate = ({ darkTheme }) => {
+const TodoListTemplate = ({ idToken, darkTheme }) => {
     const [ todoItemList, setTodoItemList ] = useState([]);
     const [ formInput, setFormInput ] = useState('');
     const [ fetched, setFetched ] = useState(false);
-
-    const idToken = localStorage.getItem("idToken");
 
     useEffect(() => { // 다크 모드 
         console.log()

@@ -2,12 +2,10 @@ import './TimerTemplate.css';
 import Timer from './Timer.js';
 import { useState, useEffect } from 'react';
 
-const TimerTemplate = () => {
+const TimerTemplate = ({ idToken }) => {
     const [ pomo, setPomo ] = useState(0);
     const [ timerSet, setTimerSet ] = useState(25*60);
     const [ fetched, setFetched ] = useState(false);
-
-    const idToken = localStorage.getItem("idToken");
 
     function handlePomoUpdate() {
         const pomodoroForm = {

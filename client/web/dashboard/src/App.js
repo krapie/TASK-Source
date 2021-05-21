@@ -29,7 +29,7 @@ function App() {
 
   const [isPatched, setIsPatched] = useState(false);
   const [userInfo, setUserInfo] = useState("");
-  const idToken = localStorage.getItem("idToken");
+  const idToken = document.cookie.split('; ').find(row => row.startsWith('idToken')).split('=')[1];
   
   // Read
   useEffect(() => {

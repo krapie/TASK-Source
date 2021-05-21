@@ -28,6 +28,12 @@ Task: Time/Task Management Service
     + Webpack, Babel
     
 # Updates
++ 2021-05-21
+    + 태스크(메인/대시보드) 서비스, 오늘 할 일 서비스, 뽀모도로 서비스
+        + 웹 클라이언트
+            + 구글 로그인 토큰 값을 localstorage가 아닌 cookie에 저장하고 참조하도록 변경
+            + 모바일 환경에 맞게 일부 CSS 변경
+
 + 2021-05-20
     + 태스크(메인/대시보드) 서비스
         + 웹 클라이언트
@@ -182,13 +188,11 @@ Task: Time/Task Management Service
     + 서버
         + API 리팩토링
     + 웹 클라이언트
-        + 네비게이션 상단에 로그인한 사용자 보이기
         + 컴포넌트 리팩토링        
 + Pomodoro 서비스
     + 서버
         + API 리팩토링
     + 웹 클라이언트
-        + 네비게이션 상단에 로그인한 사용자 보이기
         + 컴포넌트 리팩토링
 
 # Issues

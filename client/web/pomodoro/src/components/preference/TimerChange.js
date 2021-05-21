@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 import "./TimerChange.css";
 
-const TimerChange = () => {
+const TimerChange = ({ idToken }) => {
     const [ formInput, setFormInput ] = useState(''); // 입력 필드값
     const [ timerSet, setTimerSet ] = useState(0);
     const [ pomo, setPomo ] = useState(0);
     const [ fetched, setFetched ] = useState(false);
-
-    const idToken = localStorage.getItem("idToken");
 
     // FETCH - POST
     useEffect(() => {

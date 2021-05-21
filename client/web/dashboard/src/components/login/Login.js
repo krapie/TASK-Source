@@ -44,6 +44,7 @@ function Login({ history }) {
     function onSuccess(googleUser) {
         const id_token = googleUser.getAuthResponse().id_token;
         localStorage.setItem("idToken", id_token);
+        document.cookie = `idToken=${id_token}; path=/`;
         /* 
         const profile = googleUser.getBasicProfile();
         console.log(profile);
