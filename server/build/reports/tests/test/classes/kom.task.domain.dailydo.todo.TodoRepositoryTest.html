@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.017s</div>
+<div class="counter">0.015s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,7 +79,7 @@
 </thead>
 <tr>
 <td class="success">todo_repository_save_test</td>
-<td class="success">0.017s</td>
+<td class="success">0.015s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -87,12 +87,16 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2021-05-22 20:19:16.319  INFO 9932 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [kom.task.domain.dailydo.todo.TodoRepositoryTest], using SpringBootContextLoader
-2021-05-22 20:19:16.321  INFO 9932 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [kom.task.domain.dailydo.todo.TodoRepositoryTest]: no resource found for suffixes {-context.xml, Context.groovy}.
-2021-05-22 20:19:16.322  INFO 9932 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kom.task.domain.dailydo.todo.TodoRepositoryTest]: TodoRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2021-05-22 20:19:16.325  INFO 9932 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kom.task.Application for test class kom.task.domain.dailydo.todo.TodoRepositoryTest
-2021-05-22 20:19:16.326  INFO 9932 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
-2021-05-22 20:19:16.327  INFO 9932 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@41f872d, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@3a1ca1c5, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@5298f0fb, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@6692baaa, org.springframework.test.context.support.DirtiesContextTestExecutionListener@1e4c6fba, org.springframework.test.context.transaction.TransactionalTestExecutionListener@4181f73f, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@548bd8dc, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@27bf6f0d, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@5af3f5ff, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@1405d991, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@1ec2aef5, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@42597d27]
+<pre>2021-05-22 20:56:41.805  INFO 7432 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [kom.task.domain.dailydo.todo.TodoRepositoryTest], using SpringBootContextLoader
+2021-05-22 20:56:41.806  INFO 7432 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [kom.task.domain.dailydo.todo.TodoRepositoryTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2021-05-22 20:56:41.806  INFO 7432 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kom.task.domain.dailydo.todo.TodoRepositoryTest]: TodoRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2021-05-22 20:56:41.807  INFO 7432 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kom.task.Application for test class kom.task.domain.dailydo.todo.TodoRepositoryTest
+2021-05-22 20:56:41.809  INFO 7432 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2021-05-22 20:56:41.809  INFO 7432 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@6ca6e90, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@16e3e593, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@273d1ebc, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@1c6cd4ab, org.springframework.test.context.support.DirtiesContextTestExecutionListener@49079758, org.springframework.test.context.transaction.TransactionalTestExecutionListener@40412c96, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@f4602dc, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@75754613, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@bdb2b2, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@49511baf, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@763ea0bb, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@292435b1]
+Hibernate: insert into todo (content, is_done, user_id) values (?, ?, ?)
+Hibernate: select todo0_.id as id1_2_, todo0_.content as content2_2_, todo0_.is_done as is_done3_2_, todo0_.user_id as user_id4_2_ from todo todo0_
+Hibernate: select todo0_.id as id1_2_, todo0_.content as content2_2_, todo0_.is_done as is_done3_2_, todo0_.user_id as user_id4_2_ from todo todo0_
+Hibernate: delete from todo where id=?
 </pre>
 </span>
 </div>
@@ -104,7 +108,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 4.10.2</a> at 2021. 5. 22 오후 8:19:16</p>
+<a href="http://www.gradle.org">Gradle 4.10.2</a> at 2021. 5. 22 오후 8:56:41</p>
 </div>
 </div>
 </body>
