@@ -30,10 +30,10 @@ public class TaskApiController {
     /*** LOGIN REST CONTROLLER ***/
     // Login
     @PostMapping("/api/google/tokensignin")
-    public String googleTokenLogin(@RequestBody TextNode tokenDtoString) {
+    public ResponseEntity<?> googleTokenLogin(@RequestBody TextNode tokenDtoString) {
         String userName = taskService.googleTokenLogin(tokenDtoString.asText());
 
-        return userName;
+        return ResponseEntity.status(HttpStatus.OK).body(userName);
     }
 
     // Get User Info
