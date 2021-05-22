@@ -57,14 +57,18 @@ function Login({ history }) {
        
         // 서버로 토큰 전송
         // 전송 완료 후 대시보드로 Re-route
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com:8080/api/google/tokensignin'); // 추후 HTTPS 이용! 
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onload = function() {
-            console.log('Signed in as: ' + xhr.responseText);
-            history.push("/dashboard");
-        };
-        xhr.send('idtoken=' + id_token);
+        fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com:8080/api/google/tokensignin', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(id_token)
+        })
+            .then((response) => response.json())
+            .then((userName) => {
+                console.log('Signed in as: ' + userName);
+                history.push("/dashboard");
+            });
     }
 
     function onFailure(error) {

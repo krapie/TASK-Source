@@ -27,39 +27,19 @@ function App() {
     setDarkTheme(!darkTheme);
   }
 
-  const [isPatched, setIsPatched] = useState(false);
   const [userInfo, setUserInfo] = useState("");
 
-  const idToken = document.cookie === "" ? "" : document.cookie.split('; ').find(row => row.startsWith('idToken')).split('=')[1];
-  
-  // Read
-  useEffect(() => {
-      if (!isPatched) {
-          // GET 방식으로 서버 전송
-          fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/user', {
-              method: 'POST',
-              headers: {
-                  'content-type': 'application/json'
-              },
-              body: JSON.stringify(idToken)
-          })
-              .then((response) => response.json())
-              .then((newUserInfo) => {
-                  console.log("유저 정보 가져옴: ", { newUserInfo });
-                  setUserInfo(newUserInfo);
-              });
-
-          setIsPatched(true);
-      }
-  }, [isPatched]);
+  function handleUserInfo(newUserInfo) {
+    setUserInfo(newUserInfo);
+  }
 
   return (
-    <Router>
+    <Router basename="/">
       <div className="main">
         <Switch>
-          <Route path="/" exact component={Login}/>
-          <Route path="/dashboard" render={() => <DashboardTemplateWrapper darkTheme={darkTheme} userInfo={userInfo}></DashboardTemplateWrapper>}/>
-          <Route path="/preference" render={() => <PreferenceTemplateWrapper darkTheme={darkTheme} userInfo={userInfo} handleThemeToggle={handleThemeToggle}></PreferenceTemplateWrapper>}/>
+          <Route path={process.env.PUBLIC_URL + '/'} exact component={Login}/>
+          <Route path={process.env.PUBLIC_URL + '/dashboard'} render={() => <DashboardTemplateWrapper darkTheme={darkTheme} userInfo={userInfo} passUserInfo={handleUserInfo}></DashboardTemplateWrapper>}/>
+          <Route path={process.env.PUBLIC_URL + '/preference'} render={() => <PreferenceTemplateWrapper darkTheme={darkTheme} userInfo={userInfo} handleThemeToggle={handleThemeToggle}></PreferenceTemplateWrapper>}/>
         </Switch>
         <Footer></Footer>
       </div>

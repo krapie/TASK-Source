@@ -43,7 +43,7 @@ function App() {
   useEffect(() => {
       if (!isPatched) {
           // GET 방식으로 서버 전송
-          fetch('http://localhost:8080/api/user', {
+          fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com:8080/api/user', {
               method: 'POST',
               headers: {
                   'content-type': 'application/json'
@@ -62,12 +62,12 @@ function App() {
   
   // 메인
   return (
-    <Router>
+    <Router basename="/dailydo">
       <div className="main">
         <Navigation userInfo={userInfo}></Navigation>
         <Switch>
-          <Route path="/" exact render={() => <TodayWrapper idToken={idToken} darkTheme={darkTheme} todayDateHTML={todayDateHTML}/>}/>
-          <Route path="/preference" render={() => <PreferenceWrapper idToken={idToken} darkTheme={darkTheme} handleThemeToggle={handleThemeToggle}/>}/>
+          <Route path={process.env.PUBLIC_URL + '/'} exact render={() => <TodayWrapper idToken={idToken} darkTheme={darkTheme} todayDateHTML={todayDateHTML}/>}/>
+          <Route path={process.env.PUBLIC_URL + '/preference'} render={() => <PreferenceWrapper idToken={idToken} darkTheme={darkTheme} handleThemeToggle={handleThemeToggle}/>}/>
         </Switch>
         <Footer></Footer>
       </div>

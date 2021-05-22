@@ -30,8 +30,8 @@ public class TaskApiController {
     /*** LOGIN REST CONTROLLER ***/
     // Login
     @PostMapping("/api/google/tokensignin")
-    public String googleTokenLogin(@RequestParam("idtoken") String tokenDtoString) {
-        String userName = taskService.googleTokenLogin(tokenDtoString);
+    public String googleTokenLogin(@RequestBody TextNode tokenDtoString) {
+        String userName = taskService.googleTokenLogin(tokenDtoString.asText());
 
         return userName;
     }

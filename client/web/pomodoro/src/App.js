@@ -38,7 +38,7 @@ function App() {
   useEffect(() => {
       if (!isPatched) {
           // GET 방식으로 서버 전송
-          fetch('http://localhost:8080/api/user', {
+          fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com:8080/api/user', {
               method: 'POST',
               headers: {
                   'content-type': 'application/json'
@@ -56,12 +56,12 @@ function App() {
   }, [isPatched]);
 
   return (
-    <Router>
+    <Router basename="/pomodoro">
       <div className="main">
         <Navigation userInfo={userInfo}></Navigation>
         <Switch>
-          <Route path="/" exact render={() => <TimerTemplate idToken={idToken}></TimerTemplate>}/>
-          <Route path="/preference" render={() => <PreferenceTemplate idToken={idToken} darkTheme={darkTheme} onToggle={handleThemeToggle}></PreferenceTemplate>}/>
+          <Route path={process.env.PUBLIC_URL + '/'} exact render={() => <TimerTemplate idToken={idToken}></TimerTemplate>}/>
+          <Route path={process.env.PUBLIC_URL + '/preference'} render={() => <PreferenceTemplate idToken={idToken} darkTheme={darkTheme} onToggle={handleThemeToggle}></PreferenceTemplate>}/>
         </Switch>
         <Footer></Footer>
       </div>
