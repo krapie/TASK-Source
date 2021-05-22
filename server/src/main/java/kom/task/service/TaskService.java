@@ -230,34 +230,6 @@ public class TaskService {
     }
 
 
-    /*** FETCH LOGICS ***/
-    public void todayFetch(String userId) {
-        // (임시) 이미 해당 아이디를 field로 가진 To-do 아이템이 존재하면 (이미 요일별 할 일이 저장되어 있으면) -> 추후 날짜가 지나면 업데이트 하는 로직으로 수정
-        if(todoRepository.findAllByUserId(userId).size() != 0) {
-            return;
-        }
-
-        // 호출된 시점의 요일을 구해서
-        LocalDate localDate = LocalDate.now();
-        int todayDay =  localDate.getDayOfWeek().getValue(); // Monday - Sunday : 1 ~ 7
-
-        // 해당 요일에 해당하는 튜플들을 DaydoRepository에서 추출 후
-        List<Daydo> daydoList = daydoRepository.findAllByUserId(userId);
-        List<Daydo> todayDaydoList = daydoList.stream().filter(daydo -> daydo.getDay() == todayDay).collect(Collectors.toList());
-
-        // To-do 아이템으로 변환 후 TodoRepository에 저장
-        for(Daydo daydo : todayDaydoList ) {
-            Todo todoEntity = Todo.builder()
-                    .userId(userId)
-                    .content(daydo.getContent())
-                    .isDone(false)
-                    .build();
-
-            todoRepository.save(todoEntity);
-        }
-    }
-
-
     /*** Pomodoro Service ***/
     @Transactional
     public PomodoroResponseDto fetchPomodoroItem(String tokenDtoString) {
@@ -301,6 +273,35 @@ public class TaskService {
         return pomodoroResponseDto;
     }
 
+
+
+
+    /*** FETCH LOGICS ***/
+    public void todayFetch(String userId) {
+        // (임시) 이미 해당 아이디를 field로 가진 To-do 아이템이 존재하면 (이미 요일별 할 일이 저장되어 있으면) -> 추후 날짜가 지나면 업데이트 하는 로직으로 수정
+        if(todoRepository.findAllByUserId(userId).size() != 0) {
+            return;
+        }
+
+        // 호출된 시점의 요일을 구해서
+        LocalDate localDate = LocalDate.now();
+        int todayDay =  localDate.getDayOfWeek().getValue(); // Monday - Sunday : 1 ~ 7
+
+        // 해당 요일에 해당하는 튜플들을 DaydoRepository에서 추출 후
+        List<Daydo> daydoList = daydoRepository.findAllByUserId(userId);
+        List<Daydo> todayDaydoList = daydoList.stream().filter(daydo -> daydo.getDay() == todayDay).collect(Collectors.toList());
+
+        // To-do 아이템으로 변환 후 TodoRepository에 저장
+        for(Daydo daydo : todayDaydoList ) {
+            Todo todoEntity = Todo.builder()
+                    .userId(userId)
+                    .content(daydo.getContent())
+                    .isDone(false)
+                    .build();
+
+            todoRepository.save(todoEntity);
+        }
+    }
 
     /*** TOKEN VERIFY ***/
     public Payload TokenVerify(String tokenDtoString) {
