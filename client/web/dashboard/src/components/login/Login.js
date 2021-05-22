@@ -58,7 +58,7 @@ function Login({ history }) {
         // 서버로 토큰 전송
         // 전송 완료 후 대시보드로 Re-route
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://localhost:8080/api/google/tokensignin'); // 추후 HTTPS 이용! 
+        xhr.open('POST', 'http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com:8080/api/google/tokensignin'); // 추후 HTTPS 이용! 
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onload = function() {
             console.log('Signed in as: ' + xhr.responseText);
