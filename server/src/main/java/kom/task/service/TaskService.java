@@ -18,6 +18,7 @@ import kom.task.web.dto.pomodoro.PomodoroUpdateRequestDto;
 import kom.task.web.dto.todo.TodoResponseDto;
 import kom.task.web.dto.todo.TodoSaveRequestDto;
 import kom.task.web.dto.todo.TodoUpdateRequestDto;
+import kom.task.web.dto.user.UserLoginResponseDto;
 import kom.task.web.dto.user.UserResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -47,7 +48,7 @@ public class TaskService {
     private final PomodoroRepository pomodoroRepository;
 
     /*** LOGIN REST SERVICE ***/
-    public String googleTokenLogin(String tokenDtoString) {
+    public UserLoginResponseDto googleTokenLogin(String tokenDtoString) {
         String returnString = "";
         Payload payload = TokenVerify(tokenDtoString);
 
@@ -85,7 +86,7 @@ public class TaskService {
             returnString = "invalid token";
         }
 
-        return returnString;
+        return new UserLoginResponseDto(returnString);
     }
 
     public UserResponseDto fetchUserInfo(String tokenDtoString) {

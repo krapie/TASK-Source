@@ -12,6 +12,7 @@ import kom.task.web.dto.pomodoro.PomodoroUpdateRequestDto;
 import kom.task.web.dto.todo.TodoResponseDto;
 import kom.task.web.dto.todo.TodoSaveRequestDto;
 import kom.task.web.dto.todo.TodoUpdateRequestDto;
+import kom.task.web.dto.user.UserLoginResponseDto;
 import kom.task.web.dto.user.UserResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -31,9 +32,9 @@ public class TaskApiController {
     // Login
     @PostMapping("/api/google/tokensignin")
     public ResponseEntity<?> googleTokenLogin(@RequestBody TextNode tokenDtoString) {
-        String userName = taskService.googleTokenLogin(tokenDtoString.asText());
+        UserLoginResponseDto responseDto = taskService.googleTokenLogin(tokenDtoString.asText());
 
-        return ResponseEntity.status(HttpStatus.OK).body(userName);
+        return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 
     // Get User Info
