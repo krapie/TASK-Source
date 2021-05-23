@@ -24,16 +24,23 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes />
+    <loaded-nodes>
+      <connection connection-id="389422d5-d30e-4765-9c8e-1a72522a558d">
+        <schema name="AWS_EC2_Webserver" object-types="table, view, procedure, function, constraint, index, column, dataset trigger" />
+        <schema name="mysql" object-types="table, view, function" />
+      </connection>
+    </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="389422d5-d30e-4765-9c8e-1a72522a558d">
-      <console name="TASK" type="STANDARD" schema="mysql" session="Main"><![CDATA[use AWS_EC2_Webserver;
+      <console name="TASK" type="STANDARD" schema="AWS_EC2_Webserver" session="Main"><![CDATA[use AWS_EC2_Webserver;
 
 select * from user;
 select * from todo;
 select * from daydo;
-select * from pomodoro;]]></console>
+select * from pomodoro;
+
+delete from daydo where day = 0;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
@@ -44,6 +51,7 @@ select * from pomodoro;]]></console>
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="389422d5-d30e-4765-9c8e-1a72522a558d" dataset="AWS_EC2_Webserver.user" active-filter-id="" />
+    <filter-actions connection-id="389422d5-d30e-4765-9c8e-1a72522a558d" dataset="AWS_EC2_Webserver.daydo" active-filter-id="" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />

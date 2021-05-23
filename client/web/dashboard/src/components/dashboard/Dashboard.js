@@ -96,13 +96,13 @@ function Dashboard({ passUserInfo }) {
             </div>
             <div className="dashboard_content component">
                 <div className="dashboard_daily_do">
-                    <a href="./dailydo/index.html" target="_blank" rel="noreferrer"><div className="daily_do_app_picture">오늘 할 일</div></a>
+                    <a href="./dailydo" target="_blank" rel="noreferrer"><div className="daily_do_app_picture">오늘 할 일</div></a>
                     <ul>
                         <li><p>오늘 할 일 달성률</p><hr></hr><h1>{todoItemsCount !== 0 ? Math.round((todoItemsDoneCount / todoItemsCount) * 100) : '0'}%</h1></li>
                     </ul>
                 </div>
                 <div className="dashboard_pomodoro">
-                    <a href="./pomodoro/index.html" target="_blank" rel="noreferrer"><div className="pomodoro_app_picture">뽀모도로</div></a>
+                    <a href="./pomodoro" target="_blank" rel="noreferrer"><div className="pomodoro_app_picture">뽀모도로</div></a>
                     <ul>
                         <li><p>오늘 한 뽀모</p><hr></hr><h1>{pomoCount} 뽀모</h1></li>
                         <li><p>나의 집중력</p><hr></hr><h1>{isNaN(pomoTimer.seconds) ? '0분0초' : pomoTimer.minutes + '분' + pomoTimer.seconds + '초'}</h1></li>

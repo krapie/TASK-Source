@@ -1,6 +1,6 @@
 import './App.css';
 import TimerTemplate from './components/timer/TimerTemplate';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import PreferenceTemplate from './components/preference/PreferenceTemplate';
 import Navigation from './components/fixed/Navigation';
 import Footer from './components/fixed/Footer';
@@ -56,16 +56,16 @@ function App() {
   }, [isPatched]);
 
   return (
-    <Router basename="/pomodoro">
+    <HashRouter>
       <div className="main">
         <Navigation userInfo={userInfo}></Navigation>
         <Switch>
-          <Route path={process.env.PUBLIC_URL + '/'} exact render={() => <TimerTemplate idToken={idToken}></TimerTemplate>}/>
-          <Route path={process.env.PUBLIC_URL + '/preference'} render={() => <PreferenceTemplate idToken={idToken} darkTheme={darkTheme} onToggle={handleThemeToggle}></PreferenceTemplate>}/>
+          <Route path={'/'} exact render={() => <TimerTemplate idToken={idToken}></TimerTemplate>}/>
+          <Route path={'/preference'} render={() => <PreferenceTemplate idToken={idToken} darkTheme={darkTheme} onToggle={handleThemeToggle}></PreferenceTemplate>}/>
         </Switch>
         <Footer></Footer>
       </div>
-    </Router>
+    </HashRouter>
   );
 }
 

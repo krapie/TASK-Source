@@ -1,6 +1,6 @@
 import './App.css';
 import { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import Footer from './components/fixed/Footer'
 import DashboardTemplateWrapper from './components/dashboard/DashboardTemplateWrapper';
 import PreferenceTemplateWrapper from './components/preference/PreferenceTemplateWrapper';
@@ -34,7 +34,7 @@ function App() {
   }
 
   return (
-    <Router basename="/">
+    <HashRouter>
       <div className="main">
         <Switch>
           <Route path={process.env.PUBLIC_URL + '/'} exact component={Login}/>
@@ -43,7 +43,7 @@ function App() {
         </Switch>
         <Footer></Footer>
       </div>
-    </Router>
+    </HashRouter>
   );
 }
 

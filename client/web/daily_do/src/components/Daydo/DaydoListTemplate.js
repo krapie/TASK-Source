@@ -12,8 +12,10 @@ const DayDoListTemplate = ({ idToken, darkTheme }) => {
 
     const [ formInput, setFormInput ] = useState('');
     const [ fetched, setFetched ] = useState(false);
-
-    const [ day, setDay ] = useState(today.getDay()); // 설정의 요일별 할 일 목록의 세팅되어 있는 요일 (기본 월요일 설정)
+    
+    // 설정의 요일별 할 일 목록의 세팅되어 있는 요일
+    // 기준은 JAVA 요일 시스템을 따름 (그 날의 요일)
+    const [ day, setDay ] = useState(today.getDay() === 0 ? 7 : today.getDay()); 
 
     useEffect(() => { // 다크 모드 
         console.log()
@@ -49,14 +51,7 @@ const DayDoListTemplate = ({ idToken, darkTheme }) => {
                     
         // 초기로 설정되어 있는 요일에 해당하는 요일별 할 일 목록 생성
         // !! Java에서 day = 1 ~ 7 : 월요일 ~ 일요일 | JavaScript에서 day = 0 ~ 6 : 일요일 ~ 토요일
-        const defaultDaydoItemList = allDaydoItemList.filter(daydoItem => {
-            if(day === 0) {
-                return daydoItem.day === 7;
-            }
-            else {
-                return daydoItem.day === day;
-            }
-        });
+        const defaultDaydoItemList = allDaydoItemList.filter(daydoItem => daydoItem.day === day);
             
         setDaydoItemList(defaultDaydoItemList);
     }, [fetched, allDaydoItemList, day]);

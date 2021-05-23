@@ -4,7 +4,7 @@ import Navigation from './components/fixed/Navigation';
 import PreferenceWrapper from './components/PreferenceWrapper';
 import TodayWrapper from './components/TodayWrapper';
 import './App.css';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 
 function App() {
   const today = new Date();
@@ -62,16 +62,16 @@ function App() {
   
   // 메인
   return (
-    <Router basename="/dailydo">
+    <HashRouter>
       <div className="main">
         <Navigation userInfo={userInfo}></Navigation>
         <Switch>
-          <Route path={process.env.PUBLIC_URL + '/'} exact render={() => <TodayWrapper idToken={idToken} darkTheme={darkTheme} todayDateHTML={todayDateHTML}/>}/>
-          <Route path={process.env.PUBLIC_URL + '/preference'} render={() => <PreferenceWrapper idToken={idToken} darkTheme={darkTheme} handleThemeToggle={handleThemeToggle}/>}/>
+          <Route path={'/'} exact render={() => <TodayWrapper idToken={idToken} darkTheme={darkTheme} todayDateHTML={todayDateHTML}/>}/>
+          <Route path={'/preference'} render={() => <PreferenceWrapper idToken={idToken} darkTheme={darkTheme} handleThemeToggle={handleThemeToggle}/>}/>
         </Switch>
         <Footer></Footer>
       </div>
-    </Router>
+    </HashRouter>
   );
 }
 
