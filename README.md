@@ -21,6 +21,7 @@ Task: Time/Task Management Service
     + REST API
     + Java
     + Spring Boot
+    + AWS EC2, RDS
 + 웹 클라이언트
     + HTML5/CSS3
     + JavaScript (ES6)
@@ -28,6 +29,23 @@ Task: Time/Task Management Service
     + Webpack, Babel
     
 # Updates
++ 2021-05-23 
+    + 태스크(메인/대시보드) 서비스, 오늘 할 일 서비스, 뽀모도로 서비스
+        + 서버
+            + 태스크(메인/대시보드) 서비스, 오늘 할 일 서비스, 뽀모도로 서비스의 모든 기능 정상 작동 확인 완료
+        + 웹 클라이언트
+            + 페이지를 리로딩하면 404 에러가 뜨는 문제를 해결 (HashRouter)
+            + 오늘 할 일 서비스에서 요일을 서로 다르게 저장하고 사용하고 있었던 문제를 해결
+
++ 2021-05-22
+    + 태스크(메인/대시보드) 서비스, 오늘 할 일 서비스, 뽀모도로 서비스
+        + 서버
+            + AWS EC2 서버 환경 구축, RDS 데이베이스 구축 및 EC2-RDS 연결
+            + EC2 서버 환경에 배포 스크립트 생성 완료 (깃허브 Pull 후 Build)
+            + 서버 정상 실행 확인 완료
+        + 웹 클라이언트
+            + Fetch API 주소를 AWS EC2 서버 주소로 수정
+
 + 2021-05-21
     + 태스크(메인/대시보드) 서비스, 오늘 할 일 서비스, 뽀모도로 서비스
         + 웹 클라이언트
@@ -200,3 +218,4 @@ Task: Time/Task Management Service
     + Port Issue: Cross Origin 3000 -> 8080
     + Pomodoro 서비스: 탭 전환 시 간헐적으로 메모리 누수와 함께 제대로 cleanUp이 되지 않는 문제
     + React Warnings: useEffect dependencies에 추가 여부에 관한 문제
+    + MariaDB Lock 관련 문제: Lock wait timeout exceed, pessimistic lock...
