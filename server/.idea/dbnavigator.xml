@@ -39,7 +39,15 @@ select * from todo;
 select * from daydo;
 select * from pomodoro;
 
-delete from daydo where day = 0;]]></console>
+drop table user;
+drop table todo;
+drop table daydo;
+drop table pomodoro;
+
+create table daydo (id bigint not null auto_increment, content varchar(255), day integer, user_id varchar(255), primary key (id)) engine=InnoDB;
+create table pomodoro (user_id varchar(255) not null, max_pomo integer, pomo integer, timer_set integer, primary key (user_id)) engine=InnoDB;
+create table todo (id bigint not null auto_increment, content varchar(255), is_done bit, user_id varchar(255), primary key (id)) engine=InnoDB;
+create table user (user_id varchar(255) not null, email varchar(255) not null, name varchar(255) not null, picture_url varchar(255), pomodoro_updated_date date, todo_updated_date date, primary key (user_id)) engine=InnoDB;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

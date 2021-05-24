@@ -99,6 +99,9 @@ public class TaskService {
             String userId = payload.getSubject();
             System.out.println("User ID: " + userId + "=> User Info Fetch");
 
+            // 오늘의 패치 진행
+            todayFetch(userId);
+
             User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("id not found"));
             userResponseDto = new UserResponseDto(user);
         }
@@ -139,9 +142,6 @@ public class TaskService {
             // Print user identifier
             String userId = payload.getSubject();
             System.out.println("User ID: " + userId + "=> Todo Item List Fetch");
-
-            // 오늘의 패치 진행
-            todayTodoFetch(userId);
 
             List<Todo> todoEntities = todoRepository.findAllByUserId(userId);
 
@@ -244,9 +244,6 @@ public class TaskService {
             String userId = payload.getSubject();
             System.out.println("User ID: " + userId + "=> Pomodoro Info Fetch");
 
-            // 오늘의 패치 진행
-            todayPomodoroFetch(userId);
-
             Pomodoro pomodoro = pomodoroRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("id not found"));
             pomodoroResponseDto = new PomodoroResponseDto(pomodoro);
         }
@@ -283,7 +280,7 @@ public class TaskService {
 
 
     /*** FETCH LOGICS ***/
-    public void todayTodoFetch(String userId) {
+    public void todayFetch(String userId) {
         LocalTime sixAM = LocalTime.of(6,0,0);
 
         // User 엔티티 가져오기
@@ -295,8 +292,8 @@ public class TaskService {
 
         // User에 저장된 todoUpdatedTime 와 날짜가 다르고 && 현재 시간이 오전 6시 이후이면
         if(!user.getTodoUpdatedDate().isEqual(nowDate) && nowTime.isAfter(sixAM)) {
-            System.out.println("todayPomodoroFetch");
-            // Fetch 진행
+            /*** TodoItem 갱신 ***/
+            System.out.println("todayTodoItemFetch");
 
             // 해당 userId를 가진 모든 todoItem 삭제
             todoRepository.deleteAllByUserId(userId);
@@ -320,23 +317,10 @@ public class TaskService {
 
             // User todoUpdatedTime 업데이트
             user.updateTodoUpdatedDate(nowDate);
-        }
-    }
 
-    /*** FETCH LOGICS ***/
-    public void todayPomodoroFetch(String userId) {
-        LocalTime sixAM = LocalTime.of(6,0,0);
-
-        // User 엔티티 가져오기
-        User user = userRepository.findByUserId(userId).orElseThrow(() -> new IllegalArgumentException("userId not found"));
-
-        // 호출된 시점의 요일을 구해서
-        LocalDate nowDate = LocalDate.now();
-        LocalTime nowTime = LocalTime.now();
-
-        // User에 저장된 pomodoroUpdatedTime 와 날짜가 다르고 && 현재 시간이 오전 6시 이후이면
-        if(!user.getPomodoroUpdatedDate().isEqual(nowDate) && nowTime.isAfter(sixAM)) {
+            /*** Pomodoro 갱신 ***/
             System.out.println("todayPomodoroFetch");
+
             // Pomodoro 엔티티 가져오기
             Pomodoro pomodoro = pomodoroRepository.findByUserId(userId).orElseThrow(() -> new IllegalArgumentException("userId not found"));
 
