@@ -13,6 +13,6 @@ public interface TodoRepository extends JpaRepository<Todo,Long> {
 
     @Transactional
     @Modifying
-    @Query("delete from User where userId = :userId")
+    @Query("delete from Todo where userId = :userId")
     void deleteAllByUserId(@Param("userId") String userId);
 }

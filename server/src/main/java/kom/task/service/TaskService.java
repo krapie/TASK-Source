@@ -292,15 +292,16 @@ public class TaskService {
 
         // User에 저장된 todoUpdatedTime 와 날짜가 다르고 && 현재 시간이 오전 6시 이후이면
         if(!user.getTodoUpdatedDate().isEqual(nowDate) && nowTime.isAfter(sixAM)) {
+
             /*** TodoItem 갱신 ***/
             System.out.println("todayTodoItemFetch");
 
             // 해당 userId를 가진 모든 todoItem 삭제
             todoRepository.deleteAllByUserId(userId);
 
+            // 해당 요일에 해당하는 튜플들을 DaydoRepository에서 추출
             int todayDay =  nowDate.getDayOfWeek().getValue(); // Monday - Sunday : 1 ~ 7
 
-            // 해당 요일에 해당하는 튜플들을 DaydoRepository에서 추출
             List<Daydo> daydoList = daydoRepository.findAllByUserId(userId);
             List<Daydo> todayDaydoList = daydoList.stream().filter(daydo -> daydo.getDay() == todayDay).collect(Collectors.toList());
 
