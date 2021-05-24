@@ -90,6 +90,7 @@ public class TaskService {
         return new UserLoginResponseDto(returnString);
     }
 
+    @Transactional
     public UserResponseDto fetchUserInfo(String tokenDtoString) {
         Payload payload = TokenVerify(tokenDtoString);
         UserResponseDto userResponseDto = null;
