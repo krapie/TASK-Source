@@ -26,7 +26,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="389422d5-d30e-4765-9c8e-1a72522a558d">
-        <schema name="AWS_EC2_Webserver" object-types="table, view, function, column" />
+        <schema name="AWS_EC2_Webserver" object-types="table, view, procedure, function, constraint, index, column, dataset trigger" />
       </connection>
     </loaded-nodes>
   </component>

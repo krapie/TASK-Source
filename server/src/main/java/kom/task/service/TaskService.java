@@ -299,7 +299,7 @@ public class TaskService {
             // Fetch 진행
 
             // 해당 userId를 가진 모든 todoItem 삭제
-            todoRepository.
+            todoRepository.deleteAllByUserId(userId);
 
             int todayDay =  nowDate.getDayOfWeek().getValue(); // Monday - Sunday : 1 ~ 7
 
