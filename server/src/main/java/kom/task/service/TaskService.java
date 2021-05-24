@@ -27,6 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -55,7 +56,7 @@ public class TaskService {
         if(payload != null) {
             // Print user identifier
             String userId = payload.getSubject();
-            System.out.println("User ID: " + userId);
+            System.out.println("User ID: " + userId + "=> Google Token Login");
 
             // Get profile information from payload
             String email = payload.getEmail();
@@ -96,7 +97,7 @@ public class TaskService {
         if(payload != null) {
             // Print user identifier
             String userId = payload.getSubject();
-            System.out.println("User ID: " + userId);
+            System.out.println("User ID: " + userId + "=> User Info Fetch");
 
             User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("id not found"));
             userResponseDto = new UserResponseDto(user);
@@ -118,7 +119,7 @@ public class TaskService {
         if(payload != null) {
             // Print user identifier
             String userId = payload.getSubject();
-            System.out.println("User ID: " + userId);
+            System.out.println("User ID: " + userId + "=> Todo Item Save");
 
             createdTodo = todoRepository.save(requestDto.toEntity(userId));
         }
@@ -137,9 +138,10 @@ public class TaskService {
         if(payload != null) {
             // Print user identifier
             String userId = payload.getSubject();
-            System.out.println("User ID: " + userId);
+            System.out.println("User ID: " + userId + "=> Todo Item List Fetch");
 
-            todayFetch(userId);
+            // 오늘의 패치 진행
+            todayTodoFetch(userId);
 
             List<Todo> todoEntities = todoRepository.findAllByUserId(userId);
 
@@ -180,7 +182,7 @@ public class TaskService {
         if(payload != null) {
             // Print user identifier
             String userId = payload.getSubject();
-            System.out.println("User ID: " + userId);
+            System.out.println("User ID: " + userId + "=> Daydo Item Save");
 
             createdDaydo = daydoRepository.save(requestDto.toEntity(userId));
         }
@@ -199,7 +201,7 @@ public class TaskService {
         if(payload != null) {
             // Print user identifier
             String userId = payload.getSubject();
-            System.out.println("User ID: " + userId);
+            System.out.println("User ID: " + userId + "=> Daydo Item List Fetch");
 
             List<Daydo> daydoEntities = daydoRepository.findAllByUserId(userId);
 
@@ -240,7 +242,10 @@ public class TaskService {
         if(payload != null) {
             // Print user identifier
             String userId = payload.getSubject();
-            System.out.println("User ID: " + userId);
+            System.out.println("User ID: " + userId + "=> Pomodoro Info Fetch");
+
+            // 오늘의 패치 진행
+            todayPomodoroFetch(userId);
 
             Pomodoro pomodoro = pomodoroRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("id not found"));
             pomodoroResponseDto = new PomodoroResponseDto(pomodoro);
@@ -260,7 +265,7 @@ public class TaskService {
         if(payload != null) {
             // Print user identifier
             String userId = payload.getSubject();
-            System.out.println("User ID: " + userId);
+            System.out.println("User ID: " + userId + "=> Pomodoro Info Update");
 
             Pomodoro pomodoro = pomodoroRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("id not found"));
             pomodoro.update(requestDto.getTimerSet(),requestDto.getPomo());
@@ -278,29 +283,68 @@ public class TaskService {
 
 
     /*** FETCH LOGICS ***/
-    public void todayFetch(String userId) {
-        // (임시) 이미 해당 아이디를 field로 가진 To-do 아이템이 존재하면 (이미 요일별 할 일이 저장되어 있으면) -> 추후 날짜가 지나면 업데이트 하는 로직으로 수정
-        if(todoRepository.findAllByUserId(userId).size() != 0) {
-            return;
-        }
+    public void todayTodoFetch(String userId) {
+        LocalTime sixAM = LocalTime.of(6,0,0);
+
+        // User 엔티티 가져오기
+        User user = userRepository.findByUserId(userId).orElseThrow(() -> new IllegalArgumentException("userId not found"));
 
         // 호출된 시점의 요일을 구해서
-        LocalDate localDate = LocalDate.now();
-        int todayDay =  localDate.getDayOfWeek().getValue(); // Monday - Sunday : 1 ~ 7
+        LocalDate nowDate = LocalDate.now();
+        LocalTime nowTime = LocalTime.now();
 
-        // 해당 요일에 해당하는 튜플들을 DaydoRepository에서 추출 후
-        List<Daydo> daydoList = daydoRepository.findAllByUserId(userId);
-        List<Daydo> todayDaydoList = daydoList.stream().filter(daydo -> daydo.getDay() == todayDay).collect(Collectors.toList());
+        // User에 저장된 todoUpdatedTime 와 날짜가 다르고 && 현재 시간이 오전 6시 이후이면
+        if(!user.getTodoUpdatedDate().isEqual(nowDate) && nowTime.isAfter(sixAM)) {
+            System.out.println("todayPomodoroFetch");
+            // Fetch 진행
 
-        // To-do 아이템으로 변환 후 TodoRepository에 저장
-        for(Daydo daydo : todayDaydoList ) {
-            Todo todoEntity = Todo.builder()
-                    .userId(userId)
-                    .content(daydo.getContent())
-                    .isDone(false)
-                    .build();
+            // 해당 userId를 가진 모든 todoItem 삭제
+            todoRepository.
 
-            todoRepository.save(todoEntity);
+            int todayDay =  nowDate.getDayOfWeek().getValue(); // Monday - Sunday : 1 ~ 7
+
+            // 해당 요일에 해당하는 튜플들을 DaydoRepository에서 추출
+            List<Daydo> daydoList = daydoRepository.findAllByUserId(userId);
+            List<Daydo> todayDaydoList = daydoList.stream().filter(daydo -> daydo.getDay() == todayDay).collect(Collectors.toList());
+
+            // To-do 아이템으로 변환 후 TodoRepository에 저장
+            for(Daydo daydo : todayDaydoList ) {
+                Todo todoEntity = Todo.builder()
+                        .userId(userId)
+                        .content(daydo.getContent())
+                        .isDone(false)
+                        .build();
+
+                todoRepository.save(todoEntity);
+            }
+
+            // User todoUpdatedTime 업데이트
+            user.updateTodoUpdatedDate(nowDate);
+        }
+    }
+
+    /*** FETCH LOGICS ***/
+    public void todayPomodoroFetch(String userId) {
+        LocalTime sixAM = LocalTime.of(6,0,0);
+
+        // User 엔티티 가져오기
+        User user = userRepository.findByUserId(userId).orElseThrow(() -> new IllegalArgumentException("userId not found"));
+
+        // 호출된 시점의 요일을 구해서
+        LocalDate nowDate = LocalDate.now();
+        LocalTime nowTime = LocalTime.now();
+
+        // User에 저장된 pomodoroUpdatedTime 와 날짜가 다르고 && 현재 시간이 오전 6시 이후이면
+        if(!user.getPomodoroUpdatedDate().isEqual(nowDate) && nowTime.isAfter(sixAM)) {
+            System.out.println("todayPomodoroFetch");
+            // Pomodoro 엔티티 가져오기
+            Pomodoro pomodoro = pomodoroRepository.findByUserId(userId).orElseThrow(() -> new IllegalArgumentException("userId not found"));
+
+            // pomo 업데이트
+            pomodoro.updatePomo();
+
+            // User pomodoroUpdatedTime 업데이트
+            user.updatePomodoroUpdatedDate(nowDate);
         }
     }
 

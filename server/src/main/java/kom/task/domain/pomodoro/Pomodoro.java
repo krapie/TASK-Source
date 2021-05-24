@@ -22,11 +22,15 @@ public class Pomodoro {
 
     @Column
     private Integer pomo;
+    
+    @Column
+    private Integer maxPomo;
 
     public Pomodoro(String userId) {
         this.userId = userId;
         this.timerSet = 25*60;
         this.pomo = 0;
+        this.maxPomo = 0;
     }
 
     @Builder
@@ -34,10 +38,18 @@ public class Pomodoro {
         this.userId = userId;
         this.timerSet = timerSet;
         this.pomo = pomo;
+        this.maxPomo = 0;
     }
 
     public void update(Integer timerSet, Integer pomo) {
         this.timerSet = timerSet;
         this.pomo = pomo;
+    }
+    
+    public void updatePomo() {
+        if(this.pomo > this.maxPomo) {
+            this.maxPomo = this.pomo;
+        }
+        this.pomo = 0;
     }
 }
