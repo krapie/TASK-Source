@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import "./TimerChange.css";
 
-const TimerChange = ({ idToken }) => {
+const TimerChange = () => {
     const [ formInput, setFormInput ] = useState(''); // 입력 필드값
     const [ timerSet, setTimerSet ] = useState(0);
     const [ pomo, setPomo ] = useState(0);
     const [ fetched, setFetched ] = useState(false);
+
+    const idTokenLocation = document.cookie.split('; ').find(row => row.startsWith('idToken'));
+    const idToken = idTokenLocation === undefined ? window.location.replace('http://komputer-task.ml') : idTokenLocation.split('=')[1];
 
     // FETCH - POST
     useEffect(() => {

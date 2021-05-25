@@ -4,7 +4,7 @@ import DaydoForm from './DaydoForm'
 import './DaydoListTemplate.css'
 import DaydoSlider from './DaydoSlider'
 
-const DayDoListTemplate = ({ idToken, darkTheme }) => {
+const DayDoListTemplate = ({ darkTheme }) => {
     const today = new Date();
 
     const [ allDaydoItemList, setAllDaydoItemList ] = useState([]);
@@ -12,6 +12,9 @@ const DayDoListTemplate = ({ idToken, darkTheme }) => {
 
     const [ formInput, setFormInput ] = useState('');
     const [ fetched, setFetched ] = useState(false);
+    
+    const idTokenLocation = document.cookie.split('; ').find(row => row.startsWith('idToken'));
+    const idToken = idTokenLocation === undefined ? window.location.replace('http://komputer-task.ml') : idTokenLocation.split('=')[1];
     
     // 설정의 요일별 할 일 목록의 세팅되어 있는 요일
     // 기준은 JAVA 요일 시스템을 따름 (그 날의 요일)

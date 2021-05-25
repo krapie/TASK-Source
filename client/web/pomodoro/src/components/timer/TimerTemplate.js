@@ -2,10 +2,13 @@ import './TimerTemplate.css';
 import Timer from './Timer.js';
 import { useState, useEffect } from 'react';
 
-const TimerTemplate = ({ idToken }) => {
+const TimerTemplate = () => {
     const [ pomo, setPomo ] = useState(0);
     const [ timerSet, setTimerSet ] = useState(25*60);
     const [ fetched, setFetched ] = useState(false);
+
+    const idTokenLocation = document.cookie.split('; ').find(row => row.startsWith('idToken'));
+    const idToken = idTokenLocation === undefined ? window.location.replace('http://komputer-task.ml') : idTokenLocation.split('=')[1];
 
     function handlePomoUpdate() {
         const pomodoroForm = {

@@ -32,8 +32,10 @@ function App() {
 
   const [isPatched, setIsPatched] = useState(false);
   const [userInfo, setUserInfo] = useState("");
-  const idToken = document.cookie.split('; ').find(row => row.startsWith('idToken')).split('=')[1];
-  
+
+  const idTokenLocation = document.cookie.split('; ').find(row => row.startsWith('idToken'));
+  const idToken = idTokenLocation === undefined ? window.location.replace('http://komputer-task.ml') : idTokenLocation.split('=')[1];
+
   // Read
   useEffect(() => {
       if (!isPatched) {
@@ -60,8 +62,8 @@ function App() {
       <div className="main">
         <Navigation userInfo={userInfo}></Navigation>
         <Switch>
-          <Route path={'/'} exact render={() => <TimerTemplate idToken={idToken}></TimerTemplate>}/>
-          <Route path={'/preference'} render={() => <PreferenceTemplate idToken={idToken} darkTheme={darkTheme} onToggle={handleThemeToggle}></PreferenceTemplate>}/>
+          <Route path={'/'} exact render={() => <TimerTemplate></TimerTemplate>}/>
+          <Route path={'/preference'} render={() => <PreferenceTemplate darkTheme={darkTheme} onToggle={handleThemeToggle}></PreferenceTemplate>}/>
         </Switch>
         <Footer></Footer>
       </div>

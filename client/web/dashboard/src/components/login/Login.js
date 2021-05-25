@@ -43,8 +43,10 @@ function Login({ history }) {
 
     function onSuccess(googleUser) {
         const id_token = googleUser.getAuthResponse().id_token;
+        const tokenExpireTime = 60*60; //1시간
+
         localStorage.setItem("idToken", id_token);
-        document.cookie = `idToken=${id_token}; path=/`;
+        document.cookie = `idToken=${id_token}; max-age=${tokenExpireTime} path=/`;
         /* 
         const profile = googleUser.getBasicProfile();
         console.log(profile);

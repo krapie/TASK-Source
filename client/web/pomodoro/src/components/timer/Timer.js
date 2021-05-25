@@ -62,9 +62,10 @@ const Timer = ({ timeSet, pomoUpdate }) => {
                 } else {
                     isBreakTime = false;
                     setTimerSet(timeSet);
+                    setTimerActive(false);
                     // 설정된 타이머 디스플레이하기
                     setRemainderMinutes(Math.floor(timerSet / 60));
-                    setRemainderSeconds(timerSet);
+                    setRemainderSeconds(timerSet % 60);
                     break_time_display.innerHTML = "";
                 }
 

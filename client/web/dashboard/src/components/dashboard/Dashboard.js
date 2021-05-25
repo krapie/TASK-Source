@@ -10,10 +10,13 @@ function Dashboard({ passUserInfo }) {
 
     const [todoItemsCount, setTodoItemsCount] = useState(0);
     const [todoItemsDoneCount, setTodoItemsDoneCount] = useState(0);
+
     const [pomoCount, setPomoCount] = useState(0);
+    const [pomoTotalCount, setPomoTotalCount] = useState(0);
     const [pomoTimer, setPomoTimer] = useState({});
 
-    const idToken = document.cookie.split('; ').find(row => row.startsWith('idToken')).split('=')[1];
+    const idTokenLocation = document.cookie.split('; ').find(row => row.startsWith('idToken'));
+    const idToken = idTokenLocation === undefined ? window.location.replace('http://komputer-task.ml') : idTokenLocation.split('=')[1];
 
     // Read
     useEffect(() => {
@@ -55,7 +58,7 @@ function Dashboard({ passUserInfo }) {
             })
                 .then((response) => response.json())
                 .then((info) => {
-                    console.log("서버로부터 Pomodoro 정보 가져옴: ", info.timerSet, info.pomo);
+                    console.log("서버로부터 Pomodoro 정보 가져옴: ", info.timerSet, info.pomo, info.maxPomo, info.totalPomo);
                     setPomodoroItem(info);
                 });
 
@@ -81,6 +84,7 @@ function Dashboard({ passUserInfo }) {
         const timerSet = pomodoroItem.timerSet;
 
         setPomoCount(pomodoroItem.pomo);
+        setPomoTotalCount(pomodoroItem.totalPomo);
         setPomoTimer({
             minutes: Math.floor(timerSet / 60),
             seconds: timerSet % 60
@@ -104,8 +108,9 @@ function Dashboard({ passUserInfo }) {
                 <div className="dashboard_pomodoro">
                     <a href="./pomodoro" target="_blank" rel="noreferrer"><div className="pomodoro_app_picture">뽀모도로</div></a>
                     <ul>
-                        <li><p>오늘 한 뽀모</p><hr></hr><h1>{pomoCount} 뽀모</h1></li>
                         <li><p>나의 집중력</p><hr></hr><h1>{isNaN(pomoTimer.seconds) ? '0분0초' : pomoTimer.minutes + '분' + pomoTimer.seconds + '초'}</h1></li>
+                        <li><p>오늘 한 뽀모</p><hr></hr><h1>{pomoCount} 뽀모</h1></li>
+                        <li><p>지금까지 한 총 뽀모</p><hr></hr><h1>{pomoTotalCount} 뽀모</h1></li>
                     </ul>
                 </div>
             </div>

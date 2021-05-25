@@ -291,23 +291,22 @@ public class TaskService {
         LocalDate nowDate = LocalDate.now();
         LocalTime nowTime = LocalTime.now();
 
+        /*** TodoItem 갱신 ***/
         // User에 저장된 todoUpdatedTime 와 날짜가 다르고 && 현재 시간이 오전 6시 이후이면
         if(!user.getTodoUpdatedDate().isEqual(nowDate) && nowTime.isAfter(sixAM)) {
-
-            /*** TodoItem 갱신 ***/
             System.out.println("todayTodoItemFetch");
 
             // 해당 userId를 가진 모든 todoItem 삭제
             todoRepository.deleteAllByUserId(userId);
 
             // 해당 요일에 해당하는 튜플들을 DaydoRepository에서 추출
-            int todayDay =  nowDate.getDayOfWeek().getValue(); // Monday - Sunday : 1 ~ 7
+            int todayDay = nowDate.getDayOfWeek().getValue(); // Monday - Sunday : 1 ~ 7
 
             List<Daydo> daydoList = daydoRepository.findAllByUserId(userId);
             List<Daydo> todayDaydoList = daydoList.stream().filter(daydo -> daydo.getDay() == todayDay).collect(Collectors.toList());
 
             // To-do 아이템으로 변환 후 TodoRepository에 저장
-            for(Daydo daydo : todayDaydoList ) {
+            for (Daydo daydo : todayDaydoList) {
                 Todo todoEntity = Todo.builder()
                         .userId(userId)
                         .content(daydo.getContent())
@@ -319,8 +318,11 @@ public class TaskService {
 
             // User todoUpdatedTime 업데이트
             user.updateTodoUpdatedDate(nowDate);
+        }
 
-            /*** Pomodoro 갱신 ***/
+        /*** Pomodoro 갱신 ***/
+        // User에 저장된 pomodoroUpdatedDate 와 날짜가 다르고 && 현재 시간이 오전 6시 이후이면
+        if(!user.getPomodoroUpdatedDate().isEqual(nowDate) && nowTime.isAfter(sixAM)) {
             System.out.println("todayPomodoroFetch");
 
             // Pomodoro 엔티티 가져오기

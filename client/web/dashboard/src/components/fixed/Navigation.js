@@ -7,7 +7,7 @@ const Navigation = ({ userInfo }) => {
         var auth2 = window.gapi.auth2.getAuthInstance();
         auth2.signOut().then(function () {
             console.log('User signed out.');
-            window.location.replace('http://localhost:3000');
+            window.location.replace('http://komputer-task.ml');
         });
     }
 

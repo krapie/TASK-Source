@@ -3,11 +3,14 @@ import TodoForm from './TodoForm';
 import TodoItemList from './TodoItemList';
 import './TodoListTemplate.css';
 
-const TodoListTemplate = ({ idToken, darkTheme }) => {
+const TodoListTemplate = ({ darkTheme }) => {
     const [ todoItemList, setTodoItemList ] = useState([]);
     const [ formInput, setFormInput ] = useState('');
     const [ fetched, setFetched ] = useState(false);
 
+    const idTokenLocation = document.cookie.split('; ').find(row => row.startsWith('idToken'));
+    const idToken = idTokenLocation === undefined ? window.location.replace('http://komputer-task.ml') : idTokenLocation.split('=')[1];
+    
     useEffect(() => { // 다크 모드 
         console.log()
         const inputs = document.querySelectorAll('input');
