@@ -82,11 +82,11 @@ const DayDoListTemplate = ({ darkTheme }) => {
         .then((response) => response.json())
         .then((newDaydoItem) => {
             console.log("새 Todo 아이템 생성됨: ", newDaydoItem);
-             setDaydoItemList([...daydoItemList, newDaydoItem]);
+            setDaydoItemList([...daydoItemList, newDaydoItem]);
+            
+            // 서버에서 다시 목록 가져오기
+            setFetched(false);
          })
-
-         // 서버에서 다시 목록 가져오기
-         setFetched(false);
     }
     
     // REMOVE - DELETE
