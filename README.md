@@ -254,8 +254,4 @@ Task: Time/Task Management Service
 + Pomodoro 서비스: 탭 전환 시 간헐적으로 메모리 누수와 함께 제대로 cleanUp이 되지 않는 문제
 + React Warnings: useEffect dependencies에 추가 여부에 관한 문제
 + ~~MariaDB Lock 관련 문제: Lock wait timeout exceed, pessimistic lock...~~
-<<<<<<< HEAD
     + Transaction 처리 문제, 서비스 단에서 DB에 CRUD를 하는 서비스 각각에 @Transactional 어노테이션 추가로 Transaction Locking 해결
-=======
-    + Transaction 처리 문제, 서비스 단에서 DB에 CRUD를 하는 서비스 각각에 @Transactional 어노테이션 추가로 Transaction Locking 해결
->>>>>>> 2da563fbb0301af5e88091861139198be27e0cab
