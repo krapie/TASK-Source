@@ -29,6 +29,7 @@ Task: Time/Task Management Service
     + Webpack, Babel
     
 # Updates
+<<<<<<< HEAD
 + 2021-05-26
     + 오늘 할 일 서비스
         + 웹 클라이언트
@@ -39,12 +40,18 @@ Task: Time/Task Management Service
 <details><summary>지난 업데이트 보기</summary>ㄴ
 <p>
 
+=======
+>>>>>>> 2da563fbb0301af5e88091861139198be27e0cab
 + 2021-05-25
     + 태스크(메인/대시보드) 서비스, 오늘 할 일 서비스, 뽀모도로 서비스
         + 서버
             + DB: 뽀모도로 DB 수정 및 관련 서비스, API, DTO 수정 완료
             + 버그: todayFetch 함수에서 오늘 할 일 서비스의 갱신 시간만으로 오늘 할 일 서비스, 뽀모도로 서비스 둘 다 업데이트하던 문제 해결
+<<<<<<< HEAD
         + 웹 클라이언트
+=======
+        + 클라이언트
+>>>>>>> 2da563fbb0301af5e88091861139198be27e0cab
             + 대시보드: 지금까지 한 총 뽀모 표시 기능 추가
             + 모든 서비스: 로그인 후 1시간이 지난 뒤 특정 작업을 수행하려고 하면 자동으로 로그아웃되고 로그인 페이지로 이동하는 기능 구현 (구글 토큰 유효기간: 1시간)
             + 버그
@@ -53,6 +60,13 @@ Task: Time/Task Management Service
                     + 타이머가 끝나고 다시 타이머 시작 버튼이 다시 활성화 되지 않던 문제 해결
                     + 타이머가 끝나고 다시 초기 상태로 돌아갈 때, 초 단위 표시가 제대로 표시되지 않던 문제 해결 
 
+<<<<<<< HEAD
+=======
+
+<details><summary>지난 업데이트 보기</summary>
+<p>
+
+>>>>>>> 2da563fbb0301af5e88091861139198be27e0cab
 + 2021-05-24
     + 오늘 할 일 서비스, 뽀모도로 서비스
         + 서버
@@ -254,4 +268,8 @@ Task: Time/Task Management Service
 + Pomodoro 서비스: 탭 전환 시 간헐적으로 메모리 누수와 함께 제대로 cleanUp이 되지 않는 문제
 + React Warnings: useEffect dependencies에 추가 여부에 관한 문제
 + ~~MariaDB Lock 관련 문제: Lock wait timeout exceed, pessimistic lock...~~
+<<<<<<< HEAD
     + Transaction 처리 문제, 서비스 단에서 DB에 CRUD를 하는 서비스 각각에 @Transactional 어노테이션 추가로 Transaction Locking 해결
+=======
+    + Transaction 처리 문제, 서비스 단에서 DB에 CRUD를 하는 서비스 각각에 @Transactional 어노테이션 추가로 Transaction Locking 해결
+>>>>>>> 2da563fbb0301af5e88091861139198be27e0cab
