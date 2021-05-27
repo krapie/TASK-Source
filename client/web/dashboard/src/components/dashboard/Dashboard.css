@@ -21,11 +21,13 @@
 .dashboard .dashboard_content .daily_do_app_picture {
     width: 75px;
     height: 75px;
-    background-color: #333333;
-    /*background-image: url("../../Komputer.png");
+
+    background-image: url("../../assets/images/dailydo_icon.png");
     background-position: center;
-    background-size: cover;*/
-    border-radius: 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+
     margin: auto;
     text-align: center;
     line-height: 75px;
@@ -35,11 +37,13 @@
 .dashboard .dashboard_content .pomodoro_app_picture {
     width: 75px;
     height: 75px;
-    background-color: #333333;
-    /*background-image: url("../../Komputer.png");
+
+    background-image: url("../../assets/images/pomdoro_icon.png");
     background-position: center;
-    background-size: cover;*/
-    border-radius: 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+
     margin: auto;
     text-align: center;
     line-height: 75px;

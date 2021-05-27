@@ -95,18 +95,20 @@ function Dashboard({ passUserInfo }) {
         <div className="dashboard">
             <div className="dashboard_user_info component">
                 <img className="user_picture" src={userInfo.pictureUrl} alt={userInfo.name}></img><br></br>
-                <h2 style={{ display: 'inline-block' }}>{userInfo.name}</h2><span>님의 대시보드</span>
+                <h2 style={{ display: 'inline-block', marginBottom: '5%' }}>{userInfo.name}</h2><span>님의 대시보드</span>
                 <hr></hr>
             </div>
             <div className="dashboard_content component">
                 <div className="dashboard_daily_do">
-                    <a href="./dailydo" target="_blank" rel="noreferrer"><div className="daily_do_app_picture">오늘 할 일</div></a>
+                    <a href="./dailydo" target="_blank" rel="noreferrer"><div className="daily_do_app_picture"></div></a>
+                    <h2>오늘 할 일</h2>
                     <ul>
                         <li><p>오늘 할 일 달성률</p><hr></hr><h1>{todoItemsCount !== 0 ? Math.round((todoItemsDoneCount / todoItemsCount) * 100) : '0'}%</h1></li>
                     </ul>
                 </div>
                 <div className="dashboard_pomodoro">
-                    <a href="./pomodoro" target="_blank" rel="noreferrer"><div className="pomodoro_app_picture">뽀모도로</div></a>
+                    <a href="./pomodoro" target="_blank" rel="noreferrer"><div className="pomodoro_app_picture"></div></a>
+                    <h2>뽀모도로</h2>
                     <ul>
                         <li><p>나의 집중력</p><hr></hr><h1>{isNaN(pomoTimer.seconds) ? '0분0초' : pomoTimer.minutes + '분' + pomoTimer.seconds + '초'}</h1></li>
                         <li><p>오늘 한 뽀모</p><hr></hr><h1>{pomoCount} 뽀모</h1></li>

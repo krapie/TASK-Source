@@ -19,7 +19,7 @@ const Navigation = ({ userInfo }) => {
     return (
         <nav className="navigation">
             <ul className="navigation-list">
-                <li id="logo">&pi;</li>
+                <li id="logo"><a href="https://komputer-p.github.io/Portfolio/" target="_blank" rel="noreferrer">&pi;</a></li>
                 <li><Link to="/dashboard">대시보드</Link></li>
                 <li><Link to="/preference">설정</Link></li>
                 <li>

@@ -5,7 +5,7 @@ const Navigation = ({ userInfo }) => {
     return (
         <nav className="navigation">
             <ul className="navigation-list">
-                <li id="logo">&pi;</li>
+                <li id="logo"><a href="http://komputer-task.ml/#/dashboard" target="_blank" rel="noreferrer">&pi;</a></li>
                 <li><Link to="/">할일</Link></li>
                 <li><Link to="/preference">설정</Link></li>
                 <li>
