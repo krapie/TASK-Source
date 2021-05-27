@@ -48,6 +48,91 @@ public class TaskService {
     private final UserRepository userRepository;
     private final PomodoroRepository pomodoroRepository;
 
+    /*** FETCH LOGICS ***/
+    public void todayFetch(String userId) {
+        LocalTime sixAM = LocalTime.of(6,0,0);
+
+        // User 엔티티 가져오기
+        User user = userRepository.findByUserId(userId).orElseThrow(() -> new IllegalArgumentException("userId not found"));
+
+        // 호출된 시점의 요일을 구해서
+        LocalDate nowDate = LocalDate.now();
+        LocalTime nowTime = LocalTime.now();
+
+        /*** TodoItem 갱신 ***/
+        // User에 저장된 todoUpdatedTime 와 날짜가 다르고 && 현재 시간이 오전 6시 이후이면
+        if(!user.getTodoUpdatedDate().isEqual(nowDate) && nowTime.isAfter(sixAM)) {
+            System.out.println("todayTodoItemFetch");
+
+            // 해당 userId를 가진 모든 todoItem 삭제
+            todoRepository.deleteAllByUserId(userId);
+
+            // 해당 요일에 해당하는 튜플들을 DaydoRepository에서 추출
+            int todayDay = nowDate.getDayOfWeek().getValue(); // Monday - Sunday : 1 ~ 7
+
+            List<Daydo> daydoList = daydoRepository.findAllByUserId(userId);
+            List<Daydo> todayDaydoList = daydoList.stream().filter(daydo -> daydo.getDay() == todayDay).collect(Collectors.toList());
+
+            // To-do 아이템으로 변환 후 TodoRepository에 저장
+            for (Daydo daydo : todayDaydoList) {
+                Todo todoEntity = Todo.builder()
+                        .userId(userId)
+                        .content(daydo.getContent())
+                        .isDone(false)
+                        .build();
+
+                todoRepository.save(todoEntity);
+            }
+
+            // User todoUpdatedTime 업데이트
+            user.updateTodoUpdatedDate(nowDate);
+        }
+
+        /*** Pomodoro 갱신 ***/
+        // User에 저장된 pomodoroUpdatedDate 와 날짜가 다르고 && 현재 시간이 오전 6시 이후이면
+        if(!user.getPomodoroUpdatedDate().isEqual(nowDate) && nowTime.isAfter(sixAM)) {
+            System.out.println("todayPomodoroFetch");
+
+            // Pomodoro 엔티티 가져오기
+            Pomodoro pomodoro = pomodoroRepository.findByUserId(userId).orElseThrow(() -> new IllegalArgumentException("userId not found"));
+
+            // pomo 업데이트
+            pomodoro.updatePomo();
+
+            // User pomodoroUpdatedTime 업데이트
+            user.updatePomodoroUpdatedDate(nowDate);
+        }
+    }
+
+    /*** TOKEN VERIFY ***/
+    public Payload TokenVerify(String tokenDtoString) {
+        Payload payload = null;
+
+        GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new GsonFactory())
+                // Specify the CLIENT_ID of the app that accesses the backend:
+                .setAudience(Collections.singletonList(CLIENT_ID))
+                // Or, if multiple clients access the backend:
+                //.setAudience(Arrays.asList(CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3))
+                .build();
+
+        // (Receive idTokenString by HTTPS POST)
+        try {
+            GoogleIdToken idToken = verifier.verify(tokenDtoString);
+            if (idToken != null) {
+                payload = idToken.getPayload();
+            } else {
+                System.out.println("Invalid ID token.");
+            }
+        } catch (GeneralSecurityException e) {
+            System.out.println(e.getStackTrace());
+        } catch (IOException e) {
+            System.out.println(e.getStackTrace());
+        }
+
+        return payload;
+    }
+
+
     /*** LOGIN REST SERVICE ***/
     public UserLoginResponseDto googleTokenLogin(String tokenDtoString) {
         String returnString = "";
@@ -71,7 +156,7 @@ public class TaskService {
             // ...
             userRepository.findByUserId(userId)
                     .map(entity -> entity.update(name, pictureUrl))
-                    .orElse(userRepository.save(User.builder()
+                    .orElseGet(() -> userRepository.save(User.builder()
                             .userId(userId)
                             .name(name)
                             .email(email)
@@ -275,92 +360,5 @@ public class TaskService {
         }
 
         return pomodoroResponseDto;
-    }
-
-
-
-
-    /*** FETCH LOGICS ***/
-    public void todayFetch(String userId) {
-        LocalTime sixAM = LocalTime.of(6,0,0);
-
-        // User 엔티티 가져오기
-        User user = userRepository.findByUserId(userId).orElseThrow(() -> new IllegalArgumentException("userId not found"));
-
-        // 호출된 시점의 요일을 구해서
-        LocalDate nowDate = LocalDate.now();
-        LocalTime nowTime = LocalTime.now();
-
-        /*** TodoItem 갱신 ***/
-        // User에 저장된 todoUpdatedTime 와 날짜가 다르고 && 현재 시간이 오전 6시 이후이면
-        if(!user.getTodoUpdatedDate().isEqual(nowDate) && nowTime.isAfter(sixAM)) {
-            System.out.println("todayTodoItemFetch");
-
-            // 해당 userId를 가진 모든 todoItem 삭제
-            todoRepository.deleteAllByUserId(userId);
-
-            // 해당 요일에 해당하는 튜플들을 DaydoRepository에서 추출
-            int todayDay = nowDate.getDayOfWeek().getValue(); // Monday - Sunday : 1 ~ 7
-
-            List<Daydo> daydoList = daydoRepository.findAllByUserId(userId);
-            List<Daydo> todayDaydoList = daydoList.stream().filter(daydo -> daydo.getDay() == todayDay).collect(Collectors.toList());
-
-            // To-do 아이템으로 변환 후 TodoRepository에 저장
-            for (Daydo daydo : todayDaydoList) {
-                Todo todoEntity = Todo.builder()
-                        .userId(userId)
-                        .content(daydo.getContent())
-                        .isDone(false)
-                        .build();
-
-                todoRepository.save(todoEntity);
-            }
-
-            // User todoUpdatedTime 업데이트
-            user.updateTodoUpdatedDate(nowDate);
-        }
-
-        /*** Pomodoro 갱신 ***/
-        // User에 저장된 pomodoroUpdatedDate 와 날짜가 다르고 && 현재 시간이 오전 6시 이후이면
-        if(!user.getPomodoroUpdatedDate().isEqual(nowDate) && nowTime.isAfter(sixAM)) {
-            System.out.println("todayPomodoroFetch");
-
-            // Pomodoro 엔티티 가져오기
-            Pomodoro pomodoro = pomodoroRepository.findByUserId(userId).orElseThrow(() -> new IllegalArgumentException("userId not found"));
-
-            // pomo 업데이트
-            pomodoro.updatePomo();
-
-            // User pomodoroUpdatedTime 업데이트
-            user.updatePomodoroUpdatedDate(nowDate);
-        }
-    }
-
-    /*** TOKEN VERIFY ***/
-    public Payload TokenVerify(String tokenDtoString) {
-        Payload payload = null;
-
-        GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new GsonFactory())
-                // Specify the CLIENT_ID of the app that accesses the backend:
-                .setAudience(Collections.singletonList(CLIENT_ID))
-                // Or, if multiple clients access the backend:
-                //.setAudience(Arrays.asList(CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3))
-                .build();
-
-        // (Receive idTokenString by HTTPS POST)
-        try {
-            GoogleIdToken idToken = verifier.verify(tokenDtoString);
-            if (idToken != null) {
-                payload = idToken.getPayload();
-            } else {
-                System.out.println("Invalid ID token.");
-            }
-        } catch (GeneralSecurityException e) {
-            System.out.println(e.getStackTrace());
-        } catch (IOException e) {
-            System.out.println(e.getStackTrace());
-        }
-
-        return payload;
     }
 }
