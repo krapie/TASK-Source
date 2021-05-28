@@ -29,6 +29,15 @@ Task: Time/Task Management Service
     + Webpack, Babel
     
 # Updates
++ 2021-05-28
+    + 태스크
+        + 서버
+            + TASK-Server 리파지토리에 서버가 업데이트되어 깃허브에 push되면 자동으로 배포되도록 구축 완료 (Travis CI -> AWS S3 -> AWS CodeDeploy -> AWS EC2)
+
+
+<details><summary>지난 업데이트 보기</summary>
+<p>
+
 + 2021-05-27
     + 태스크(메인/대시보드) 서비스, 오늘 할 일 서비스, 뽀모도로 서비스
         + 서버
@@ -36,10 +45,6 @@ Task: Time/Task Management Service
         + 웹 클라이언트
             + 공통: 로고 아이콘을 누르면 대시보드, 포트폴리오 페이지로 이동하도록 수정
             + 대시보드: 오늘 할 일 서비스, 뽀모도로 서비스 아이콘 추가 및 일부 CSS 조정
-
-
-<details><summary>지난 업데이트 보기</summary>
-<p>
 
 + 2021-05-26
     + 오늘 할 일 서비스
