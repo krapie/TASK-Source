@@ -13,7 +13,7 @@ const TimerChange = () => {
     // FETCH - POST
     useEffect(() => {
         if(!fetched) {
-            fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com:8080/api/pomodoro', {
+            fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/pomodoro', {
                 method : 'POST',
                 headers : {
                     'content-type' : 'application/json'
@@ -50,7 +50,7 @@ const TimerChange = () => {
         };    
 
         // 서버
-        fetch(`http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com:8080/api/pomodoro/update`, {
+        fetch(`http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/pomodoro/update`, {
             method : 'PUT',
             headers : {
                 'content-type' : 'application/json'

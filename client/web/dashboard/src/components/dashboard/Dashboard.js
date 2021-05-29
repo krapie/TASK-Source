@@ -22,7 +22,7 @@ function Dashboard({ passUserInfo }) {
     useEffect(() => {
         if (!isPatched) {
             // GET 방식으로 서버 전송
-            fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com:8080/api/user', {
+            fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/user', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -34,32 +34,35 @@ function Dashboard({ passUserInfo }) {
                     console.log("유저 정보 가져옴: ", { newUserInfo });
                     setUserInfo(newUserInfo);
                     passUserInfo(newUserInfo);
-                });
-
-            fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com:8080/api/todos', {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(idToken)
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log("Todo Items: ", data);
-                    setTodoItems(data);
-                });
-
-            fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com:8080/api/pomodoro', {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(idToken)
-            })
-                .then((response) => response.json())
-                .then((info) => {
-                    console.log("서버로부터 Pomodoro 정보 가져옴: ", info.timerSet, info.pomo, info.maxPomo, info.totalPomo);
-                    setPomodoroItem(info);
+                    
+                    debugger
+                    // User가 Fetch되면 todo, pomodoro Item Fetch하기
+                    // Todo
+                    fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/todos', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(idToken)
+                    })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            console.log("Todo Items: ", data);
+                            setTodoItems(data);
+                        });
+                    // Pomodoro
+                    fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/pomodoro', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(idToken)
+                    })
+                        .then((response) => response.json())
+                        .then((info) => {
+                            console.log("서버로부터 Pomodoro 정보 가져옴: ", info.timerSet, info.pomo, info.maxPomo, info.totalPomo);
+                            setPomodoroItem(info);
+                        });
                 });
 
             setIsPatched(true);

@@ -59,7 +59,7 @@ function Login({ history }) {
        
         // 서버로 토큰 전송
         // 전송 완료 후 대시보드로 Re-route
-        fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com:8080/api/google/tokensignin', {
+        fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/google/tokensignin', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

@@ -27,7 +27,7 @@ const TodoListTemplate = ({ darkTheme }) => {
     useEffect(() => {
         //첫 로딩시에만 서버로부터 Todo 목록 가져오기
         if(!fetched) {
-            fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com:8080/api/todos', {
+            fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/todos', {
                 method : 'POST',
                 headers : {
                     'content-type' : 'application/json'
@@ -56,7 +56,7 @@ const TodoListTemplate = ({ darkTheme }) => {
         };
         
         // POST 방식으로 서버 전송
-        fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com:8080/api/todo', {
+        fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/todo', {
             method : 'POST',
             headers: {
                 'content-type' : 'application/json'
@@ -76,7 +76,7 @@ const TodoListTemplate = ({ darkTheme }) => {
         const updatedTodoItemList = todoItemList.filter(todoItem => todoItem.id !== id);
 
         //서버
-        fetch(`http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com:8080/api/todo/${id}`, {
+        fetch(`http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/todo/${id}`, {
             method: 'DELETE',
             headers : {
                 'content-type' : 'application/json'
@@ -99,7 +99,7 @@ const TodoListTemplate = ({ darkTheme }) => {
         selectedItem.content = e.target.value;
 
         // 서버
-        fetch(`http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com:8080/api/todo/${id}`, {
+        fetch(`http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/todo/${id}`, {
             method : 'PUT',
             headers : {
                 'content-type' : 'application/json'
@@ -129,7 +129,7 @@ const TodoListTemplate = ({ darkTheme }) => {
         selectedItem.isDone = !selectedItem.isDone;
 
         // 서버
-        fetch(`http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com:8080/api/todo/${id}`, {
+        fetch(`http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/todo/${id}`, {
             method : 'PUT',
             headers : {
                 'content-type' : 'application/json'

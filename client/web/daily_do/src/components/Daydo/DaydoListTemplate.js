@@ -36,7 +36,7 @@ const DayDoListTemplate = ({ darkTheme }) => {
     useEffect(() => {
         // 서버로부터 모든 요일의 Daydo 목록 가져오기
         if(!fetched) {
-            fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com:8080/api/daydos', {
+            fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/daydos', {
                 method : 'POST',
                 headers : {
                     'content-type' : 'application/json'
@@ -72,7 +72,7 @@ const DayDoListTemplate = ({ darkTheme }) => {
         };
         
         // POST 방식으로 서버 전송
-        fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com:8080/api/daydo', {
+        fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/daydo', {
             method : 'POST',
             headers: {
                 'content-type' : 'application/json'
@@ -95,7 +95,7 @@ const DayDoListTemplate = ({ darkTheme }) => {
         const updatedDaydoItemList = daydoItemList.filter(daydoItem => daydoItem.id !== id);
 
         //서버
-        fetch(`http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com:8080/api/daydo/${id}`, {
+        fetch(`http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/daydo/${id}`, {
             method: 'DELETE',
             headers : {
                 'content-type' : 'application/json'
@@ -121,7 +121,7 @@ const DayDoListTemplate = ({ darkTheme }) => {
         selectedItem.content = e.target.value;
 
         // 서버
-        fetch(`http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com:8080/api/daydo/${id}`, {
+        fetch(`http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/daydo/${id}`, {
             method : 'PUT',
             headers : {
                 'content-type' : 'application/json'

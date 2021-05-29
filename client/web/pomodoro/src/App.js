@@ -40,7 +40,7 @@ function App() {
   useEffect(() => {
       if (!isPatched) {
           // GET 방식으로 서버 전송
-          fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com:8080/api/user', {
+          fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/user', {
               method: 'POST',
               headers: {
                   'content-type': 'application/json'
