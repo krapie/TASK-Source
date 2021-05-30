@@ -38,8 +38,8 @@ function App() {
   const [isPatched, setIsPatched] = useState(false);
   const [userInfo, setUserInfo] = useState("");
 
-  const idTokenLocation = document.cookie.split('; ').find(row => row.startsWith('idToken'));
-  const idToken = idTokenLocation === undefined ? window.location.replace('http://komputer-task.ml') : idTokenLocation.split('=')[1];
+  const userIdLocation = document.cookie.split('; ').find(row => row.startsWith('userId'));
+  const userId = userIdLocation === undefined ? window.location.replace('http://komputer-task.ml') : userIdLocation.split('=')[1];
   
   // Read
   useEffect(() => {
@@ -50,7 +50,7 @@ function App() {
               headers: {
                   'content-type': 'application/json'
               },
-              body: JSON.stringify(idToken)
+              body: JSON.stringify(userId)
           })
               .then((response) => response.json())
               .then((newUserInfo) => {

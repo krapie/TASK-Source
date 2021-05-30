@@ -35,7 +35,6 @@ function Dashboard({ passUserInfo }) {
                     setUserInfo(newUserInfo);
                     passUserInfo(newUserInfo);
                     
-                    debugger
                     // User가 Fetch되면 todo, pomodoro Item Fetch하기
                     // Todo
                     fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/todos', {

@@ -8,8 +8,8 @@ const TodoListTemplate = ({ darkTheme }) => {
     const [ formInput, setFormInput ] = useState('');
     const [ fetched, setFetched ] = useState(false);
 
-    const idTokenLocation = document.cookie.split('; ').find(row => row.startsWith('idToken'));
-    const idToken = idTokenLocation === undefined ? window.location.replace('http://komputer-task.ml') : idTokenLocation.split('=')[1];
+    const userIdLocation = document.cookie.split('; ').find(row => row.startsWith('userId'));
+    const userId = userIdLocation === undefined ? window.location.replace('http://komputer-task.ml') : userIdLocation.split('=')[1];
     
     useEffect(() => { // 다크 모드 
         console.log()
@@ -32,7 +32,7 @@ const TodoListTemplate = ({ darkTheme }) => {
                 headers : {
                     'content-type' : 'application/json'
                 },
-                body : JSON.stringify(idToken)
+                body : JSON.stringify(userId)
             })
             .then((response) => response.json())
             .then((items) => {
@@ -50,7 +50,7 @@ const TodoListTemplate = ({ darkTheme }) => {
 
         // 서버로 보낼 객체 아이템 생성
         const newTodoItem = {
-            token: idToken,
+            userId: userId,
             content: formInput,
             isDone: false
         };

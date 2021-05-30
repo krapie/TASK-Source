@@ -7,8 +7,8 @@ const TimerChange = () => {
     const [ pomo, setPomo ] = useState(0);
     const [ fetched, setFetched ] = useState(false);
 
-    const idTokenLocation = document.cookie.split('; ').find(row => row.startsWith('idToken'));
-    const idToken = idTokenLocation === undefined ? window.location.replace('http://komputer-task.ml') : idTokenLocation.split('=')[1];
+    const userIdLocation = document.cookie.split('; ').find(row => row.startsWith('userId'));
+    const userId = userIdLocation === undefined ? window.location.replace('http://komputer-task.ml') : userIdLocation.split('=')[1];
 
     // FETCH - POST
     useEffect(() => {
@@ -18,7 +18,7 @@ const TimerChange = () => {
                 headers : {
                     'content-type' : 'application/json'
                 },
-                body : JSON.stringify(idToken)
+                body : JSON.stringify(userId)
             })
             .then((response) => response.json())
             .then((info) => {
@@ -44,7 +44,7 @@ const TimerChange = () => {
         seconds += minutes * 60;
         
         const pomodoroForm = {
-            tokenId : idToken,
+            userId : userId,
             timerSet : seconds,
             pomo : pomo
         };    

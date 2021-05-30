@@ -56,10 +56,10 @@ function Login({ history }) {
             body: JSON.stringify(id_token)
         })
         .then((response) => response.json())
-        .then((userId) => {
-            console.log('Login userId: ' + userId);
+        .then((userData) => {
+            console.log('Login userId: ' + userData.userId);
 
-            document.cookie = `userId=${userId}; max-age=${tokenExpireTime} path=/`;
+            document.cookie = `userId=${userData.userId}; max-age=${tokenExpireTime} path=/`;
         })
         .then(() => {
             history.push("/dashboard");

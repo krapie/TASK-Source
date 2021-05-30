@@ -13,8 +13,8 @@ const DayDoListTemplate = ({ darkTheme }) => {
     const [ formInput, setFormInput ] = useState('');
     const [ fetched, setFetched ] = useState(false);
     
-    const idTokenLocation = document.cookie.split('; ').find(row => row.startsWith('idToken'));
-    const idToken = idTokenLocation === undefined ? window.location.replace('http://komputer-task.ml') : idTokenLocation.split('=')[1];
+    const userIdLocation = document.cookie.split('; ').find(row => row.startsWith('userId'));
+    const userId = userIdLocation === undefined ? window.location.replace('http://komputer-task.ml') : userIdLocation.split('=')[1];
     
     // 설정의 요일별 할 일 목록의 세팅되어 있는 요일
     // 기준은 JAVA 요일 시스템을 따름 (그 날의 요일)
@@ -41,7 +41,7 @@ const DayDoListTemplate = ({ darkTheme }) => {
                 headers : {
                     'content-type' : 'application/json'
                 },
-                body : JSON.stringify(idToken)
+                body : JSON.stringify(userId)
             })
             .then((response) => response.json())
             .then((items) => {
@@ -66,7 +66,7 @@ const DayDoListTemplate = ({ darkTheme }) => {
 
         // 서버로 보낼 객체 아이템 생성
         const newDaydoItem = {
-            token: idToken,
+            userId: userId,
             content: formInput,
             day: day
         };
