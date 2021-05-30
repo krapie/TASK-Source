@@ -39,8 +39,8 @@ public class TaskApiController {
 
     // Get User Info
     @PostMapping("/api/user")
-    public ResponseEntity<?> fetchUserData(@RequestBody TextNode tokenDtoString) {
-        UserResponseDto responseDto = taskService.fetchUserInfo(tokenDtoString.asText());
+    public ResponseEntity<?> fetchUserData(@RequestBody TextNode userIdString) {
+        UserResponseDto responseDto = taskService.fetchUserInfo(userIdString.asText());
 
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
@@ -57,8 +57,8 @@ public class TaskApiController {
 
     // Read
     @PostMapping("/api/todos")
-    public ResponseEntity<?> fetchAllTodoItems(@RequestBody TextNode tokenDtoString) {
-        List<TodoResponseDto> responseDto = taskService.fetchAllTodoItems(tokenDtoString.asText());
+    public ResponseEntity<?> fetchAllTodoItems(@RequestBody TextNode userIdString) {
+        List<TodoResponseDto> responseDto = taskService.fetchAllTodoItems(userIdString.asText());
 
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
@@ -87,8 +87,8 @@ public class TaskApiController {
 
     // Read
     @PostMapping("/api/daydos")
-    public ResponseEntity<?> fetchAllDaydoItems(@RequestBody TextNode tokenDtoString) {
-        List<DaydoResponseDto> responseDto = taskService.fetchAllDaydoItems(tokenDtoString.asText());
+    public ResponseEntity<?> fetchAllDaydoItems(@RequestBody TextNode userIdString) {
+        List<DaydoResponseDto> responseDto = taskService.fetchAllDaydoItems(userIdString.asText());
 
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
@@ -110,8 +110,8 @@ public class TaskApiController {
 
      // Read
      @PostMapping("/api/pomodoro")
-     public ResponseEntity<?> fetchPomodoroItem(@RequestBody TextNode tokenDtoString) {
-         PomodoroResponseDto responseDto = taskService.fetchPomodoroItem(tokenDtoString.asText());
+     public ResponseEntity<?> fetchPomodoroItem(@RequestBody TextNode userIdString) {
+         PomodoroResponseDto responseDto = taskService.fetchPomodoroItem(userIdString.asText());
 
          return ResponseEntity.status(HttpStatus.OK).body(responseDto);
      }

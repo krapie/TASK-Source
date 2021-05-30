@@ -55,7 +55,7 @@ public class Pomodoro {
         this.pomo = pomo;
     }
 
-    public void updatePomo() {
+    public void updateMaxPomo() {
         if(this.pomo > this.maxPomo) {
             this.maxPomo = this.pomo;
         }

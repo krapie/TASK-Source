@@ -62,8 +62,6 @@ public class TaskService {
         /*** TodoItem 갱신 ***/
         // User에 저장된 todoUpdatedTime 와 날짜가 다르고 && 현재 시간이 오전 6시 이후이면
         if(!user.getTodoUpdatedDate().isEqual(nowDate) && nowTime.isAfter(sixAM)) {
-            System.out.println("todayTodoItemFetch");
-
             // 해당 userId를 가진 모든 todoItem 삭제
             todoRepository.deleteAllByUserId(userId);
 
@@ -91,13 +89,11 @@ public class TaskService {
         /*** Pomodoro 갱신 ***/
         // User에 저장된 pomodoroUpdatedDate 와 날짜가 다르고 && 현재 시간이 오전 6시 이후이면
         if(!user.getPomodoroUpdatedDate().isEqual(nowDate) && nowTime.isAfter(sixAM)) {
-            System.out.println("todayPomodoroFetch");
-
             // Pomodoro 엔티티 가져오기
             Pomodoro pomodoro = pomodoroRepository.findByUserId(userId).orElseThrow(() -> new IllegalArgumentException("userId not found"));
 
             // pomo 업데이트
-            pomodoro.updatePomo();
+            pomodoro.updateMaxPomo();
 
             // User pomodoroUpdatedTime 업데이트
             user.updatePomodoroUpdatedDate(nowDate);
@@ -134,6 +130,7 @@ public class TaskService {
 
 
     /*** LOGIN REST SERVICE ***/
+    @Transactional
     public UserLoginResponseDto googleTokenLogin(String tokenDtoString) {
         String returnString = "";
         Payload payload = TokenVerify(tokenDtoString);
@@ -166,7 +163,7 @@ public class TaskService {
             pomodoroRepository.findByUserId(userId)
                     .orElseGet(() -> pomodoroRepository.save(new Pomodoro(userId)));
 
-            returnString = name;
+            returnString = userId;
         }
         else {
             returnString = "invalid token";
@@ -176,24 +173,12 @@ public class TaskService {
     }
 
     @Transactional
-    public UserResponseDto fetchUserInfo(String tokenDtoString) {
-        Payload payload = TokenVerify(tokenDtoString);
-        UserResponseDto userResponseDto = null;
+    public UserResponseDto fetchUserInfo(String userId) {
+        // 오늘의 패치 진행
+        todayFetch(userId);
 
-        if(payload != null) {
-            // Print user identifier
-            String userId = payload.getSubject();
-            System.out.println("User ID: " + userId + "=> User Info Fetch");
-
-            // 오늘의 패치 진행
-            todayFetch(userId);
-
-            User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("id not found"));
-            userResponseDto = new UserResponseDto(user);
-        }
-        else {
-
-        }
+        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("id not found"));
+        UserResponseDto userResponseDto = new UserResponseDto(user);
 
         return userResponseDto;
     }
@@ -202,41 +187,18 @@ public class TaskService {
     /*** TO DO REST SERVICE ***/
     @Transactional
     public TodoResponseDto saveTodoItem(TodoSaveRequestDto requestDto) {
-        Payload payload = TokenVerify(requestDto.getToken());
-        Todo createdTodo = new Todo();
-
-        if(payload != null) {
-            // Print user identifier
-            String userId = payload.getSubject();
-            System.out.println("User ID: " + userId + "=> Todo Item Save");
-
-            createdTodo = todoRepository.save(requestDto.toEntity(userId));
-        }
-        else {
-            System.out.println("invalid token");
-        }
+        Todo createdTodo = todoRepository.save(requestDto.toEntity());
 
         return new TodoResponseDto(createdTodo);
     }
 
     @Transactional
-    public List<TodoResponseDto> fetchAllTodoItems(String tokenDtoString) {
-        Payload payload = TokenVerify(tokenDtoString);
+    public List<TodoResponseDto> fetchAllTodoItems(String userId) {
         List<TodoResponseDto> responseDtoList = new ArrayList<>();
+        List<Todo> todoEntities = todoRepository.findAllByUserId(userId);
 
-        if(payload != null) {
-            // Print user identifier
-            String userId = payload.getSubject();
-            System.out.println("User ID: " + userId + "=> Todo Item List Fetch");
-
-            List<Todo> todoEntities = todoRepository.findAllByUserId(userId);
-
-            for(Todo todoEntity : todoEntities) {
-                responseDtoList.add(new TodoResponseDto(todoEntity));
-            }
-        }
-        else {
-            System.out.println("invalid token");
+        for(Todo todoEntity : todoEntities) {
+            responseDtoList.add(new TodoResponseDto(todoEntity));
         }
 
         return responseDtoList;
@@ -262,41 +224,18 @@ public class TaskService {
     /*** DAY DO REST SERVICE ***/
     @Transactional
     public DaydoResponseDto saveDaydoItem(DaydoSaveRequestDto requestDto) {
-        Payload payload = TokenVerify(requestDto.getToken());
-        Daydo createdDaydo = new Daydo();
-
-        if(payload != null) {
-            // Print user identifier
-            String userId = payload.getSubject();
-            System.out.println("User ID: " + userId + "=> Daydo Item Save");
-
-            createdDaydo = daydoRepository.save(requestDto.toEntity(userId));
-        }
-        else {
-            System.out.println("invalid token");
-        }
+        Daydo createdDaydo = daydoRepository.save(requestDto.toEntity());
 
         return new DaydoResponseDto(createdDaydo);
     }
 
     @Transactional
-    public List<DaydoResponseDto> fetchAllDaydoItems(String tokenDtoString) {
-        Payload payload = TokenVerify(tokenDtoString);
+    public List<DaydoResponseDto> fetchAllDaydoItems(String userId) {
         List<DaydoResponseDto> responseDtoList = new ArrayList<>();
+        List<Daydo> daydoEntities = daydoRepository.findAllByUserId(userId);
 
-        if(payload != null) {
-            // Print user identifier
-            String userId = payload.getSubject();
-            System.out.println("User ID: " + userId + "=> Daydo Item List Fetch");
-
-            List<Daydo> daydoEntities = daydoRepository.findAllByUserId(userId);
-
-            for(Daydo daydoEntity : daydoEntities) {
-                responseDtoList.add(new DaydoResponseDto(daydoEntity));
-            }
-        }
-        else {
-            System.out.println("invalid token");
+        for(Daydo daydoEntity : daydoEntities) {
+            responseDtoList.add(new DaydoResponseDto(daydoEntity));
         }
 
         return responseDtoList;
@@ -321,44 +260,17 @@ public class TaskService {
 
     /*** Pomodoro Service ***/
     @Transactional
-    public PomodoroResponseDto fetchPomodoroItem(String tokenDtoString) {
-        Payload payload = TokenVerify(tokenDtoString);
-        PomodoroResponseDto pomodoroResponseDto = null;
+    public PomodoroResponseDto fetchPomodoroItem(String userId) {
+        Pomodoro pomodoro = pomodoroRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("id not found"));
 
-        if(payload != null) {
-            // Print user identifier
-            String userId = payload.getSubject();
-            System.out.println("User ID: " + userId + "=> Pomodoro Info Fetch");
-
-            Pomodoro pomodoro = pomodoroRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("id not found"));
-            pomodoroResponseDto = new PomodoroResponseDto(pomodoro);
-        }
-        else {
-
-        }
-
-        return pomodoroResponseDto;
+        return new PomodoroResponseDto(pomodoro);
     }
 
     @Transactional
     public PomodoroResponseDto updatePomodoroItem(PomodoroUpdateRequestDto requestDto) {
-        Payload payload = TokenVerify(requestDto.getTokenId());
-        PomodoroResponseDto pomodoroResponseDto = null;
+        Pomodoro pomodoro = pomodoroRepository.findById(requestDto.getUserId()).orElseThrow(() -> new IllegalArgumentException("id not found"));
+        pomodoro.update(requestDto.getTimerSet(),requestDto.getPomo());
 
-        if(payload != null) {
-            // Print user identifier
-            String userId = payload.getSubject();
-            System.out.println("User ID: " + userId + "=> Pomodoro Info Update");
-
-            Pomodoro pomodoro = pomodoroRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("id not found"));
-            pomodoro.update(requestDto.getTimerSet(),requestDto.getPomo());
-
-            pomodoroResponseDto = new PomodoroResponseDto(pomodoro);
-        }
-        else {
-
-        }
-
-        return pomodoroResponseDto;
+        return new PomodoroResponseDto(pomodoro);
     }
 }

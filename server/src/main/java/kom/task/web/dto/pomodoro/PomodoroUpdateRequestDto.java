@@ -6,12 +6,12 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class PomodoroUpdateRequestDto {
-    private String tokenId;
+    private String userId;
     private Integer timerSet;
     private Integer pomo;
 
-    PomodoroUpdateRequestDto(String tokenId, Integer timerSet, Integer pomo) {
-        this.tokenId = tokenId;
+    PomodoroUpdateRequestDto(String userId, Integer timerSet, Integer pomo) {
+        this.userId = userId;
         this.timerSet = timerSet;
         this.pomo = pomo;
     }

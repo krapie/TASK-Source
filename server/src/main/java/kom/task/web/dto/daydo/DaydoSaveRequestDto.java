@@ -9,18 +9,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DaydoSaveRequestDto {
 
-    private String token;
+    private String userId;
     private Integer day;
     private String content;
 
     @Builder
-    public DaydoSaveRequestDto(String token, Integer day, String content) {
-        this.token = token;
+    public DaydoSaveRequestDto(String userId, Integer day, String content) {
+        this.userId = userId;
         this.day = day;
         this.content = content;
     }
 
-    public Daydo toEntity(String userId) {
+    public Daydo toEntity() {
         return Daydo.builder()
                 .userId(userId)
                 .day(day)

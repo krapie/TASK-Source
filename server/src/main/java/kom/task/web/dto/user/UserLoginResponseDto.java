@@ -6,9 +6,9 @@ import lombok.Getter;
 @Getter
 public class UserLoginResponseDto {
 
-    private String name;
+    private String userId;
 
-    public UserLoginResponseDto(String name) {
-        this.name = name;
+    public UserLoginResponseDto(String userId) {
+        this.userId = userId;
     }
 }

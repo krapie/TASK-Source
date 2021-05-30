@@ -43,22 +43,11 @@ function Login({ history }) {
 
     function onSuccess(googleUser) {
         const id_token = googleUser.getAuthResponse().id_token;
-        const tokenExpireTime = 60*60; //1시간
+        const tokenExpireTime = 24*60*60; //24시간
 
-        localStorage.setItem("idToken", id_token);
-        document.cookie = `idToken=${id_token}; max-age=${tokenExpireTime} path=/`;
-        /* 
-        const profile = googleUser.getBasicProfile();
-        console.log(profile);
-        console.log(`Token: ${googleUser.getAuthResponse().id_token}`);
-        console.log(`ID: ${profile.getId()}`);
-        console.log(`Name: ${profile.getName()}`);
-        console.log(`Image URL: ${profile.getImageUrl()}`);
-        console.log(`Email: ${profile.getEmail()}`);
-        */
-       
         // 서버로 토큰 전송
-        // 전송 완료 후 대시보드로 Re-route
+        // 전송 완료 후 받은 userId 쿠기에 저장
+        // 이후 대시보드로 Re-route
         fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/google/tokensignin', {
             method: 'POST',
             headers: {
@@ -66,11 +55,15 @@ function Login({ history }) {
             },
             body: JSON.stringify(id_token)
         })
-            .then((response) => response.json())
-            .then((userName) => {
-                console.log('Signed in as: ' + userName);
-                history.push("/dashboard");
-            });
+        .then((response) => response.json())
+        .then((userId) => {
+            console.log('Login userId: ' + userId);
+
+            document.cookie = `userId=${userId}; max-age=${tokenExpireTime} path=/`;
+        })
+        .then(() => {
+            history.push("/dashboard");
+        })
     }
 
     function onFailure(error) {
