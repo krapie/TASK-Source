@@ -43,7 +43,10 @@ function Login({ history }) {
 
     function onSuccess(googleUser) {
         const id_token = googleUser.getAuthResponse().id_token;
-        const tokenExpireTime = 24*60*60; //24시간
+        const tokenExpireTime = 24*60*60*1000; //24시간
+
+        let date = new Date();
+        date.setTime(date.getTime() + tokenExpireTime);
 
         // 서버로 토큰 전송
         // 전송 완료 후 받은 userId 쿠기에 저장
@@ -59,7 +62,7 @@ function Login({ history }) {
         .then((userData) => {
             console.log('Login userId: ' + userData.userId);
 
-            document.cookie = `userId=${userData.userId}; max-age=${tokenExpireTime} path=/`;
+            document.cookie = `userId=${userData.userId}; expires=${date.toUTCString()} path=/`;
         })
         .then(() => {
             history.push("/dashboard");

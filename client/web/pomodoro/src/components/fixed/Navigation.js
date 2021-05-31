@@ -2,6 +2,16 @@ import { Link } from 'react-router-dom';
 import './Navigation.css';
 
 const Navigation = ({ userInfo }) => {
+    function logout() {
+        document.cookie = `userId= ; expires=Thu, 01 Jan 1999 00:00:10 GMT;`;
+        window.location.replace('http://komputer-task.ml');
+    }
+
+    function handleToggle() {
+        let dropdown = document.querySelector('.user-info-dropdown');
+        dropdown.classList.toggle('show');
+    }
+
     return (
         <nav className="navigation">
             <ul className="navigation-list">
@@ -9,9 +19,14 @@ const Navigation = ({ userInfo }) => {
                 <li><Link to="/">뽀모</Link></li>
                 <li><Link to="/preference">설정</Link></li>
                 <li>
-                    <div className="navigation-user-info">
-                        <img className="navigation-user_picture" src={userInfo.pictureUrl} alt={userInfo.name}></img>
-                        <span className="navigation-user-name">{userInfo.name}</span>
+                    <div className="dropdown">
+                        <div className="navigation-user-info" onClick={handleToggle}>
+                            <img className="navigation-user_picture" src={userInfo.pictureUrl} alt={userInfo.name}></img>
+                            <span className="navigation-user-name">{userInfo.name}</span>
+                        </div>
+                        <div className="user-info-dropdown">
+                            <p className="logout" onClick={logout}>로그아웃</p>
+                        </div>
                     </div>
                 </li>
             </ul>

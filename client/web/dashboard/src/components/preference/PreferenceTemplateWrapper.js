@@ -18,7 +18,7 @@ function PreferenceTemplateWrapper({ darkTheme, userInfo, handleThemeToggle }) {
     return (
         <div className="navigation-preference-wrapper wrapper">
             <Navigation userInfo={userInfo}></Navigation>
-            <h1 style={{ fontSize : '3rem', marginBottom : '10%'}}>설정</h1>
+            <h1 style={{ fontSize : '3rem', marginBottom : '5%'}}>설정</h1>
             <div className="preferences">
                 <Preference darkTheme={darkTheme} onToggle={handleThemeToggle}></Preference>
             </div>

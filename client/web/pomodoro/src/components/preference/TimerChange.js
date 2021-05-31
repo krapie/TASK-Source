@@ -75,7 +75,7 @@ const TimerChange = () => {
     }
 
     return (
-        <div className="preference_component">
+        <div className="preference_component wrapper">
             <h3>타이머 설정</h3>
             <div className="timer_set_form">
                 <input className="timer_set_text" type="text" value={formInput} onChange={handleChange} onKeyPress={handleKeyPress} placeholder="분 : 초 "></input>

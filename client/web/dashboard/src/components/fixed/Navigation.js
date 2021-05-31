@@ -2,13 +2,9 @@ import { Link } from 'react-router-dom';
 import './Navigation.css';
 
 const Navigation = ({ userInfo }) => {
-
-    function signOut() {
-        var auth2 = window.gapi.auth2.getAuthInstance();
-        auth2.signOut().then(function () {
-            console.log('User signed out.');
-            window.location.replace('http://komputer-task.ml');
-        });
+    function logout() {
+        document.cookie = `userId= ; expires=Thu, 01 Jan 1999 00:00:10 GMT;`;
+        window.location.replace('http://komputer-task.ml');
     }
 
     function handleToggle() {
@@ -29,7 +25,7 @@ const Navigation = ({ userInfo }) => {
                             <span className="navigation-user-name">{userInfo.name}</span>
                         </div>
                         <div className="user-info-dropdown">
-                            <p className="logout" onClick={signOut}>로그아웃</p>
+                            <p className="logout" onClick={logout}>로그아웃</p>
                         </div>
                     </div>
                 </li>

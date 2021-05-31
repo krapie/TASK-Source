@@ -2,7 +2,7 @@ import './DarkMode.css';
 
 const DarkMode = ({ darkTheme, onToggle }) => {
     return (
-        <div className="preference_component">
+        <div className="preference_component wrapper">
             <h3>기본 설정</h3>
             <div className="theme_toggle">
                 <span className="text">다크 모드</span>

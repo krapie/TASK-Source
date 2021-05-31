@@ -13,6 +13,10 @@
     margin: auto;
 }
 
+.dashboard .dashboard_refresh:hover {
+    cursor: pointer;
+}
+
 .dashboard .dashboard_content {
     display: grid;
     grid-template-columns: 1fr 1fr;

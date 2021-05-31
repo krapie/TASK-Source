@@ -29,16 +29,22 @@ Task: Time/Task Management Service
     + Webpack, Babel
     
 # Updates
++ 2021-05-31 - Version 1.0 Release
+    + 태스크
+        + 웹 클라이언트
+            + 공통: 네비게이션 바의 사용자 아이콘을 클릭하면 로그아웃 할 수 있는 버튼 추가 및 기존 로그아웃 로직 변경
+            + 대시보드 서비스: 사용자 프로필 옆에 새로운 정보를 가져오는 Refresh 버튼 추가
+            + 뽀모도로: 설정의 일부 CSS 변경
+
+<details><summary>지난 업데이트 보기</summary>
+<p>
+
 + 2021-05-30
     + 태스크
         + 서버
             + 서버 API가 더이상 구글 발급 토큰이 아닌, 자체 사용자ID를 통해 API 통신하도록 변경 (REST 컨트롤러, 서비스 등 대부분의 로직 변경) 
         + 웹 클라이언트
             + 공통: 사용자ID를 쿠키로 계속 로그인이 유지되도록 변경 (1시간 뒤 로그아웃되어 뽀모도로의 뽀모가 업데이트가 되지 않는 문제 등을 해결)
-
-
-<details><summary>지난 업데이트 보기</summary>
-<p>
 
 + 2021-05-29
     + 태스크
@@ -254,7 +260,6 @@ Task: Time/Task Management Service
 </details>
 
 
-
 # TO-DO
 + 태스크(메인/대시보드) 서비스
     + 서버
@@ -273,10 +278,11 @@ Task: Time/Task Management Service
     + 웹 클라이언트
         + 컴포넌트 리팩토링
 
+
 # Issues
 + ~~CORS Policy로 API 서버와 통신을 제대로 하지 못하는 문제~~
     + Cross Origin 3000 -> 8080
-+ Pomodoro 서비스: 탭 전환 시 간헐적으로 메모리 누수와 함께 제대로 cleanUp이 되지 않는 문제
-+ React Warnings: useEffect dependencies에 추가 여부에 관한 문제
 + ~~MariaDB Lock 관련 문제: Lock wait timeout exceed, pessimistic lock...~~
     + Transaction 처리 문제, 서비스 단에서 DB에 CRUD를 하는 서비스 각각에 @Transactional 어노테이션 추가로 Transaction Locking 해결
++ Pomodoro 서비스: 탭 전환 시 간헐적으로 메모리 누수와 함께 제대로 cleanUp이 되지 않는 문제
++ React Warnings: useEffect dependencies에 추가 여부에 관한 문제

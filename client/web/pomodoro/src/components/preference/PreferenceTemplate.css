@@ -1,7 +1,6 @@
 .preference_template {
-    width: 70%;
     margin: auto;
-    margin-top: 15%;
+    margin-top: 10%;
 }
 
 .preference_title {
@@ -15,10 +14,31 @@
 
 .preference_template li {
     margin-top: 5%;
-    margin-bottom: 15%;
+    margin-bottom: 10%;
 }
 
 .preference_component {
-    width: 70%;
+    width: 600px;
     margin: auto;
+}
+
+/*Responsive*/
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .preference_template {
+        margin-top: 15%;
+    }
+
+    .preference_component {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .preference_template {
+        margin-top: 25%;
+    }
+
+    .preference_component {
+        width: 70%;
+    }
 }
