@@ -93,6 +93,7 @@ const DayDoListTemplate = ({ darkTheme }) => {
     function handleRemove(id) {
         // 서버와 클라이언트 따로따로 처리됨
         const updatedDaydoItemList = daydoItemList.filter(daydoItem => daydoItem.id !== id);
+        const updatedAllDaydoItemList = allDaydoItemList.filter(daydoItem => daydoItem.id !== id);
 
         //서버
         fetch(`http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/daydo/${id}`, {
@@ -108,9 +109,7 @@ const DayDoListTemplate = ({ darkTheme }) => {
 
         // 클라이언트
         setDaydoItemList(updatedDaydoItemList);
-
-        // 서버에서 다시 목록 가져오기
-        setFetched(false);
+        setAllDaydoItemList(updatedAllDaydoItemList);
     }
   
     // UPDATE (content) - PUT
@@ -135,15 +134,18 @@ const DayDoListTemplate = ({ darkTheme }) => {
 
         // 클라이언트
         const updatedDaydoItemList = [...daydoItemList];
-
         updatedDaydoItemList[index] = {
             ...selectedItem,
         };
 
-        setDaydoItemList(updatedDaydoItemList);
+        const allDayItemListIndex = allDaydoItemList.findIndex(daydoItem => daydoItem.id === id);
+        const updatedAllDaydoItemList = [...allDaydoItemList];
+        updatedAllDaydoItemList[allDayItemListIndex] = {
+            ...selectedItem,
+        };
 
-        // 서버에서 다시 목록 가져오기
-        setFetched(false);
+        setDaydoItemList(updatedDaydoItemList);
+        setAllDaydoItemList(updatedAllDaydoItemList);
     }
 
     function handleFormInputChange(e) {
