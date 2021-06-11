@@ -4,7 +4,7 @@ import './Navigation.css';
 const Navigation = ({ userInfo }) => {
     function logout() {
         document.cookie = `userId= ; expires=Thu, 01 Jan 1999 00:00:10 GMT;`;
-        window.location.replace('http://komputer-task.ml');
+        window.location.replace('http://tasko.today');
     }
 
     function handleToggle() {

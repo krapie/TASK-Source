@@ -29,15 +29,19 @@ Task: Time/Task Management Service
     + Webpack, Babel
     
 # Updates
++ 2021-06-11 - Website Update
+    + 태스크
+        + 공통: 태스크 홈페이지 주소 변경 (http://tasko.today)
+
+<details><summary>지난 업데이트 보기</summary>
+<p>
+
 + 2021-05-31 - Version 1.0 Release
     + 태스크
         + 웹 클라이언트
             + 공통: 네비게이션 바의 사용자 아이콘을 클릭하면 로그아웃 할 수 있는 버튼 추가 및 기존 로그아웃 로직 변경
             + 대시보드 서비스: 사용자 프로필 옆에 새로운 정보를 가져오는 Refresh 버튼 추가
             + 뽀모도로: 설정의 일부 CSS 변경
-
-<details><summary>지난 업데이트 보기</summary>
-<p>
 
 + 2021-05-30
     + 태스크

@@ -4,7 +4,7 @@ import './Navigation.css';
 const Navigation = ({ userInfo }) => {
     function logout() {
         document.cookie = `userId= ; expires=Thu, 01 Jan 1999 00:00:10 GMT;`;
-        window.location.replace('http://komputer-task.ml');
+        window.location.replace('http://tasko.today');
     }
 
     function handleToggle() {
@@ -15,7 +15,7 @@ const Navigation = ({ userInfo }) => {
     return (
         <nav className="navigation">
             <ul className="navigation-list">
-                <li id="logo"><a href="http://komputer-task.ml/#/dashboard" target="_blank" rel="noreferrer">&pi;</a></li>
+                <li id="logo"><a href="http://tasko.today/#/dashboard" target="_blank" rel="noreferrer">&pi;</a></li>
                 <li><Link to="/">할일</Link></li>
                 <li><Link to="/preference">설정</Link></li>
                 <li>

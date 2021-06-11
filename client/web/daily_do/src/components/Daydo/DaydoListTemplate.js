@@ -14,7 +14,7 @@ const DayDoListTemplate = ({ darkTheme }) => {
     const [ fetched, setFetched ] = useState(false);
     
     const userIdLocation = document.cookie.split('; ').find(row => row.startsWith('userId'));
-    const userId = userIdLocation === undefined ? window.location.replace('http://komputer-task.ml') : userIdLocation.split('=')[1];
+    const userId = userIdLocation === undefined ? window.location.replace('http://tasko.today') : userIdLocation.split('=')[1];
     
     // 설정의 요일별 할 일 목록의 세팅되어 있는 요일
     // 기준은 JAVA 요일 시스템을 따름 (그 날의 요일)

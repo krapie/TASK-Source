@@ -23,7 +23,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@CrossOrigin(origins = {"http://komputer-task.ml","http://localhost:3000","http://localhost:3001","http://localhost:3002"})
+@CrossOrigin(origins = {"http://tasko.today","http://localhost:3000","http://localhost:3001","http://localhost:3002"})
 public class TaskApiController {
 
     private final TaskService taskService;

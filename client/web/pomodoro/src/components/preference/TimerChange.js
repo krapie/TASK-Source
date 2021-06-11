@@ -8,7 +8,7 @@ const TimerChange = () => {
     const [ fetched, setFetched ] = useState(false);
 
     const userIdLocation = document.cookie.split('; ').find(row => row.startsWith('userId'));
-    const userId = userIdLocation === undefined ? window.location.replace('http://komputer-task.ml') : userIdLocation.split('=')[1];
+    const userId = userIdLocation === undefined ? window.location.replace('http://tasko.today') : userIdLocation.split('=')[1];
 
     // FETCH - POST
     useEffect(() => {
