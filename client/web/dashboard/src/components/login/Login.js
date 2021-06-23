@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import './Login.css';
+import { serverURL } from '../../config'
 
 function Login({ history }) {
     const googleLoginBtn = useRef(null);
@@ -51,7 +52,7 @@ function Login({ history }) {
         // 서버로 토큰 전송
         // 전송 완료 후 받은 userId 쿠기에 저장
         // 이후 대시보드로 Re-route
-        fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/google/tokensignin', {
+        fetch(`${serverURL}/api/google/tokensignin`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

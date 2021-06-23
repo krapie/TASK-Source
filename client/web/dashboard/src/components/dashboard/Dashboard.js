@@ -1,5 +1,6 @@
 import './Dashboard.css';
 import { useEffect, useState } from "react";
+import { homepageURL, serverURL } from '../../config'
 
 function Dashboard({ passUserInfo }) {
     const [todoItems, setTodoItems] = useState([]);
@@ -16,13 +17,13 @@ function Dashboard({ passUserInfo }) {
     const [pomoTimer, setPomoTimer] = useState({});
 
     const userIdLocation = document.cookie.split('; ').find(row => row.startsWith('userId'));
-    const userId = userIdLocation === undefined ? window.location.replace('http://tasko.today') : userIdLocation.split('=')[1];
+    const userId = userIdLocation === undefined ? window.location.replace(homepageURL) : userIdLocation.split('=')[1];
 
     // Read
     useEffect(() => {
         if (!isPatched) {
             // GET 방식으로 서버 전송
-            fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/user', {
+            fetch(`${serverURL}/api/user`, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -51,7 +52,7 @@ function Dashboard({ passUserInfo }) {
 
     function refreshDashboardItems() {
         // Todo
-        fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/todos', {
+        fetch(`${serverURL}/api/todos`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -64,7 +65,7 @@ function Dashboard({ passUserInfo }) {
                 setTodoItems(data);
             });
         // Pomodoro
-        fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/pomodoro', {
+        fetch(`${serverURL}/api/pomodoro`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

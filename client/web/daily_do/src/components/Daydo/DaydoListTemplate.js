@@ -3,6 +3,7 @@ import DaydoItemList from './DaydoItemList'
 import DaydoForm from './DaydoForm'
 import './DaydoListTemplate.css'
 import DaydoSlider from './DaydoSlider'
+import { homepageURL, serverURL } from '../../config'
 
 const DayDoListTemplate = ({ darkTheme }) => {
     const today = new Date();
@@ -14,7 +15,7 @@ const DayDoListTemplate = ({ darkTheme }) => {
     const [ fetched, setFetched ] = useState(false);
     
     const userIdLocation = document.cookie.split('; ').find(row => row.startsWith('userId'));
-    const userId = userIdLocation === undefined ? window.location.replace('http://tasko.today') : userIdLocation.split('=')[1];
+    const userId = userIdLocation === undefined ? window.location.replace(homepageURL) : userIdLocation.split('=')[1];
     
     // 설정의 요일별 할 일 목록의 세팅되어 있는 요일
     // 기준은 JAVA 요일 시스템을 따름 (그 날의 요일)
@@ -36,7 +37,7 @@ const DayDoListTemplate = ({ darkTheme }) => {
     useEffect(() => {
         // 서버로부터 모든 요일의 Daydo 목록 가져오기
         if(!fetched) {
-            fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/daydos', {
+            fetch(`${serverURL}/api/daydos`, {
                 method : 'POST',
                 headers : {
                     'content-type' : 'application/json'
@@ -72,7 +73,7 @@ const DayDoListTemplate = ({ darkTheme }) => {
         };
         
         // POST 방식으로 서버 전송
-        fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/daydo', {
+        fetch(`${serverURL}/api/daydo`, {
             method : 'POST',
             headers: {
                 'content-type' : 'application/json'
@@ -96,7 +97,7 @@ const DayDoListTemplate = ({ darkTheme }) => {
         const updatedAllDaydoItemList = allDaydoItemList.filter(daydoItem => daydoItem.id !== id);
 
         //서버
-        fetch(`http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/daydo/${id}`, {
+        fetch(`${serverURL}/api/daydo/${id}`, {
             method: 'DELETE',
             headers : {
                 'content-type' : 'application/json'
@@ -120,7 +121,7 @@ const DayDoListTemplate = ({ darkTheme }) => {
         selectedItem.content = e.target.value;
 
         // 서버
-        fetch(`http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/daydo/${id}`, {
+        fetch(`${serverURL}/api/daydo/${id}`, {
             method : 'PUT',
             headers : {
                 'content-type' : 'application/json'

@@ -1,6 +1,7 @@
 import './TimerTemplate.css';
 import Timer from './Timer.js';
 import { useState, useEffect } from 'react';
+import { homepageURL, serverURL } from '../../config';
 
 const TimerTemplate = () => {
     const [ pomo, setPomo ] = useState(0);
@@ -8,7 +9,7 @@ const TimerTemplate = () => {
     const [ fetched, setFetched ] = useState(false);
 
     const userIdLocation = document.cookie.split('; ').find(row => row.startsWith('userId'));
-    const userId = userIdLocation === undefined ? window.location.replace('http://tasko.today') : userIdLocation.split('=')[1];
+    const userId = userIdLocation === undefined ? window.location.replace(homepageURL) : userIdLocation.split('=')[1];
 
     function handlePomoUpdate() {
         const pomodoroForm = {
@@ -18,7 +19,7 @@ const TimerTemplate = () => {
         };    
 
         // 서버
-        fetch(`http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/pomodoro/update`, {
+        fetch(`${serverURL}/api/pomodoro/update`, {
             method : 'PUT',
             headers : {
                 'content-type' : 'application/json'
@@ -35,7 +36,7 @@ const TimerTemplate = () => {
     // FETCH - POST
     useEffect(() => {
         if(!fetched) {
-            fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/pomodoro', {
+            fetch(`${serverURL}/api/pomodoro`, {
                 method : 'POST',
                 headers : {
                     'content-type' : 'application/json'

@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 import './Navigation.css';
+import { homepageURL } from '../../config'
 
 const Navigation = ({ userInfo }) => {
     function logout() {
         document.cookie = `userId= ; expires=Thu, 01 Jan 1999 00:00:10 GMT;`;
-        window.location.replace('http://tasko.today');
+        window.location.replace(homepageURL);
     }
 
     function handleToggle() {

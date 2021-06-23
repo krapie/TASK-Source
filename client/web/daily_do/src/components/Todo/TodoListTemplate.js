@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import TodoForm from './TodoForm';
 import TodoItemList from './TodoItemList';
 import './TodoListTemplate.css';
+import { homepageURL, serverURL } from '../../config'
 
 const TodoListTemplate = ({ darkTheme }) => {
     const [ todoItemList, setTodoItemList ] = useState([]);
@@ -9,7 +10,7 @@ const TodoListTemplate = ({ darkTheme }) => {
     const [ fetched, setFetched ] = useState(false);
 
     const userIdLocation = document.cookie.split('; ').find(row => row.startsWith('userId'));
-    const userId = userIdLocation === undefined ? window.location.replace('http://tasko.today') : userIdLocation.split('=')[1];
+    const userId = userIdLocation === undefined ? window.location.replace(homepageURL) : userIdLocation.split('=')[1];
     
     useEffect(() => { // 다크 모드 
         console.log()
@@ -27,7 +28,7 @@ const TodoListTemplate = ({ darkTheme }) => {
     useEffect(() => {
         //첫 로딩시에만 서버로부터 Todo 목록 가져오기
         if(!fetched) {
-            fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/todos', {
+            fetch(`${serverURL}/api/todos`, {
                 method : 'POST',
                 headers : {
                     'content-type' : 'application/json'
@@ -56,7 +57,7 @@ const TodoListTemplate = ({ darkTheme }) => {
         };
         
         // POST 방식으로 서버 전송
-        fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/todo', {
+        fetch(`${serverURL}/api/todo`, {
             method : 'POST',
             headers: {
                 'content-type' : 'application/json'
@@ -76,7 +77,7 @@ const TodoListTemplate = ({ darkTheme }) => {
         const updatedTodoItemList = todoItemList.filter(todoItem => todoItem.id !== id);
 
         //서버
-        fetch(`http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/todo/${id}`, {
+        fetch(`${serverURL}/api/todo/${id}`, {
             method: 'DELETE',
             headers : {
                 'content-type' : 'application/json'
@@ -99,7 +100,7 @@ const TodoListTemplate = ({ darkTheme }) => {
         selectedItem.content = e.target.value;
 
         // 서버
-        fetch(`http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/todo/${id}`, {
+        fetch(`${serverURL}/api/todo/${id}`, {
             method : 'PUT',
             headers : {
                 'content-type' : 'application/json'
@@ -129,7 +130,7 @@ const TodoListTemplate = ({ darkTheme }) => {
         selectedItem.isDone = !selectedItem.isDone;
 
         // 서버
-        fetch(`http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/todo/${id}`, {
+        fetch(`${serverURL}/api/todo/${id}`, {
             method : 'PUT',
             headers : {
                 'content-type' : 'application/json'

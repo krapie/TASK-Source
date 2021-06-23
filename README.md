@@ -29,12 +29,16 @@ Task: Time/Task Management Service
     + Webpack, Babel
     
 # Updates
-+ 2021-06-11 - Website Update
++ 2021-06-23
     + 태스크
-        + 공통: 태스크 홈페이지 주소 변경 (http://tasko.today)
+        + 공통: config.js 파일로 웹사이트 URL, 서버 URL를 한 곳에 관리하도록 리팩토링
 
 <details><summary>지난 업데이트 보기</summary>
 <p>
+
++ 2021-06-11 - Website Update
+    + 태스크
+        + 공통: 태스크 홈페이지 주소 변경 (http://tasko.today)
 
 + 2021-05-31 - Version 1.0 Release
     + 태스크

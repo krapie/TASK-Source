@@ -5,6 +5,7 @@ import PreferenceWrapper from './components/PreferenceWrapper';
 import TodayWrapper from './components/TodayWrapper';
 import './App.css';
 import { HashRouter, Route, Switch } from 'react-router-dom';
+import { homepageURL, serverURL } from './config'
 
 function App() {
   const today = new Date();
@@ -39,13 +40,13 @@ function App() {
   const [userInfo, setUserInfo] = useState("");
 
   const userIdLocation = document.cookie.split('; ').find(row => row.startsWith('userId'));
-  const userId = userIdLocation === undefined ? window.location.replace('http://tasko.today') : userIdLocation.split('=')[1];
+  const userId = userIdLocation === undefined ? window.location.replace(homepageURL) : userIdLocation.split('=')[1];
   
   // Read
   useEffect(() => {
       if (!isPatched) {
           // GET 방식으로 서버 전송
-          fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/user', {
+          fetch(`${serverURL}/api/user`, {
               method: 'POST',
               headers: {
                   'content-type': 'application/json'

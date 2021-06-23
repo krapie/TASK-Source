@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./TimerChange.css";
+import { homepageURL, serverURL } from '../../config';
 
 const TimerChange = () => {
     const [ formInput, setFormInput ] = useState(''); // 입력 필드값
@@ -8,12 +9,12 @@ const TimerChange = () => {
     const [ fetched, setFetched ] = useState(false);
 
     const userIdLocation = document.cookie.split('; ').find(row => row.startsWith('userId'));
-    const userId = userIdLocation === undefined ? window.location.replace('http://tasko.today') : userIdLocation.split('=')[1];
+    const userId = userIdLocation === undefined ? window.location.replace(homepageURL) : userIdLocation.split('=')[1];
 
     // FETCH - POST
     useEffect(() => {
         if(!fetched) {
-            fetch('http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/pomodoro', {
+            fetch(`${serverURL}/api/pomodoro`, {
                 method : 'POST',
                 headers : {
                     'content-type' : 'application/json'
@@ -50,7 +51,7 @@ const TimerChange = () => {
         };    
 
         // 서버
-        fetch(`http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com/api/pomodoro/update`, {
+        fetch(`${serverURL}/api/pomodoro/update`, {
             method : 'PUT',
             headers : {
                 'content-type' : 'application/json'
