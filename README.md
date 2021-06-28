@@ -29,12 +29,16 @@ Task: Time/Task Management Service
     + Webpack, Babel
     
 # Updates
-+ 2021-06-23
++ 2021-06-28
     + 태스크
-        + 공통: config.js 파일로 웹사이트 URL, 서버 URL를 한 곳에 관리하도록 리팩토링
+        + 공통: 웹사이트에 Google Analytics 추가
 
 <details><summary>지난 업데이트 보기</summary>
 <p>
+
++ 2021-06-23
+    + 태스크
+        + 공통: config.js 파일로 웹사이트 URL, 서버 URL를 한 곳에 관리하도록 리팩토링
 
 + 2021-06-11 - Website Update
     + 태스크
