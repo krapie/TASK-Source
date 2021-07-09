@@ -1,0 +1,4 @@
+## TASK Ignore File ##
+
+*.pem
+*.ppk
