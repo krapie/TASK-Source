@@ -6,14 +6,15 @@ Task: Time/Task Management Service
 + 오늘 할 일 서비스
     + 오늘 할 일 관리 기능
     + 설정 - 요일별 할 일 추가 기능 (자동으로 해당 요일에 할 일이 추가됨)
-    + 다크 모드
+    + 다크 모드 기능
 + 뽀모도로 서비스
     + 타이머 기능
     + 오늘 달성한 포모 표시 기능
-    + 다크 모드    
+    + 다크 모드 기능   
 + 태스크(메인/대시보드) 서비스
     + 오늘 할 일 / 뽀모도로 관련 정보 표시 기능
-    + 다크 모드 
+    + 자동 로그인 기능
+    + 다크 모드 기능
 
 
 # Tech Stacks
@@ -29,12 +30,16 @@ Task: Time/Task Management Service
     + Webpack, Babel
     
 # Updates
-+ 2021-06-28
++ 2021-12-12
     + 태스크
-        + 공통: 웹사이트에 Google Analytics 추가
+        + 공통: 웹사이트 자동 로그인 기능 구현
 
 <details><summary>지난 업데이트 보기</summary>
 <p>
+
++ 2021-06-28
+    + 태스크
+        + 공통: 웹사이트에 Google Analytics 추가
 
 + 2021-06-23
     + 태스크
