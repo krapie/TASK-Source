@@ -5,6 +5,7 @@ import Footer from './components/fixed/Footer'
 import DashboardTemplateWrapper from './components/dashboard/DashboardTemplateWrapper';
 import PreferenceTemplateWrapper from './components/preference/PreferenceTemplateWrapper';
 import Login from './components/login/Login';
+import Loading from './Loading';
 
 function App() {
   const [ darkTheme, setDarkTheme ] = useState(false); // 다크 모드
@@ -37,7 +38,8 @@ function App() {
     <HashRouter>
       <div className="main">
         <Switch>
-          <Route path={process.env.PUBLIC_URL + '/'} exact component={Login}/>
+          <Route path={process.env.PUBLIC_URL + '/'} exact component={Loading}/>
+          <Route path={process.env.PUBLIC_URL + '/login'} exact component={Login}/>
           <Route path={process.env.PUBLIC_URL + '/dashboard'} render={() => <DashboardTemplateWrapper darkTheme={darkTheme} userInfo={userInfo} passUserInfo={handleUserInfo}></DashboardTemplateWrapper>}/>
           <Route path={process.env.PUBLIC_URL + '/preference'} render={() => <PreferenceTemplateWrapper darkTheme={darkTheme} userInfo={userInfo} handleThemeToggle={handleThemeToggle}></PreferenceTemplateWrapper>}/>
         </Switch>

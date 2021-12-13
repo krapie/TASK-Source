@@ -30,12 +30,16 @@ Task: Time/Task Management Service
     + Webpack, Babel
     
 # Updates
-+ 2021-12-12
++ 2021-12-13
     + 태스크
-        + 공통: 웹사이트 자동 로그인 기능 구현
+        + 공통: 웹사이트 로딩 화면 구현 (로딩 화면에서 자동 로그인 수행)
 
 <details><summary>지난 업데이트 보기</summary>
 <p>
+
++ 2021-12-12
+    + 태스크
+        + 공통: 웹사이트 자동 로그인 기능 구현
 
 + 2021-06-28
     + 태스크
@@ -282,8 +286,8 @@ Task: Time/Task Management Service
     + 서버
         + API 리팩토링
     + 웹 클라이언트
-        + CDN (클라우드플레어) 등으로 웹사이트 운영 
-        + 컴포넌트 리팩토링           
+        + CDN (클라우드플레어) 등으로 웹사이트 운영
+        + 컴포넌트 리팩토링
 + Daily Do 서비스
     + 서버
         + API 리팩토링
@@ -294,7 +298,8 @@ Task: Time/Task Management Service
         + API 리팩토링
     + 웹 클라이언트
         + 컴포넌트 리팩토링
-
++ Memo 서비스
+    + 메모 기능 추가 (Google Keep API와 연동) 
 
 # Issues
 + ~~CORS Policy로 API 서버와 통신을 제대로 하지 못하는 문제~~
