@@ -1,6 +1,6 @@
 # TASK
 Task: Time/Task Management Service
-태스크: 일정/시간 관리 서비스
+태스크: 매일 간단하게 활용할 수 있는 일정/시간 관리 웹 서비스
 
 # Features
 + 오늘 할 일 서비스
