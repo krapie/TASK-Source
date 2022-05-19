@@ -1,6 +1,0 @@
-kom/task/Application.java
- kom.task.Application
-kom/task/domain/task/TaskRepository.java
- kom.task.domain.task.TaskRepository
-kom/task/domain/task/Task.java
- kom.task.domain.task.Task

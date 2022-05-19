@@ -1,2 +1,0 @@
-k20:03:36.442 [Test worker] DEBUG org.springframework.mock.env.MockEnvironment - Activating profile 'real'
-n20:03:36.446 [Test worker] DEBUG org.springframework.mock.env.MockEnvironment - Activating profile 'real-db'

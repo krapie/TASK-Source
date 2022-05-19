@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kom.task.web.ProfileControllerUnitTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-05-29T11:03:36" hostname="Komputers" time="0.13">
-  <properties/>
-  <testcase name="real_profile_obtained" classname="kom.task.web.ProfileControllerUnitTest" time="0.13"/>
-  <system-out><![CDATA[20:03:36.442 [Test worker] DEBUG org.springframework.mock.env.MockEnvironment - Activating profile 'real'
-20:03:36.446 [Test worker] DEBUG org.springframework.mock.env.MockEnvironment - Activating profile 'real-db'
-]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
