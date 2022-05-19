@@ -1,9 +1,3 @@
-## TASK Ignore File ##
-
-*.pem
-*.ppk
-
-### Server ###
 HELP.md
 .gradle
 build/
