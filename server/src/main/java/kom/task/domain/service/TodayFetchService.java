@@ -1,13 +1,13 @@
-package kom.task.repository.service;
+package kom.task.domain.service;
 
-import kom.task.repository.repository.dailydo.daydo.Daydo;
-import kom.task.repository.repository.dailydo.daydo.DaydoRepository;
-import kom.task.repository.repository.dailydo.todo.Todo;
-import kom.task.repository.repository.dailydo.todo.TodoRepository;
-import kom.task.repository.repository.pomodoro.Pomodoro;
-import kom.task.repository.repository.pomodoro.PomodoroRepository;
-import kom.task.repository.repository.user.User;
-import kom.task.repository.repository.user.UserRepository;
+import kom.task.domain.repository.dailydo.daydo.Daydo;
+import kom.task.domain.repository.dailydo.daydo.DaydoRepository;
+import kom.task.domain.repository.dailydo.todo.Todo;
+import kom.task.domain.repository.dailydo.todo.TodoRepository;
+import kom.task.domain.repository.pomodoro.Pomodoro;
+import kom.task.domain.repository.pomodoro.PomodoroRepository;
+import kom.task.domain.repository.user.User;
+import kom.task.domain.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

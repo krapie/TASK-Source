@@ -1,4 +1,4 @@
-package kom.task.domain.dailydo;
+package kom.task.domain.repository.dailydo;
 
 import kom.task.domain.repository.dailydo.daydo.Daydo;
 import kom.task.domain.repository.dailydo.daydo.DaydoRepository;

@@ -1,4 +1,4 @@
-package kom.task.web;
+package kom.task.global;
 
 import kom.task.global.profile.ProfileController;
 import org.junit.Test;

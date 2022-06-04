@@ -1,4 +1,4 @@
-package kom.task.repository.web.dto.pomodoro;
+package kom.task.domain.web.dto.pomodoro;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

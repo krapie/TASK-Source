@@ -1,4 +1,4 @@
-package kom.task.repository.web.dto.daydo;
+package kom.task.domain.web.dto.daydo;
 
 import lombok.Builder;
 import lombok.Getter;

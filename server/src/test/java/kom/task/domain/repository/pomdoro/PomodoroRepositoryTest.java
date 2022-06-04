@@ -1,4 +1,4 @@
-package kom.task.domain.pomdoro;
+package kom.task.domain.repository.pomdoro;
 
 import kom.task.domain.repository.pomodoro.Pomodoro;
 import kom.task.domain.repository.pomodoro.PomodoroRepository;

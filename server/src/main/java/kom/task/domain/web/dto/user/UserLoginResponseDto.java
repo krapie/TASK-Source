@@ -1,4 +1,4 @@
-package kom.task.repository.web.dto.user;
+package kom.task.domain.web.dto.user;
 
 import lombok.Getter;
 

@@ -1,6 +1,6 @@
-package kom.task.repository.web.dto.daydo;
+package kom.task.domain.web.dto.daydo;
 
-import kom.task.repository.repository.dailydo.daydo.Daydo;
+import kom.task.domain.repository.dailydo.daydo.Daydo;
 import lombok.Getter;
 
 @Getter

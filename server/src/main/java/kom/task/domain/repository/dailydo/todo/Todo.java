@@ -1,4 +1,4 @@
-package kom.task.repository.repository.dailydo.todo;
+package kom.task.domain.repository.dailydo.todo;
 
 import lombok.Builder;
 import lombok.Getter;
