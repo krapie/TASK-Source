@@ -1,6 +1,6 @@
-package kom.task.repository.web.dto.pomodoro;
+package kom.task.domain.web.dto.pomodoro;
 
-import kom.task.repository.repository.pomodoro.Pomodoro;
+import kom.task.domain.repository.pomodoro.Pomodoro;
 import lombok.Getter;
 
 @Getter

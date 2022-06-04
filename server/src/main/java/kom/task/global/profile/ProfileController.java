@@ -1,4 +1,4 @@
-package kom.task.web;
+package kom.task.global.profile;
 
 import lombok.RequiredArgsConstructor;
 

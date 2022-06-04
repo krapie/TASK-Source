@@ -1,6 +1,6 @@
-package kom.task.repository.web.dto.user;
+package kom.task.domain.web.dto.user;
 
-import kom.task.repository.repository.user.User;
+import kom.task.domain.repository.user.User;
 import lombok.Getter;
 
 @Getter

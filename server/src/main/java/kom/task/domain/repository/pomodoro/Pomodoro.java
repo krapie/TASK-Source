@@ -1,4 +1,4 @@
-package kom.task.repository.repository.pomodoro;
+package kom.task.domain.repository.pomodoro;
 
 import lombok.Builder;
 import lombok.Getter;

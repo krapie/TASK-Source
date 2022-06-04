@@ -1,4 +1,4 @@
-package kom.task.domain.user;
+package kom.task.domain.repository.user;
 
 import kom.task.domain.repository.user.User;
 import kom.task.domain.repository.user.UserRepository;

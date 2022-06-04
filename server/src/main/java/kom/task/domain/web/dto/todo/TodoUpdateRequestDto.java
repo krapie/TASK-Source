@@ -1,4 +1,4 @@
-package kom.task.repository.web.dto.todo;
+package kom.task.domain.web.dto.todo;
 
 import lombok.Builder;
 import lombok.Getter;

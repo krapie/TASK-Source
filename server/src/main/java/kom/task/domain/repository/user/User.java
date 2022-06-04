@@ -1,4 +1,4 @@
-package kom.task.repository.repository.user;
+package kom.task.domain.repository.user;
 
 import lombok.Builder;
 import lombok.Getter;
