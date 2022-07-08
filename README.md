@@ -31,13 +31,17 @@
     + Webpack, Babel
     
 # Updates
++ 2022-07-09
+    + 태스크
+        + TASK Version 1.0, Electron 기반 Mac & Windows 데스크탑 앱으로 포팅 완료
+
+<details><summary>지난 업데이트 보기</summary>
+<p>
 + 2022-07-08
     + 태스크
         + 웹사이트 도메인 주소 변경 (http://www.task.link)
         + TASK API 서버 이전 (AWS -> Synology)
 
-<details><summary>지난 업데이트 보기</summary>
-<p>
 + 2021-12-13
     + 태스크
         + 공통: 웹사이트 로딩 화면 구현 (로딩 화면에서 자동 로그인 수행)
