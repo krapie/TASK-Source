@@ -1,2 +1,2 @@
-export const homepageURL = "http://tasko.today";
-export const serverURL = "http://ec2-3-36-251-188.ap-northeast-2.compute.amazonaws.com";
+export const homepageURL = "http://tasko.link";
+export const serverURL = "http://121.130.91.176:10000";

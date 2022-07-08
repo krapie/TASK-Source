@@ -1,6 +1,5 @@
 # TASK
-Task: Time/Task Management Service
-
+> Version 2.0 개발 예정
 태스크: 매일 쉽고 간단하게 활용할 수 있는 일정/시간 관리 웹 서비스
 
 # Features
@@ -31,12 +30,16 @@ Task: Time/Task Management Service
     + Webpack, Babel
     
 # Updates
-+ 2021-12-13
++ 2022-07-08
     + 태스크
-        + 공통: 웹사이트 로딩 화면 구현 (로딩 화면에서 자동 로그인 수행)
+        + 웹사이트 도메인 주소 변경 (http://www.task.link)
+        + TASK API 서버 이전 (AWS -> Synology)
 
 <details><summary>지난 업데이트 보기</summary>
 <p>
++ 2021-12-13
+    + 태스크
+        + 공통: 웹사이트 로딩 화면 구현 (로딩 화면에서 자동 로그인 수행)
 
 + 2021-12-12
     + 태스크
