@@ -14,6 +14,7 @@ export default function GoogleLogin({
     // https://developers.google.com/identity/gsi/web/reference/js-reference#google.accounts.id.initialize
     window.google.accounts.id.initialize({
       client_id: clientId,
+      cancel_on_tap_outside: false,
       callback: onGoogleSignIn,
     });
     // https://developers.google.com/identity/gsi/web/reference/js-reference#google.accounts.id.renderButton
@@ -27,6 +28,7 @@ export default function GoogleLogin({
         logo_alignment: "center",
       } // customization attributes
     );
+    window.google.accounts.id.prompt();
   });
 
   return <div className="customGPlusSignIn" ref={googleSignInButton}></div>;

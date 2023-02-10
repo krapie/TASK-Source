@@ -10,7 +10,6 @@ function Login({ history }) {
     let date = new Date();
     date.setTime(date.getTime() + tokenExpireTime);
 
-    console.log(id_token);
     // 서버로 토큰 전송
     // 전송 완료 후 받은 userId 쿠기에 저장
     // 이후 대시보드로 Re-route
